@@ -2,6 +2,7 @@
   const mobileMenu = document.querySelector('.js-menu-container');
   const openMenuBtn = document.querySelector('.js-open-menu');
   const closeMenuBtn = document.querySelector('.js-close-menu');
+  const burgerIcon = openMenuBtn.querySelector('use');
   const menuLinks = mobileMenu.querySelectorAll('.nav-link, .mobile-order-btn');
 
   const toggleMenu = () => {
@@ -9,6 +10,15 @@
 
     openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
+
+    // Заміна іконок
+    if (mobileMenu.classList.contains('is-open')) {
+      burgerIcon.setAttribute('href', './img/sprite.svg#icon-close');
+      openMenuBtn.setAttribute('aria-label', 'Закрити мобільне меню');
+    } else {
+      burgerIcon.setAttribute('href', './img/sprite.svg#icon-burger');
+      openMenuBtn.setAttribute('aria-label', 'Перемикач мобільного меню');
+    }
 
     // Блокування/розблокування скролла
     document.body.classList.toggle('no-scroll');
@@ -34,6 +44,9 @@
 
     mobileMenu.classList.remove('is-open');
     openMenuBtn.setAttribute('aria-expanded', false);
+    // Повертаємо іконку бургера під час закриття через медіа-запит.
+    burgerIcon.setAttribute('href', './img/sprite.svg#icon-burger');
+    openMenuBtn.setAttribute('aria-label', 'Перемикач мобільного меню');
     document.body.classList.remove('no-scroll');
   });
 })();
