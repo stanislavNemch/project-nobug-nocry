@@ -10,7 +10,7 @@
     openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
 
-    // Замена иконки
+    // Заміна іконок
     if (mobileMenu.classList.contains('is-open')) {
       burgerIcon.setAttribute('href', './img/sprite.svg#icon-close');
       openMenuBtn.setAttribute('aria-label', 'Закрити мобільне меню');
