@@ -4,18 +4,25 @@
   const burgerIcon = openMenuBtn.querySelector('use');
   const menuLinks = mobileMenu.querySelectorAll('.nav-link, .mobile-order-btn');
 
+  // Отримуємо базовий шлях до спрайту з існуючого елемента
+  const getSpritePath = () => {
+    const currentHref = burgerIcon.getAttribute('href');
+    return currentHref.split('#')[0]; // Забираємо #icon-назву, залишаємо шлях
+  };
+
   const toggleMenu = () => {
     const isMenuOpen = mobileMenu.classList.contains('is-open');
+    const spritePath = getSpritePath();
 
     openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
     mobileMenu.classList.toggle('is-open');
 
     // Заміна іконок
     if (mobileMenu.classList.contains('is-open')) {
-      burgerIcon.setAttribute('href', './img/sprite.svg#icon-close');
+      burgerIcon.setAttribute('href', `${spritePath}#icon-close`);
       openMenuBtn.setAttribute('aria-label', 'Закрити мобільне меню');
     } else {
-      burgerIcon.setAttribute('href', './img/sprite.svg#icon-burger');
+      burgerIcon.setAttribute('href', `${spritePath}#icon-burger`);
       openMenuBtn.setAttribute('aria-label', 'Перемикач мобільного меню');
     }
 
@@ -40,9 +47,10 @@
     if (!e.matches) return;
     if (!mobileMenu.classList.contains('is-open')) return;
 
+    const spritePath = getSpritePath();
     mobileMenu.classList.remove('is-open');
     openMenuBtn.setAttribute('aria-expanded', false);
-    burgerIcon.setAttribute('href', './img/sprite.svg#icon-burger');
+    burgerIcon.setAttribute('href', `${spritePath}#icon-burger`);
     openMenuBtn.setAttribute('aria-label', 'Перемикач мобільного меню');
     document.body.classList.remove('no-scroll');
   });
