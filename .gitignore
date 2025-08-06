@@ -25,6 +25,3 @@ dist-ssr
 
 # pull request list
 pullrequest-list.txt
-package-lock.json
-package.json
-vite.config.js
