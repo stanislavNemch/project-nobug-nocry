@@ -1,0 +1,15 @@
+@import url('./modern-normalize.css');
+@import url('./reset.css');
+@import url('./body.css');
+@import url('./container.css');
+@import url('./1-navbar.css');
+@import url('./2-hero.css');
+@import url('./css-loader.css');
+@import url('./3-product.css');
+@import url('./4-about-us.css');
+@import url('./popular-products.css');
+@import url('./5-faq.css');
+@import url('./6-reviews.css');
+@import url('./7-footer.css');
+@import url('./modal.css');
+@import url('./order.css');
