@@ -1,7 +1,6 @@
 (() => {
   const mobileMenu = document.querySelector('.js-menu-container');
   const openMenuBtn = document.querySelector('.js-open-menu');
-  const closeMenuBtn = document.querySelector('.js-close-menu');
   const burgerIcon = openMenuBtn.querySelector('use');
   const menuLinks = mobileMenu.querySelectorAll('.nav-link, .mobile-order-btn');
 
@@ -24,9 +23,8 @@
     document.body.classList.toggle('no-scroll');
   };
 
-  // Відкриття та закриття за кнопками
+  // Відкриття та закриття за кнопкою
   openMenuBtn.addEventListener('click', toggleMenu);
-  closeMenuBtn.addEventListener('click', toggleMenu);
 
   // Закриття меню при натисканні на посилання
   menuLinks.forEach(link => {
@@ -44,7 +42,6 @@
 
     mobileMenu.classList.remove('is-open');
     openMenuBtn.setAttribute('aria-expanded', false);
-    // Повертаємо іконку бургера під час закриття через медіа-запит.
     burgerIcon.setAttribute('href', './img/sprite.svg#icon-burger');
     openMenuBtn.setAttribute('aria-label', 'Перемикач мобільного меню');
     document.body.classList.remove('no-scroll');
