@@ -1,7 +1,41 @@
-<section class="1-navbar">
-    <div class="container">
+<section class="navbar">
+    <div class="container nav-container">
+        <a href="./index.html" class="logo-link">
+            <svg class="company-icon" width="159" height="35" aria-label="Логотип компанії">
+                <use href="./img/sprite.svg#company-logo"></use>
+            </svg>
+        </a>
 
-        <!-- Писати свій код в цьому контейнері -->
+        <nav class="desktop-nav">
+            <ul class="nav-list">
+                <li><a href="#furniture" class="nav-link">Наші меблі</a></li>
+                <li><a href="#about" class="nav-link">Про нас</a></li>
+                <li><a href="#faq" class="nav-link">Часті питання</a></li>
+                <li><a href="#reviews" class="nav-link">Відгуки</a></li>
+            </ul>
+        </nav>
+
+        <a href="#order" class="desktop-order-btn">До покупок</a>
+
+        <button type="button" class="burger-menu-btn js-open-menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="burger-icon" width="28" height="28" aria-label="Перемикач мобільного меню">
+                <use href="./img/sprite.svg#icon-burger"></use>
+            </svg>
+        </button>
+
+        <div class="mobile-menu-container js-menu-container" id="mobile-menu">
+            <div class="container mobile-menu-content">
+                <nav>
+                    <ul class="mobile-menu-list">
+                        <li><a href="#furniture" class="nav-link">Наші меблі</a></li>
+                        <li><a href="#about" class="nav-link">Про нас</a></li>
+                        <li><a href="#faq" class="nav-link">Часті питання</a></li>
+                        <li><a href="#reviews" class="nav-link">Відгуки</a></li>
+                    </ul>
+                </nav>
+                <a href="#order" class="mobile-order-btn">До покупок</a>
+            </div>
+        </div>
 
     </div>
 </section>
