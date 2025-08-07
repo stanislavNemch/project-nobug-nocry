@@ -37,10 +37,6 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
       createPagination(NowPages);   // [3] Обновляем пагинацию
       updatePaginationButtons();    // [4] Включаем/отключаем кнопки вперёд/назад
 
-       document.getElementById('furniture').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
     } else {
       productsList.innerHTML = '<p>Товари не знайдені.</p>';
     }
@@ -106,29 +102,37 @@ function updatePaginationButtons() {
 }
 
 // Обработка кликов по пагинации
-document.addEventListener('click', (event) => {
+document.addEventListener('click', async (event) => {
+
+  let shouldScroll = false;
   if (event.target.closest('.page-number')) {
     const pageBtn = event.target.closest('.page-number');
     const pageNumber = parseInt(pageBtn.textContent, 10);
     if (!isNaN(pageNumber)) {
       NowPages = pageNumber;
-      createProductsList(getFurnitures(NowPages, 8));
+      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
     }
   }
 
   if (event.target.closest('.btn-next')) {
     if (NowPages < totalItemspages) {
       NowPages++;
-      createProductsList(getFurnitures(NowPages, 8));
+      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
     }
   }
 
   if (event.target.closest('.btn-prev')) {
     if (NowPages > 1) {
       NowPages--;
-      createProductsList(getFurnitures(NowPages, 8));
+      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
     }
   }
+
+document.getElementById('furniture').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+  });
+
 });
 
 // Инициализация
