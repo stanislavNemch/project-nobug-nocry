@@ -40,6 +40,8 @@
 .burger-icon {
   stroke: #080c09;
   display: block;
+  width: 16px;
+  height: 16px;
 }
 
 /* Стилі для мобільного меню (Mobile-first) */
