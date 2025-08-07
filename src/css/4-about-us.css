@@ -39,7 +39,9 @@
 
 .img-about {
     max-width: 335px;
-    height: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
     border-radius: 8px;
 }
 
@@ -59,10 +61,10 @@
 
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
 .about-us {
     max-width: 1440px;
-    height: 564px;
+    max-height: 564px;
 }
 
 .about-main-wrap {
