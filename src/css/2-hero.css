@@ -1,0 +1,148 @@
+/*todo ======================  MOBILE-first  ===================================== */
+
+.hero {
+  width: 100%;
+  padding: 156px 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(/src/public/img/hero/hero-mob-1x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-resolution: 2dppx) {
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(/src/public/img/hero/hero-mob-1x.jpg);
+  }
+}
+
+.hero-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 24px;
+  text-align: start;
+}
+
+.text-hero {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.hero-btn {
+  width: 100%;
+  max-width: 335px;
+  height: 46px;
+  padding: 10px 24px;
+
+  border: none;
+  border-radius: 100px;
+
+  background: #6b0609;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+
+  transition: opacity 250ms ease, transform 200ms ease;
+  cursor: pointer;
+}
+
+/* Hover / Focus */
+.hero-btn:hover,
+.hero-btn:focus {
+  opacity: 0.5;
+  background: #6b0609;
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Active */
+.hero-btn:active {
+  opacity: 1;
+  background: #6b0609;
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(0);
+}
+
+/* Disabled */
+.hero-btn:disabled {
+  opacity: 0.2;
+  background: #6b0609;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+}
+
+/*todo    ========    TABLET (768px+)    ======== */
+
+@media screen and (min-width: 768px) {
+  .hero {
+    padding: 120px 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url(/src/public/img/hero/hero-tab-1x.jpg);
+  }
+
+  @media (min-resolution: 2dppx) {
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url(/src/public/img/hero/hero-tab-2x.jpg);
+    }
+  }
+
+  .hero-title {
+    font-size: 48px;
+    max-width: 560px;
+  }
+
+  .text-hero {
+    font-size: 18px;
+    max-width: 560px;
+  }
+
+  .hero-btn {
+    width: 209px;
+  }
+}
+
+/*todo      ========    DESKTOP (1440px+)    ======== */
+
+@media screen and (min-width: 1440px) {
+  .hero {
+    padding: 160px 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url(/src/public/img/hero/hero-desc-1x.jpg);
+  }
+
+  @media (min-resolution: 2dppx) {
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url(/src/public/img/hero/hero-desc-2x.jpg);
+    }
+  }
+
+  .hero-title {
+    font-size: 56px;
+  }
+}
