@@ -6,12 +6,14 @@ let totalItemspages = 1; // [1] Глобально сохраняем общее
 const paginationContainer = document.querySelector('.pagination');
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
+  LoaderHid(); // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
   productsList.innerHTML = '';
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
   try {
     const data = await functions;
+    LoaderHid();
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
 
@@ -81,6 +83,10 @@ function createPagination(NowPages) {
   `;
 }
 
+function LoaderHid() {
+  const loader = document.querySelector('.loader');
+  loader.classList.toggle('visuallyhidden');
+}
 
 function updatePaginationButtons() {
   const prevBtn = document.querySelector('.btn-prev');
@@ -104,34 +110,41 @@ function updatePaginationButtons() {
 // Обработка кликов по пагинации
 document.addEventListener('click', async (event) => {
 
-  let shouldScroll = false;
+
   if (event.target.closest('.page-number')) {
     const pageBtn = event.target.closest('.page-number');
     const pageNumber = parseInt(pageBtn.textContent, 10);
     if (!isNaN(pageNumber)) {
       NowPages = pageNumber;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
+      await createProductsList(getFurnitures(NowPages, 8));
+      document.getElementById('furniture').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+  });
     }
   }
 
   if (event.target.closest('.btn-next')) {
     if (NowPages < totalItemspages) {
       NowPages++;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
+      await createProductsList(getFurnitures(NowPages, 8));
+      document.getElementById('furniture').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+  });
     }
   }
 
   if (event.target.closest('.btn-prev')) {
     if (NowPages > 1) {
       NowPages--;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
-    }
-  }
-
-document.getElementById('furniture').scrollIntoView({
+      await createProductsList(getFurnitures(NowPages, 8));
+      document.getElementById('furniture').scrollIntoView({
         behavior: 'smooth',
         block: 'center'
   });
+    }
+  }
 
 });
 
