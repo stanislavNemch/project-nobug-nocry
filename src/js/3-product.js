@@ -7,8 +7,9 @@ const paginationContainer = document.querySelector('.pagination');
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
   const productsList = document.querySelector('.products-list');
+  const productsContainer = document.querySelector('.pagination');
   productsList.innerHTML = '';
-
+  productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
   try {
     const data = await functions;
     const furnitures = data.furnitures || data;
@@ -35,6 +36,11 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
 
       createPagination(NowPages);   // [3] Обновляем пагинацию
       updatePaginationButtons();    // [4] Включаем/отключаем кнопки вперёд/назад
+
+       document.getElementById('furniture').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
     } else {
       productsList.innerHTML = '<p>Товари не знайдені.</p>';
     }
