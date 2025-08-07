@@ -117,10 +117,12 @@ document.addEventListener('click', async (event) => {
     if (!isNaN(pageNumber)) {
       NowPages = pageNumber;
       await createProductsList(getFurnitures(NowPages, 8));
-      document.getElementById('furniture').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-  });
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 300);
     }
   }
 
@@ -128,10 +130,12 @@ document.addEventListener('click', async (event) => {
     if (NowPages < totalItemspages) {
       NowPages++;
       await createProductsList(getFurnitures(NowPages, 8));
-      document.getElementById('furniture').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-  });
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 1000);
     }
   }
 
@@ -139,10 +143,13 @@ document.addEventListener('click', async (event) => {
     if (NowPages > 1) {
       NowPages--;
       await createProductsList(getFurnitures(NowPages, 8));
-      document.getElementById('furniture').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-  });
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 1000);
+
     }
   }
 
