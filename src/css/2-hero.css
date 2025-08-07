@@ -52,7 +52,6 @@
   font-size: 16px;
   line-height: 1.6;
   color: #fff;
-
   width: 100%;
   max-width: 335px;
   height: 46px;
@@ -113,7 +112,6 @@ html {
     width: 768px;
     padding: 36px 32px;
   }
-
   .hero {
     padding: 120px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
