@@ -23,10 +23,10 @@ const api = axios.create({
 });
 
 // 1. Отримати список меблів
-export async function getFurnitures(page = 1, limit = 10) {
+export async function getFurnitures(page = 1, limit = 10, category) {
   try {
     const response = await api.get(ENDPOINTS.FURNITURES, {
-      params: { page, limit },
+      params: { page, limit, category },
     });
     return response.data;
   } catch (error) {

@@ -1,15 +1,45 @@
-import { getFurnitures } from './furniture-api.js';
+import { getFurnitures, getCategories } from './furniture-api.js';
 
 const listCategory = document.querySelector('.product-categories-list');
 
+const ALL_CATEGORY_TEXT = 'Всі товари';
+
 let NowPages = 1;
+
+export function activeFirstCategory() {
+  const firstCategory = document.querySelector('.product-categories-content');
+  if (firstCategory) {
+    firstCategory.classList.add('active-category');
+  }
+}
+
+export function activeCategory(event) {
+  const activeItem = event.target.closest('.product-categories-content');
+
+  activeItem.classList.add('active-category');
+}
+
+export function removeActiveCategory() {
+  const activeCategory = document.querySelector('.active-category');
+  activeCategory.classList.remove('active-category');
+}
 
 export function renderCategories(data) {
   const markup = data
     .map(
-      el => `<li class="product-categories-item">
-      ${el.name}
-      </li>`
+      (el, index) => `<li class="product-categories-item" data-id="${el._id}">
+  <img
+    class="product-categories-img"
+    srcset="
+                  ../img/category-imgs/category-img-${index + 1}.webp    1x,
+                  ../img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                "
+    src="./img/category-imgs/category-img-${index + 1}.webp"
+  />
+  <div class="product-categories-content">
+    <p class="product-categories-descr">${el.name}</p>
+  </div>
+</li>`
     )
     .join('');
 
@@ -19,27 +49,38 @@ export function renderCategories(data) {
 export async function getAllCategories() {
   try {
     const data = await getCategories();
-    renderCategories([{ name: 'Всі товари' }, ...data]);
-    console.log(data);
+    renderCategories([
+      { name: ALL_CATEGORY_TEXT, _id: '78fa12bc34de56f7890a1b35' },
+      ...data,
+    ]);
+    activeFirstCategory();
   } catch (error) {
     console.log(error);
     return [];
   }
 }
 
-// async function renderCategories() {
+// export async function getOneCategoryProduct(categoryId) {
 //   try {
-//     const data = await listCategory();
-//     const murkUp = data.map(elem => {
-//       return elem;
-//     });
-//     console.log(murkUp);
-//   } catch (error) {
-//     console.log(error);
+//     const data = await getFurnitures(categoryId);
+
 //   }
 // }
 
-getAllCategories();
+export function getOneCategory(e) {
+  const categoryItem = e.target.closest('.product-categories-item');
+  if (!categoryItem) return;
+  const categoryName = categoryItem.textContent.trim();
+  const categoryId = categoryItem.dataset.id;
+
+  removeActiveCategory();
+  activeCategory(e);
+
+  if (categoryName === ALL_CATEGORY_TEXT) {
+    createProductsList();
+  }
+  createProductsList(getFurnitures(1, 8, categoryId));
+}
 
 async function createProductsList(functions = getFurnitures(1, 8)) {
   const productsList = document.querySelector('.products-list');
@@ -109,5 +150,8 @@ function createPagination(totalItemspages) {
 }
 
 addEventListener('DOMContentLoaded', () => {
+  getAllCategories();
   createProductsList();
 });
+
+listCategory.addEventListener('click', getOneCategory);
