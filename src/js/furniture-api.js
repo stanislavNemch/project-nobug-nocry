@@ -40,6 +40,58 @@ export async function getFurnitures(page = 1, limit = 10, category) {
   }
 }
 
+// 1.1. Отримати одну конкретну позицію меблів за ID (перебір по сторінках)
+export async function getFurnitureById(id) {
+  try {
+    let page = 1;
+    const limit = 30; // Максимальний ліміт
+    let totalItems = 0;
+    let totalPages = 0;
+
+    do {
+      const response = await api.get(ENDPOINTS.FURNITURES, {
+        params: { page, limit },
+      });
+
+      const data = response.data;
+      const furnitures = data.furnitures || data;
+
+      // При першому запиті отримуємо загальну кількість товарів
+      if (page === 1) {
+        totalItems = data.totalItems || 0;
+        totalPages = Math.ceil(totalItems / limit);
+      }
+
+      // Шукаємо товар з потрібним ID на поточній сторінці
+      const furniture = furnitures.find(item => item._id === id);
+
+      if (furniture) {
+        return furniture;
+      }
+
+      page++;
+    } while (page <= totalPages);
+
+    // Якщо товар не знайдено після перебору всіх сторінок
+    iziToast.warning({
+      title: 'Увага',
+      message: 'Товар з таким ID не знайдено.',
+      position: 'topRight',
+      timeout: 4000,
+    });
+    return null;
+  } catch (error) {
+    console.error('Помилка при пошуку товару:', error);
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося завантажити інформацію про товар.',
+      position: 'topRight',
+      timeout: 4000,
+    });
+    return null;
+  }
+}
+
 // 2. Отримати всі категорії
 export async function getCategories() {
   try {

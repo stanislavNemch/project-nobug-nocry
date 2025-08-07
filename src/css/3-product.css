@@ -201,3 +201,7 @@ width: 100%;
   opacity: 1;
   background-color: rgba(107, 6, 9, 1);
 }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
