@@ -1,4 +1,11 @@
-.product-container{
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.product-container {
     padding-top: 80px;
     padding-bottom: 80px;
 }
@@ -45,7 +52,126 @@
     transition: border 250ms ease-in-out;
 }
 
-.product-categories-item:hover, .product-categories-item:focus {
+.product-categories-item:hover,
+.product-categories-item:focus {
     cursor: pointer;
     border: 8px solid #6b0609;
+}
+
+.product-item {
+  width: calc(100% / 4 - 18px);
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.text-card {
+  font-weight: 600;
+  font-family: 'Raleway' sans-serif;
+  color: rgba(8, 12, 9, 1);
+  margin-top: 8px;
+  font-style: semi-bold;
+}
+.btn-go-modal {
+width: 100%;
+  height: 40px;
+  background-color:#080C090D;
+  color:rgba(8, 12, 9, 1);
+  font-weight: 500;
+  font-family: 'Raleway';
+  border-radius: 100px;
+  border: none;
+  margin-top: 16px;
+}
+.color-one {
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+}
+.colors {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.products-list {
+   display: flex;
+   gap: 24px;
+   flex-wrap: wrap;
+   margin-bottom: 32px;
+}
+
+.img-card {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: filter 0.3s ease;
+}
+.img-card:hover {
+  filter: brightness(0.7);
+  border: 8px solid rgba(107, 6, 9, 1);
+}
+.btn-loadMore {
+  display: inline;
+  color: rgba(255, 255, 255, 1);
+  width: 420px;
+  background-color: rgb(128, 8, 12);
+  border-radius: 100px;
+  padding: 10px 0px;
+  border: none;
+  font-style: medium;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto;
+}
+.hiden {
+  display: none;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  gap: 4px;
+}
+.page-number {
+  width: 56px;
+  height: 46px;
+  border: none;
+  border-radius: 100px;
+  font-weight: 500;
+  font-family: Raleway, sans-serif;
+  background-color: white;
+}
+.dtp {
+  font-weight: 500;
+  font-style: medium;
+  size: 18px;
+}
+.focus {
+  background-color: rgba(107, 6, 9, 1);
+  color: rgba(255, 255, 255, 1);
+  transition: opacity 0.3s ease;
+}
+.page-number:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.scroll {
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  background-color: rgba(242, 242, 242, 1);
+  border: 1px solid rgba(8, 12, 9, 0.15);
+  transition: opacity fill 0.5s ease;
+}
+
+.scroll:hover {
+  fill: white;
+  opacity: 0.7;
+  background-color: rgba(151, 80, 82, 1);
+}
+.scroll:active {
+  fill: white;
+  opacity: 1;
+  background-color: rgba(107, 6, 9, 1);
 }
