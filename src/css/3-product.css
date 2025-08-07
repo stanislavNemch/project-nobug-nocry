@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.three-product {
+  margin: 80px 0px;
+}
 .product-item {
   width: calc(100% / 4 - 18px);
   display: flex;
