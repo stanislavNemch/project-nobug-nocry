@@ -1,10 +1,11 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
+import { selectedColor, selectedModelId } from './modal';
 
 // Regular expressions for email and phone validation
 const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-const PHONE_REGEX = /^\d{12}$/;
+const PHONE_REGEX = /^[0-9]{12}$/;
 
 // DOM element selectors
 const orderBackdrop = document.getElementById('order-backdrop');
