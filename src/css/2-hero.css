@@ -4,7 +4,7 @@
   width: 100%;
   padding: 156px 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(/src/public/img/hero/hero-mob-1x.jpg);
+    url(../public/img/hero/hero-mob-1x.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -13,7 +13,7 @@
 @media (min-resolution: 2dppx) {
   .hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url(/src/public/img/hero/hero-mob-1x.jpg);
+      url(../public/img/hero/hero-mob-2x.jpg);
   }
 }
 
@@ -58,6 +58,7 @@
 
   transition: opacity 250ms ease, transform 200ms ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Hover / Focus */
@@ -95,19 +96,23 @@
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /*todo    ========    TABLET (768px+)    ======== */
 
 @media screen and (min-width: 768px) {
   .hero {
     padding: 120px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url(/src/public/img/hero/hero-tab-1x.jpg);
+      url(../public/img/hero/hero-tab-1x.jpg);
   }
 
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url(/src/public/img/hero/hero-tab-2x.jpg);
+        url(../public/img/hero/hero-tab-2x.jpg);
     }
   }
 
@@ -132,13 +137,13 @@
   .hero {
     padding: 160px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url(/src/public/img/hero/hero-desc-1x.jpg);
+      url(../public/img/hero/hero-desc-1x.jpg);
   }
 
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url(/src/public/img/hero/hero-desc-2x.jpg);
+        url(../public/img/hero/hero-desc-2x.jpg);
     }
   }
 
