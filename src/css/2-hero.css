@@ -1,16 +1,23 @@
+/*! ==================================================================================== */
+
 /*todo ======================  MOBILE-first  ===================================== */
 
+.hero-container {
+  width: 375px;
+  padding: 156px 20px;
+}
+
 .hero {
-  width: 100%;
-  padding: 156px 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(../public/img/hero/hero-mob-1x.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  margin-bottom: 40px;
+  padding: 0;
 }
 
-@media (min-resolution: 2dppx) {
+@media screen and (min-resolution: 2x) {
   .hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url(../public/img/hero/hero-mob-2x.jpg);
@@ -26,6 +33,7 @@
   color: #fff;
   margin-bottom: 24px;
   text-align: start;
+  max-width: 335px;
 }
 
 .text-hero {
@@ -35,22 +43,22 @@
   line-height: 1.6;
   color: #fff;
   margin-bottom: 32px;
+  max-width: 335px;
 }
 
 .hero-btn {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
   width: 100%;
   max-width: 335px;
   height: 46px;
   padding: 10px 24px;
-
   border: none;
   border-radius: 100px;
-
   background: #6b0609;
-  color: #fff;
-  font-family: inherit;
-  font-size: 16px;
-
   box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
     inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
@@ -61,7 +69,6 @@
   text-decoration: none;
 }
 
-/* Hover / Focus */
 .hero-btn:hover,
 .hero-btn:focus {
   opacity: 0.5;
@@ -73,7 +80,6 @@
   transform: translateY(-2px);
 }
 
-/* Active */
 .hero-btn:active {
   opacity: 1;
   background: #6b0609;
@@ -84,7 +90,6 @@
   transform: translateY(0);
 }
 
-/* Disabled */
 .hero-btn:disabled {
   opacity: 0.2;
   background: #6b0609;
@@ -103,13 +108,17 @@ html {
 /*todo    ========    TABLET (768px+)    ======== */
 
 @media screen and (min-width: 768px) {
+  .hero-container {
+    width: 768px;
+    padding: 36px 32px;
+  }
   .hero {
     padding: 120px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url(../public/img/hero/hero-tab-1x.jpg);
   }
 
-  @media (min-resolution: 2dppx) {
+  @media screen and (min-resolution: 2x) {
     .hero {
       background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url(../public/img/hero/hero-tab-2x.jpg);
@@ -117,7 +126,7 @@ html {
   }
 
   .hero-title {
-    font-size: 48px;
+    font-size: 56px;
     max-width: 560px;
   }
 
@@ -134,13 +143,18 @@ html {
 /*todo      ========    DESKTOP (1440px+)    ======== */
 
 @media screen and (min-width: 1440px) {
-  .hero {
-    padding: 160px 0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url(../public/img/hero/hero-desc-1x.jpg);
+  .hero-container {
+    width: 1440px;
+    padding: 92px 65px;
   }
 
-  @media (min-resolution: 2dppx) {
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url(../public/img/hero/hero-desc-1x.jpg);
+    padding: 0;
+  }
+
+  @media screen and (min-resolution: 2x) {
     .hero {
       background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url(../public/img/hero/hero-desc-2x.jpg);
@@ -149,5 +163,15 @@ html {
 
   .hero-title {
     font-size: 56px;
+    max-width: 560px;
+  }
+
+  .text-hero {
+    font-size: 18px;
+    max-width: 560px;
+  }
+
+  .hero-btn {
+    width: 209px;
   }
 }
