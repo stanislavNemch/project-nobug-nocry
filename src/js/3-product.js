@@ -8,7 +8,7 @@ const ALL_CATEGORY_TEXT = 'Всі товари';
 
 let NowPages = 1;
 let totalItemspages = 1; // [1] Глобально сохраняем общее число страниц
-
+const BtnMoreItems = document.querySelector('.btn-loadMore');
 
 export function activeFirstCategory() {
   const firstCategory = document.querySelector('.product-categories-content');
@@ -83,16 +83,21 @@ listCategory.addEventListener('click', getOneCategory);
 
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
-  LoaderHid(); // [5] Скрываем лоадер перед загрузкой товаров
+  showLoader() // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
-  if (window.innerWidth < 375) {
-  productsList.innerHTML = '';
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
+  const isMobile = window.matchMedia('(max-width: 374px)').matches;
+  console.debug('createProductsList: isMobile=', isMobile, 'innerWidth=', window.innerWidth);
+
+  if (!isMobile) {
+    // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
+    productsList.innerHTML = '';
+    if (productsContainer) productsContainer.innerHTML = '';
   }
   try {
     const data = await functions;
-    LoaderHid();
+    hideLoader() // [5] Скрываем лоадер перед загрузкой товаров
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
 
@@ -126,7 +131,7 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
       createPagination(NowPages); // [3] Обновляем пагинацию
       updatePaginationButtons(); // [4] Включаем/отключаем кнопки вперёд/назад
     } else {
-      productsList.innerHTML = '<p>Товари не знайдені.</p>';
+      console.warn('Товари не знайдені.');
     }
   } catch (error) {
     console.error('Помилка завантаження товарів:', error);
@@ -169,7 +174,12 @@ function createPagination(NowPages) {
   `;
 }
 
-
+function showLoader() {
+  document.querySelector('.loader').classList.remove('visuallyhidden');
+}
+function hideLoader() {
+  document.querySelector('.loader').classList.add('visuallyhidden');
+}
 function updatePaginationButtons() {
   const prevBtn = document.querySelector('.btn-prev');
   const nextBtn = document.querySelector('.btn-next');
@@ -211,7 +221,7 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'end'
         });
       }, 300);
     }
@@ -224,9 +234,9 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'end'
         });
-      }, 1000);
+      }, 300);
     }
   }
 
@@ -237,18 +247,27 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'end'
         });
-      }, 1000);
+      }, 300);
 
     }
   }
 
-
-  document.getElementById('furniture').scrollIntoView({
-    behavior: 'smooth',
-    block: 'center',
+  BtnMoreItems.addEventListener('click', async () => {
+    if (NowPages < totalItemspages) {
+      NowPages++;
+      hideLoadMoreButton();
+      await createProductsList(getFurnitures(NowPages, 8));
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 100);
+    }
   });
+
 
 });
 
