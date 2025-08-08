@@ -41,8 +41,6 @@
   display: block;
   fill: #080c09;
   stroke-width: 1px;
-  width: 18px;
-  height: 11px;
   transition: transform 0.3s ease;
 }
 
@@ -92,10 +90,6 @@
     font-size: 18px;
     padding: 21.5px 0;
     color: #202421;
-  }
-  .arrow {
-    width: 17px;
-    height: 11px;
   }
 
   .faq-answer {
