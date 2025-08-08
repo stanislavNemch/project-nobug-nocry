@@ -3,7 +3,6 @@
 .hero-container {
   width: 100%;
   max-width: 375px;
-  padding: 0 10px;
 }
 
 .hero {
@@ -13,7 +12,7 @@
   background-size: cover;
   background-position: center;
   margin-bottom: 40px;
-  padding: 156px 10px;
+  padding: 156px 0;
 }
 
 @media screen and (min-resolution: 2x) {
@@ -146,7 +145,7 @@ html {
 @media screen and (min-width: 1440px) {
   .hero-container {
     width: 1440px;
-    padding: 92px 65px;
+    padding: 92px 0;
     margin: 0;
   }
 
