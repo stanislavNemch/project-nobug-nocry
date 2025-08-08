@@ -4,14 +4,22 @@ let NowPages = 1;
 let totalItemspages = 1; // [1] Глобально сохраняем общее число страниц
 
 const paginationContainer = document.querySelector('.pagination');
+const BtnMoreItems = document.querySelector('.btn-loadMore');
+
+// функция для сбора товаров
+// по текущей странице и количеству на страницей
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
+  LoaderHid(); // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
+  if (window.innerWidth < 375) {
   productsList.innerHTML = '';
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
+  }
   try {
     const data = await functions;
+    LoaderHid();
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
 
@@ -81,6 +89,10 @@ function createPagination(NowPages) {
   `;
 }
 
+function LoaderHid() {
+  const loader = document.querySelector('.loader');
+  loader.classList.toggle('visuallyhidden');
+}
 
 function updatePaginationButtons() {
   const prevBtn = document.querySelector('.btn-prev');
@@ -101,38 +113,73 @@ function updatePaginationButtons() {
   }
 }
 
+function hideLoadMoreButton() {
+  if (NowPages >= totalItemspages) {
+    BtnMoreItems.style.display = 'none';
+  } else {
+    BtnMoreItems.style.display = 'inline';
+  }
+}
+
 // Обработка кликов по пагинации
 document.addEventListener('click', async (event) => {
 
-  let shouldScroll = false;
+
   if (event.target.closest('.page-number')) {
     const pageBtn = event.target.closest('.page-number');
     const pageNumber = parseInt(pageBtn.textContent, 10);
     if (!isNaN(pageNumber)) {
       NowPages = pageNumber;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
+      await createProductsList(getFurnitures(NowPages, 8));
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 300);
     }
   }
 
   if (event.target.closest('.btn-next')) {
     if (NowPages < totalItemspages) {
       NowPages++;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
+      await createProductsList(getFurnitures(NowPages, 8));
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 1000);
     }
   }
 
   if (event.target.closest('.btn-prev')) {
     if (NowPages > 1) {
       NowPages--;
-      shouldScroll = await createProductsList(getFurnitures(NowPages, 8));
+      await createProductsList(getFurnitures(NowPages, 8));
+      setTimeout(() => {
+        document.querySelector('.products-list').scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        });
+      }, 1000);
+
     }
   }
 
-document.getElementById('furniture').scrollIntoView({
+});
+BtnMoreItems.addEventListener('click', async () => {
+  if (NowPages < totalItemspages) {
+    NowPages++;
+    await createProductsList(getFurnitures(NowPages, 8));
+    hideLoadMoreButton(); // [6] Скрываем кнопку "Показать ещё" при достижении последней страницы
+    setTimeout(() => {
+      document.querySelector('.products-list').scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
-  });
-
+        block: 'nearest'
+      });
+    }, 400);
+  }
 });
 
 // Инициализация
