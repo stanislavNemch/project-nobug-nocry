@@ -1,4 +1,4 @@
-import { getFurnitures, getCategories } from './furniture-api.js';
+import { getCategories, getFurnitures } from './furniture-api.js';
 
 const listCategory = document.querySelector('.product-categories-list');
 
