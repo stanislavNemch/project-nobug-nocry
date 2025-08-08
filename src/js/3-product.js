@@ -1,13 +1,86 @@
-import { getFurnitures } from './furniture-api.js';
+import { getFurnitures, getCategories } from './furniture-api.js';
+
+const listCategory = document.querySelector('.product-categories-list');
+
+const paginationContainer = document.querySelector('.pagination');
+
+const ALL_CATEGORY_TEXT = 'Всі товари';
 
 let NowPages = 1;
 let totalItemspages = 1; // [1] Глобально сохраняем общее число страниц
 
-const paginationContainer = document.querySelector('.pagination');
-const BtnMoreItems = document.querySelector('.btn-loadMore');
 
-// функция для сбора товаров
-// по текущей странице и количеству на страницей
+export function activeFirstCategory() {
+  const firstCategory = document.querySelector('.product-categories-content');
+  if (firstCategory) {
+    firstCategory.classList.add('active-category');
+  }
+}
+
+export function activeCategory(event) {
+  const activeItem = event.target.closest('.product-categories-content');
+
+  activeItem.classList.add('active-category');
+}
+
+export function removeActiveCategory() {
+  const activeCategory = document.querySelector('.active-category');
+  activeCategory.classList.remove('active-category');
+}
+
+export function renderCategories(data) {
+  const markup = data
+    .map(
+      (el, index) => `<li class="product-categories-item" data-id="${el._id}">
+  <img
+    class="product-categories-img"
+    srcset="
+                  ../img/category-imgs/category-img-${index + 1}.webp    1x,
+                  ../img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                "
+    src="./img/category-imgs/category-img-${index + 1}.webp"
+  />
+  <div class="product-categories-content">
+    <p class="product-categories-descr">${el.name}</p>
+  </div>
+</li>`
+    )
+    .join('');
+
+  listCategory.innerHTML = markup;
+}
+
+export async function getAllCategories() {
+  try {
+    const data = await getCategories();
+    renderCategories([
+      { name: ALL_CATEGORY_TEXT, _id: '78fa12bc34de56f7890a1b35' },
+      ...data,
+    ]);
+    activeFirstCategory();
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+export function getOneCategory(e) {
+  const categoryItem = e.target.closest('.product-categories-item');
+  if (!categoryItem) return;
+  const categoryName = categoryItem.textContent.trim();
+  const categoryId = categoryItem.dataset.id;
+
+  removeActiveCategory();
+  activeCategory(e);
+
+  if (categoryName === ALL_CATEGORY_TEXT) {
+    createProductsList();
+  }
+  createProductsList(getFurnitures(1, 8, categoryId));
+}
+
+listCategory.addEventListener('click', getOneCategory);
+
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
   LoaderHid(); // [5] Скрываем лоадер перед загрузкой товаров
@@ -30,21 +103,28 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
         productItem.setAttribute('data-id', furniture._id);
 
         productItem.innerHTML = `
-          <img src="${furniture.images[0]}" alt="${furniture.name}" class="img-card" width="100%" height="256px" />
+          <img src="${furniture.images[0]}" alt="${
+          furniture.name
+        }" class="img-card" width="100%" height="256px" />
           <p class="text-card">${furniture.name}</p>
           <div class="colors">
-            ${furniture.color.map(c => `<span class="color-one" style="background-color:${c};"></span>`).join('')}
+            ${furniture.color
+              .map(
+                c =>
+                  `<span class="color-one" style="background-color:${c};"></span>`
+              )
+              .join('')}
           </div>
           <p class="text-card">${furniture.price} грн</p>
           <button class="btn btn-go-modal">Детальніше</button>
         `;
 
         productsList.appendChild(productItem);
+        createPagination(totalItemspages);
       });
 
-      createPagination(NowPages);   // [3] Обновляем пагинацию
-      updatePaginationButtons();    // [4] Включаем/отключаем кнопки вперёд/назад
-
+      createPagination(NowPages); // [3] Обновляем пагинацию
+      updatePaginationButtons(); // [4] Включаем/отключаем кнопки вперёд/назад
     } else {
       productsList.innerHTML = '<p>Товари не знайдені.</p>';
     }
@@ -89,10 +169,6 @@ function createPagination(NowPages) {
   `;
 }
 
-function LoaderHid() {
-  const loader = document.querySelector('.loader');
-  loader.classList.toggle('visuallyhidden');
-}
 
 function updatePaginationButtons() {
   const prevBtn = document.querySelector('.btn-prev');
@@ -122,8 +198,9 @@ function hideLoadMoreButton() {
 }
 
 // Обработка кликов по пагинации
-document.addEventListener('click', async (event) => {
 
+document.addEventListener('click', async event => {
+  let shouldScroll = false;
 
   if (event.target.closest('.page-number')) {
     const pageBtn = event.target.closest('.page-number');
@@ -167,22 +244,16 @@ document.addEventListener('click', async (event) => {
     }
   }
 
-});
-BtnMoreItems.addEventListener('click', async () => {
-  if (NowPages < totalItemspages) {
-    NowPages++;
-    await createProductsList(getFurnitures(NowPages, 8));
-    hideLoadMoreButton(); // [6] Скрываем кнопку "Показать ещё" при достижении последней страницы
-    setTimeout(() => {
-      document.querySelector('.products-list').scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      });
-    }, 400);
-  }
+
+  document.getElementById('furniture').scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+  });
+
 });
 
 // Инициализация
 document.addEventListener('DOMContentLoaded', () => {
+  getAllCategories();
   createProductsList();
 });
