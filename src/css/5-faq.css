@@ -1,7 +1,7 @@
 .faq-container {
   padding-top: 48px;
   padding-bottom: 48px;
-  /* max-width: 335px; */
+  max-width: 335px;
 }
 
 .faq-title {
@@ -39,7 +39,7 @@
 }
 .arrow {
   display: block;
-  stroke: #080c09;
+  fill: #080c09;
   stroke-width: 1px;
   width: 18px;
   height: 11px;
