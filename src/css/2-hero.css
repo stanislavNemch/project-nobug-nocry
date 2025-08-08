@@ -3,8 +3,10 @@
 /*todo ======================  MOBILE-first  ===================================== */
 
 .hero-container {
-  width: 375px;
-  padding: 156px 20px;
+
+  width: 100%;
+  max-width: 375px;
+
 }
 
 .hero {
@@ -14,7 +16,9 @@
   background-size: cover;
   background-position: center;
   margin-bottom: 40px;
-  padding: 0;
+
+  padding: 156px 0;
+
 }
 
 @media screen and (min-resolution: 2x) {
@@ -63,10 +67,10 @@
     inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
-
   transition: opacity 250ms ease, transform 200ms ease;
   cursor: pointer;
   text-decoration: none;
+  text-align: center;
 }
 
 .hero-btn:hover,
@@ -109,9 +113,12 @@ html {
 
 @media screen and (min-width: 768px) {
   .hero-container {
-    width: 768px;
-    padding: 36px 32px;
+
+    min-width: 768px;
+    /* padding: 36px 32px; */
   }
+
+
   .hero {
     padding: 120px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
@@ -127,7 +134,9 @@ html {
 
   .hero-title {
     font-size: 56px;
-    max-width: 560px;
+
+    max-width: 400px;
+
   }
 
   .text-hero {
@@ -145,7 +154,10 @@ html {
 @media screen and (min-width: 1440px) {
   .hero-container {
     width: 1440px;
-    padding: 92px 65px;
+
+    padding: 92px 0;
+    margin: 0;
+
   }
 
   .hero {
@@ -164,6 +176,9 @@ html {
   .hero-title {
     font-size: 56px;
     max-width: 560px;
+
+    margin: 0;
+
   }
 
   .text-hero {

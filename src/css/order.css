@@ -1,0 +1,181 @@
+/* ==================================== */
+/* Базові стилі для мобільної версії    */
+/* (Mobile-First: до 768px)             */
+/* ==================================== */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.visuallyhidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.backdrop.visuallyhidden .modal.order-modal {
+    transform: scale(1.1);
+}
+
+.modal.order-modal {
+    position: relative;
+    width: 90%;
+    /* Гумова ширина для смартфонів */
+    max-width: 320px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    transform: rotate(90deg);
+}
+
+/* Іконки SVG автоматично адаптуються для Retina-екранів */
+.close-icon {
+    fill: #2e2f42;
+}
+
+.modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.16;
+    letter-spacing: 0.02em;
+    color: #2e2f42;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.16;
+    letter-spacing: 0.04em;
+    color: #808080;
+}
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    outline: none;
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input:focus {
+    border-color: #4e75ff;
+}
+
+.comment-field {
+    margin-bottom: 8px;
+}
+
+.comment-input {
+    height: 120px;
+    resize: none;
+}
+
+.submit-btn {
+    display: block;
+    min-width: 160px;
+    height: 48px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    background-color: #4e75ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+    background-color: #6c8cff;
+}
+
+/* ==================================== */
+/* Точка переходу для планшета          */
+/* (від 768px і більше)                 */
+/* ==================================== */
+@media screen and (min-width: 768px) {
+    .modal.order-modal {
+        width: 408px;
+        /* Фіксована ширина для планшетів та десктопів */
+        padding: 40px;
+    }
+
+    .modal-title {
+        font-size: 28px;
+        line-height: 1.14;
+        margin-bottom: 32px;
+    }
+}
+
+/* ==================================== */
+/* Точка переходу для десктопа          */
+/* (від 1440px і більше)                */
+/* ==================================== */
+@media screen and (min-width: 1440px) {
+
+}
