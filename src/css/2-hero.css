@@ -13,8 +13,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  margin-bottom: 40px;
-
   padding: 156px 0;
 }
 
@@ -111,11 +109,10 @@ html {
 @media screen and (min-width: 768px) {
   .hero-container {
     min-width: 768px;
-    /* padding: 36px 32px; */
   }
 
   .hero {
-    padding: 120px 0;
+    padding: 36px 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url(/img/hero/hero-tab-1x.avif);
   }
@@ -129,7 +126,6 @@ html {
 
   .hero-title {
     font-size: 56px;
-
     max-width: 400px;
   }
 
@@ -148,15 +144,13 @@ html {
 @media screen and (min-width: 1440px) {
   .hero-container {
     width: 1440px;
-
-    padding: 92px 0;
     margin: 0;
   }
 
   .hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url(/img/hero/hero-desc-1x.avif);
-    padding: 0;
+    padding: 92px 0;
   }
 
   @media screen and (min-resolution: 2x) {
