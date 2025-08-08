@@ -1,0 +1,54 @@
+/* reviews-css */
+
+.reviews {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.reviews-heading {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01;
+    margin-bottom: 24px;
+}
+
+.revies-section-text {
+    font-size: 16px;
+    margin-bottom: 80px;
+}
+
+.rating-stars {
+    margin-bottom: 24px;
+}
+
+.review-text {
+    margin-bottom: 24px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    top: auto;
+    /* щоб не було посередині */
+    bottom: 10px;
+    /* внизу біля пагінації */
+}
+
+.swiper-button-prev {
+    left: calc(50% - 60px);
+}
+
+.swiper-button-next {
+    right: calc(50% - 60px);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-size: 16px;
+    /* розмір іконки зі шрифта Swiper */
+    color: #000;
+}
