@@ -46,9 +46,8 @@
     position: absolute;
     bottom: 0;
     top: auto;
-    /* відключає вертикальне центрування */
     background: rgba(242, 242, 242, 1);
-    border-radius: 50%;
+    border-radius: 100%;
     border: 1px solid rgba(8, 12, 9, 0.15);
     width: 48px;
     height: 48px;
@@ -103,4 +102,24 @@
 .swiper-button-disabled {
     opacity: 0.5;
     pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .reviews{
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    .reviews-heading{
+        font-size: 48px;
+    }
+        .revies-section-text{
+            font-size: 18px;
+        }
+}
+
+@media only screen and (min-width: 1440px) {
+    .reviews {
+            padding-top: 64px;
+            padding-bottom: 64px;
+        }
 }
