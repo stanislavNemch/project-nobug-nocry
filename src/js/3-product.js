@@ -151,6 +151,14 @@ function createPagination(NowPages) {
     </button>
   `;
 
+if (NowPages > 1) {
+    paginationContainer.innerHTML += `
+      <button class="page-number ${NowPages === 1 ? 'focus' : ''}">1</button>
+    `;
+    paginationContainer.innerHTML += `<span class="dtp" style="margin-right: 18px;" >...</span>`;
+  }
+
+
   // Текущая + 2 страницы (например: 8 9 10)
   for (let i = NowPages; i <= Math.min(NowPages + 2, totalItemspages); i++) {
     paginationContainer.innerHTML += `

@@ -189,6 +189,12 @@ width: 100%;
   opacity: 0.5;
   cursor: pointer;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
 .scroll {
   width: 48px;
   height: 48px;
