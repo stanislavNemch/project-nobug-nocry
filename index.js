@@ -2,10 +2,10 @@ import{a as M,i as d,S as I}from"./assets/vendor-Bl63KDk-.js";(function(){const 
   <img
     class="product-categories-img"
     srcset="
-                  /public/img/category-imgs/category-img-${r+1}.webp    1x,
-                  /public/img/category-imgs/category-img-${r+1}@2x.webp 2x
+                  /img/category-imgs/category-img-${r+1}.webp    1x,
+                  /img/category-imgs/category-img-${r+1}@2x.webp 2x
                 "
-    src="/public/img/category-imgs/category-img-${r+1}.webp"
+    src="/img/category-imgs/category-img-${r+1}.webp"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${s.name}</p>
