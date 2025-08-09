@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Меблерія</title>
   <script type="module" crossorigin src="/project-nobug-nocry/index.js"></script>
-  <link rel="modulepreload" crossorigin href="/project-nobug-nocry/assets/vendor-Bl63KDk-.js">
-  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/vendor-BuNbwwL2.css">
-  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/index-REBhCRCt.css">
+  <link rel="modulepreload" crossorigin href="/project-nobug-nocry/assets/vendor-DG4juXxD.js">
+  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/vendor-DQDhUhPu.css">
+  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/index-BGVaq4OA.css">
 </head>
 
 <body>
@@ -112,9 +112,40 @@
 </section>
     <section class="popular-products">
     <div class="container">
+        <h2 class="popular-products-title">Популярні товари</h2>
 
-        <!--Писати свій код в цьому контейнері-->
+        <!-- Swiper контейнер -->
+        <div class="swiper popular-products-swiper">
+            <div class="swiper-wrapper">
+                <!-- Слайды будут добавляться динамически -->
+            </div>
+        </div>
 
+        <!-- Навигация снизу -->
+        <div class="popular-products-controls">
+            <!-- Пагинация точками слева -->
+            <div class="popular-products-pagination swiper-pagination"></div>
+
+            <!-- Кнопки навигации справа -->
+            <div class="popular-products-navigation">
+                <button class="popular-products-btn-prev swiper-button-prev" type="button">
+                    <svg class="popular-products-icon" width="24" height="24">
+                        <use href="/project-nobug-nocry/assets/sprite-CTbW2Ani.svg#left-arrow-alt"></use>
+                    </svg>
+                </button>
+
+                <button class="popular-products-btn-next swiper-button-next" type="button">
+                    <svg class="popular-products-icon" width="24" height="24">
+                        <use href="/project-nobug-nocry/assets/sprite-CTbW2Ani.svg#right-arrow-alt"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Лоадер -->
+        <div class="popular-products-loader">
+            <div class="loader"></div>
+        </div>
     </div>
 </section>
     <section class="5-faq" id="faq">
