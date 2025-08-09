@@ -136,7 +136,6 @@ class PopularProductsSwiper {
       // События
       on: {
         init: () => {
-          console.log('Swiper initialized');
           this.addCustomIcons();
         },
         slideChange: () => {
