@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getFurnitureById } from './furniture-api.js';
 import { openOrderModal } from './order.js';
 
-const modalSelector = document.querySelector('.modal');
+const modalSelector = document.querySelector('.modal-window');
 const productsList = document.querySelector('.products-list');
 let dataId = 0;
 let selectedColor = '';
@@ -79,34 +79,59 @@ productsList.addEventListener('click', async function (event) {
 
 function renderModal(furniture) {
   return `
-  <div class="modalWindow">
+  <div class="product-modalWindow">
     <div class="modal-left">
-      <img class="modal-image-0" src="${furniture.images[0]}" alt="${furniture.description}" />
+      <img class="modal-image-0" src="${furniture.images[0]}" alt="${
+    furniture.description
+  }" />
       <div class="modal-bottom-row">
-        <img class="modal-image-1" src="${furniture.images[1]}" alt="${furniture.description}" />
-        <img class="modal-image-2" src="${furniture.images[2]}" alt="${furniture.description}" />
+        <img class="modal-image-1" src="${furniture.images[1]}" alt="${
+    furniture.description
+  }" />
+        <img class="modal-image-2" src="${furniture.images[2]}" alt="${
+    furniture.description
+  }" />
       </div>
     </div>
     <div class="modal-right">
-      <h2 class="modal-title">${furniture.name}</h2>
+      <h2 class="product-modal-title">${furniture.name}</h2>
       <p class="modal-description">${furniture.category.name}</p>
       <div class="description-container">
         <h3 class="modal-price">${furniture.price} грн</h3>
-        <div class="stars"></div>
+        <div class="stars">
+          <div class="rating" data-rate="${furniture.rate}">
+            <div class="empty-stars">★★★★★</div>
+            <div class="filled-stars" style="width: ${
+              (furniture.rate / 5) * 100
+            }%">★★★★★</div>
+          </div>
+        </div>
         <div class="color-options">
           <p class="color-label">Колір</p>
           <div class="radio-group">
             <div class="radio-wrapper">
-              <input type="radio" id="color1" name="furniture-color" value="${furniture.color[0]}" class="color-radio" />
-              <label for="color1" class="color-circle" style="background-color: ${furniture.color[0]}"></label>
+              <input type="radio" id="color1" name="furniture-color" value="${
+                furniture.color[0]
+              }" class="color-radio" />
+              <label for="color1" class="color-circle" style="background-color: ${
+                furniture.color[0]
+              }"></label>
             </div>
             <div class="radio-wrapper">
-              <input type="radio" id="color2" name="furniture-color" value="${furniture.color[1]}" class="color-radio" />
-              <label for="color2" class="color-circle" style="background-color: ${furniture.color[1]}"></label>
+              <input type="radio" id="color2" name="furniture-color" value="${
+                furniture.color[1]
+              }" class="color-radio" />
+              <label for="color2" class="color-circle" style="background-color: ${
+                furniture.color[1]
+              }"></label>
             </div>
             <div class="radio-wrapper">
-              <input type="radio" id="color3" name="furniture-color" value="${furniture.color[2]}" class="color-radio" />
-              <label for="color3" class="color-circle" style="background-color: ${furniture.color[2]}"></label>
+              <input type="radio" id="color3" name="furniture-color" value="${
+                furniture.color[2]
+              }" class="color-radio" />
+              <label for="color3" class="color-circle" style="background-color: ${
+                furniture.color[2]
+              }"></label>
             </div>
           </div>
         </div>
@@ -120,7 +145,7 @@ function renderModal(furniture) {
 
 //next goes logic to close modal
 modalSelector.addEventListener('click', function (event) {
-  const modalWindow = event.target.closest('.modalWindow');
+  const modalWindow = event.target.closest('.product-modalWindow');
   if (!modalWindow) {
     console.log('closing modal');
     console.log('selected color after closing modal', selectedColor);

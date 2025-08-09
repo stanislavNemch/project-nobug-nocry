@@ -1,4 +1,4 @@
-.modalWindow {
+.product-modalWindow {
   z-index: 1001;
   border-radius: 8px;
   padding: 64px;
@@ -67,7 +67,7 @@
   height: 100%;
 }
 
-.modal-title {
+.product-modal-title {
   font-weight: 700;
   font-size: 40px;
   line-height: 1.3;
@@ -168,4 +168,32 @@
 
 .color-circle:hover {
   transform: scale(1.1);
+}
+
+/* .stars {
+  margin: 16px 0;
+} */
+
+.rating {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.empty-stars {
+  color: #ddd;
+  padding: 0;
+  margin: 0;
+}
+
+.filled-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000000;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
 }
