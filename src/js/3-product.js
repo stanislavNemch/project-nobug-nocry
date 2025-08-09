@@ -35,10 +35,10 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  /img/category-imgs/category-img-${index + 1}.webp    1x,
-                  /img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                  ./img/category-imgs/category-img-${index + 1}.webp    1x,
+                  ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
-    src="/img/category-imgs/category-img-${index + 1}.webp"
+    src="./img/category-imgs/category-img-${index + 1}.webp"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
@@ -136,6 +136,7 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
 
       createPagination(NowPages); // [3] Обновляем пагинацию
       updatePaginationButtons(); // [4] Включаем/отключаем кнопки вперёд/назад
+      hideLoadMoreButton();
     } else {
       console.warn('Товари не знайдені.');
     }
@@ -213,6 +214,23 @@ function hideLoadMoreButton() {
   }
 }
 
+BtnMoreItems.addEventListener('click', async () => {
+  if (NowPages < totalItemspages) {
+    NowPages++;
+    await createProductsList(getFurnitures(NowPages, 8));
+    setTimeout(() => {
+      const lastProduct = document.querySelector(
+        '.products-list .product-item:last-child'
+      );
+      if (lastProduct) {
+        lastProduct.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }, 100);
+  }
+});
 // Обработка кликов по пагинации
 
 document.addEventListener('click', async event => {
@@ -258,20 +276,6 @@ document.addEventListener('click', async event => {
       }, 300);
     }
   }
-
-  BtnMoreItems.addEventListener('click', async () => {
-    if (NowPages < totalItemspages) {
-      NowPages++;
-      hideLoadMoreButton();
-      await createProductsList(getFurnitures(NowPages, 8));
-      setTimeout(() => {
-        document.querySelector('.products-list').scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-        });
-      }, 100);
-    }
-  });
 });
 
 // Инициализация
