@@ -139,6 +139,11 @@
   margin-top: 16px;
 }
 
+.btn-go-modal:hover,
+.btn-go-modal:focus {
+  background-color: rgba(107, 6, 9, 0.1);
+}
+
 .color-one {
   border-radius: 100%;
   width: 24px;
@@ -358,7 +363,6 @@
   }
 
   .products-list {
-    justify-content: space-between;
     gap: calc((100% - 1240px) / 3);
   }
 
