@@ -1,0 +1,125 @@
+/* reviews-css */
+
+.reviews {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.reviews-heading {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01;
+    margin-bottom: 24px;
+}
+
+.revies-section-text {
+    font-size: 16px;
+    margin-bottom: 80px;
+}
+
+.rating-stars {
+    margin-bottom: 24px;
+}
+
+.review-text {
+    margin-bottom: 24px;
+}
+
+/* Контейнер з кнопками і пагінацією внизу справа */
+.swiper {
+    position: relative;
+    padding-bottom: 60px;
+    /* щоб звільнити місце для кнопок і крапочок */
+}
+
+/* Пагінація (крапочки) */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: auto;
+}
+
+/* Кнопки */
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    background: rgba(242, 242, 242, 1);
+    border-radius: 100%;
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Іконка всередині кнопки */
+.swiper-button-icon {
+    fill: rgba(8, 12, 9, 1);
+}
+
+/* Ховер/фокус */
+.swiper-button-prev:hover,
+.swiper-button-next:hover,
+.swiper-button-prev:focus,
+.swiper-button-next:focus {
+    background-color: rgba(151, 80, 82, 1);
+}
+
+.swiper-button-icon:hover,
+.swiper-button-icon:focus,
+.swiper-button-icon:active {
+    fill: rgba(255, 255, 255, 1);
+}
+
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    background-color: rgba(107, 6, 9, 1);
+}
+
+/* Розташування кнопок біля пагінації справа */
+.swiper-button-prev {
+    right: 60px;
+    /* кнопка "назад" */
+}
+
+.swiper-button-next {
+    right: 0;
+    /* кнопка "вперед" */
+}
+
+/* Прибираємо стандартні стрілки Swiper */
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    display: none;
+}
+
+/* Стиль для неактивних кнопок */
+.swiper-button-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .reviews{
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    .reviews-heading{
+        font-size: 48px;
+    }
+        .revies-section-text{
+            font-size: 18px;
+        }
+}
+
+@media only screen and (min-width: 1440px) {
+    .reviews {
+            padding-top: 64px;
+            padding-bottom: 64px;
+        }
+}

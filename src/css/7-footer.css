@@ -10,7 +10,7 @@ color: #FFFFFF;
     align-items: center;
     gap: 24px;
 }
-.logo-footer{
+.logo-footer-icon {
     fill: #FFFFFF;
 }
 .nav-footer{
@@ -25,17 +25,12 @@ color: #FFFFFF;
     gap: 24px;
     justify-content: center;
 }
-.logo-footer-icon{
+.social-icon{
     fill: #FFFFFF;
 }
-.social-icon-youtube{
-    fill: #FFFFFF;
-}
-.social-icon-instagram{
+.social-icon:hover,
+.social-icon:focus{
     fill: #080C09;
-}
-.social-icon-facebook{
-    fill: #FFFFFF;
 }
 .copyright{
     font-size: 12px;
