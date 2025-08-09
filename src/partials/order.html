@@ -7,22 +7,41 @@
         </svg>
       </button>
 
-      <h2 class="modal-title">Замовити зворотний зв’язок</h2>
+      <h2 class="modal-title">
+        Замовити зворотний <br />
+        зв’язок
+      </h2>
 
       <form class="order-form">
         <label class="form-field">
-          <span class="label-text">E-mail</span>
-          <input type="email" name="email" class="form-input" required />
+          <span class="label-text">E-mail*</span>
+          <input
+            type="email"
+            name="email"
+            placeholder="example@example.com"
+            class="form-input"
+            required
+          />
         </label>
 
         <label class="form-field">
-          <span class="label-text">Телефон</span>
-          <input type="tel" name="phone" class="form-input" required />
+          <span class="label-text">Телефон*</span>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+38 (099) 123 22 11"
+            class="form-input"
+            required
+          />
         </label>
 
         <label class="form-field comment-field">
           <span class="label-text">Коментар</span>
-          <textarea name="comment" class="form-input comment-input"></textarea>
+          <textarea
+            name="comment"
+            placeholder="Type your message..."
+            class="form-input comment-input"
+          ></textarea>
         </label>
 
         <button type="submit" class="submit-btn">Надіслати заявку</button>
