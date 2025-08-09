@@ -1,4 +1,5 @@
 import { getCategories, getFurnitures } from './furniture-api.js';
+import spriteUrl from '../img/sprite.svg';
 
 const listCategory = document.querySelector('.product-categories-list');
 const paginationContainer = document.querySelector('.pagination');
@@ -157,7 +158,7 @@ function createPagination(NowPages) {
   paginationContainer.innerHTML += `
     <button class="btn-prev scroll">
       <svg class="swiper-button-icon" width="24" height="24">
-                <use href="./img/sprite.svg#left-arrow-alt"/>
+                <use href="${spriteUrl}#left-arrow-alt"/>
       </svg>
     </button>
   `;
@@ -176,7 +177,7 @@ function createPagination(NowPages) {
   paginationContainer.innerHTML += `
     <button class="btn-next scroll">
       <svg class="swiper-button-icon" width="24" height="24">
-                <use href="./img/sprite.svg#right-arrow-alt" />
+                <use href="${spriteUrl}#right-arrow-alt" />
       </svg>
     </button>
   `;
