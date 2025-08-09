@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+
 .product-container {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -84,6 +85,7 @@
     color: #fff;
 }
 
+
 .product-item {
   width: calc(100% / 4 - 18px);
   display: flex;
@@ -138,7 +140,7 @@ width: 100%;
   border: 8px solid rgba(107, 6, 9, 1);
 }
 .btn-loadMore {
-  display: inline;
+  display: none;
   color: rgba(255, 255, 255, 1);
   width: 420px;
   background-color: rgb(128, 8, 12);
@@ -204,4 +206,62 @@ width: 100%;
 .disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+.loader {
+
+  width: 48px;
+    height: 48px;
+    border: 5px solid #000000;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 0.5s linear infinite;
+}
+.container-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 768px) {
+  .product-item {
+    width: calc(100% / 2 - 18px);
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+  .three-product {
+    margin: 48px 0px;
+}
+}
+
+@media only screen and (max-width: 375px) {
+  .product-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+  .three-product {
+    margin: 48px 0px;
+}
+.pagination {
+  display: none;
+}
+.btn-loadMore {
+  display: inline;
+  color: rgba(255, 255, 255, 1);
+  width: 100%;
+  background-color: rgb(128, 8, 12);
+  border-radius: 100px;
+  padding: 10px 0px;
+  border: none;
+  font-style: medium;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto;
+}
+.products-list {
+  margin-bottom: 0px;
+}
 }
