@@ -34,10 +34,10 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  ../img/category-imgs/category-img-${index + 1}.webp    1x,
-                  ../img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                  ./public/category-imgs/category-img-${index + 1}.webp    1x,
+                  ./public/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
-    src="./img/category-imgs/category-img-${index + 1}.webp"
+    src="./public/category-imgs/category-img-${index + 1}.webp"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
@@ -68,6 +68,8 @@ export function getOneCategory(e) {
   if (!categoryItem) return;
   const categoryName = categoryItem.textContent.trim();
   const categoryId = categoryItem.dataset.id;
+
+  NowPages = 1;
 
   removeActiveCategory();
   activeCategory(e);
