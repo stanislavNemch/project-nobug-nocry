@@ -125,6 +125,7 @@ width: 100%;
    gap: 24px;
    flex-wrap: wrap;
    margin-bottom: 32px;
+   justify-content: start;
 }
 
 .img-card {
