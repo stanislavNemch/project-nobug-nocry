@@ -42,16 +42,22 @@
   fill: #080c09;
   stroke-width: 1px;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 24px;
 }
 
 .faq-answer {
+  display: none;
   max-width: 335px;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
-  display: none;
   padding-bottom: 24px;
   color: #202421;
+}
+
+.faq-answer.open {
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
