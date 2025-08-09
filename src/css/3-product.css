@@ -185,6 +185,10 @@ width: 100%;
   opacity: 0.5;
   cursor: pointer;
 }
+.btn-go-modal:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
 .scroll {
   width: 48px;
   height: 48px;
