@@ -35,12 +35,10 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  /public/img/category-imgs/category-img-${
-                    index + 1
-                  }.webp    1x,
-                  /public/img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                  /img/category-imgs/category-img-${index + 1}.webp    1x,
+                  /img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
-    src="/public/img/category-imgs/category-img-${index + 1}.webp"
+    src="/img/category-imgs/category-img-${index + 1}.webp"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
