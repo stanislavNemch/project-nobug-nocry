@@ -1,0 +1,324 @@
+.popular-products {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.popular-products-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #080c09;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.popular-products-swiper {
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+/* Карточки товаров - точно как .product-item */
+.popular-products-item {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 100%;
+  height: 100%;
+  margin-top: 0; /* Убираем отступ сверху в отличие от product-item */
+}
+
+.popular-products-item .img-card {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: filter 0.3s ease;
+}
+
+.popular-products-item .img-card:hover {
+  filter: brightness(0.7);
+  border: 8px solid rgba(107, 6, 9, 1);
+}
+
+.popular-products-item .text-card {
+  font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+  color: rgba(8, 12, 9, 1);
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.popular-products-item .colors {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.popular-products-item .color-one {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.popular-products-item .btn-go-modal {
+  width: 100%;
+  height: 40px;
+  background-color: #080c090d;
+  color: rgba(8, 12, 9, 1);
+  font-weight: 500;
+  font-family: 'Raleway';
+  font-size: 16px;
+  border-radius: 100px;
+  border: none;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.popular-products-item .btn-go-modal:hover {
+  background-color: rgba(107, 6, 9, 0.1);
+}
+
+/* Контролы снизу */
+.popular-products-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Пагинация точками слева - блок 104x8 */
+.popular-products-pagination {
+  width: 104px;
+  height: 8px;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+.popular-products-pagination .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50%;
+  background-color: rgba(8, 12, 9, 0.3) !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
+
+.popular-products-pagination .swiper-pagination-bullet-active {
+  background-color: rgba(107, 6, 9, 1) !important;
+  transform: scale(1.25);
+}
+
+.popular-products-pagination .swiper-pagination-bullet:hover {
+  background-color: rgba(107, 6, 9, 0.7) !important;
+}
+
+/* Навигация стрелочками справа - блок 112x48 */
+.popular-products-navigation {
+  width: 112px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  border-radius: 24px;
+  padding: 4px;
+}
+
+.popular-products-navigation .swiper-button-prev,
+.popular-products-navigation .swiper-button-next {
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: 0 !important;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: static !important;
+  color: #080c09;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+.popular-products-navigation .swiper-button-prev::after,
+.popular-products-navigation .swiper-button-next::after {
+  display: none !important;
+}
+
+.popular-products-navigation
+  .swiper-button-prev:hover:not(.swiper-button-disabled),
+.popular-products-navigation
+  .swiper-button-next:hover:not(.swiper-button-disabled) {
+  background-color: rgba(151, 80, 82, 1);
+}
+
+.popular-products-navigation
+  .swiper-button-prev:hover:not(.swiper-button-disabled)
+  .popular-products-icon,
+.popular-products-navigation
+  .swiper-button-next:hover:not(.swiper-button-disabled)
+  .popular-products-icon {
+  fill: white;
+}
+
+.popular-products-navigation
+  .swiper-button-prev:active:not(.swiper-button-disabled),
+.popular-products-navigation
+  .swiper-button-next:active:not(.swiper-button-disabled) {
+  background-color: rgba(107, 6, 9, 1);
+}
+
+.popular-products-navigation .swiper-button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.popular-products-icon {
+  width: 24px;
+  height: 24px;
+  fill: #080c09;
+  transition: fill 0.3s ease;
+}
+
+/* Лоадер */
+.popular-products-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.popular-products-loader.hidden {
+  display: none;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #000000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 0.5s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive для мобильных устройств - 1 товар 335x450 */
+@media screen and (max-width: 767px) {
+  .popular-products {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .popular-products-title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  /* Размеры карточки как в product-item для мобильных */
+  .popular-products-item {
+    width: 335px;
+    height: 450px;
+  }
+
+  .popular-products-item .img-card {
+    height: 450px;
+  }
+
+  .popular-products-controls {
+    gap: 16px;
+  }
+
+  .popular-products-navigation {
+    width: 96px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .popular-products-navigation .swiper-button-prev,
+  .popular-products-navigation .swiper-button-next {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .popular-products-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .popular-products-pagination {
+    width: 80px;
+    height: 6px;
+  }
+
+  .popular-products-pagination .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+  }
+}
+
+/* Responsive для планшетов - 2 товара 340x460 */
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .popular-products-title {
+    font-size: 42px;
+  }
+
+  /* Размеры карточки как в product-item для планшетов */
+  .popular-products-item {
+    width: 340px;
+    height: 460px;
+  }
+
+  .popular-products-item .img-card {
+    height: 460px;
+  }
+}
+
+/* Responsive для десктопов - 4 товара 310x436 */
+@media screen and (min-width: 1440px) {
+  .popular-products-title {
+    font-size: 48px;
+  }
+
+  /* Размеры карточки как в product-item для десктопа */
+  .popular-products-item {
+    width: 310px;
+    height: 436px;
+  }
+
+  .popular-products-item .img-card {
+    height: 436px;
+  }
+}

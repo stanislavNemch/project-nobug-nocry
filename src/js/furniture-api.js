@@ -153,3 +153,21 @@ export async function createOrder(orderInfo) {
     return null;
   }
 }
+
+// 5. Отримати популярні товари
+export async function getPopularFurnitures() {
+  try {
+    const response = await api.get(ENDPOINTS.FURNITURES, {
+      params: { type: 'popular' },
+    });
+    return response.data;
+  } catch (error) {
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося завантажити популярні товари. Спробуйте пізніше.',
+      position: 'topRight',
+      timeout: 4000,
+    });
+    return null;
+  }
+}
