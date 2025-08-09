@@ -2,8 +2,6 @@
 //import { StarRating } from 'css-star-rating';
 // На вибір
 import Raty from 'raty-js';
-
-// Swiper
 import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,23 +9,19 @@ import 'swiper/css/pagination';
 
 import { getFeedbacks } from './furniture-api.js';
 
-// Нормалізація рейтингу
 function normalizeRating(value) {
   if (value >= 3.3 && value <= 3.7) return 3.5;
   if (value >= 3.8 && value <= 4.2) return 4;
-  return Math.round(value * 2) / 2; // округлення до 0.5
+  return Math.round(value * 2) / 2;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const response = await getFeedbacks(1, 10);
-    if (!response || !Array.isArray(response.feedbacks)) {
-      return;
-    }
-
-    console.log('Отримані відгуки з бекенду:', response.feedbacks);
+    if (!response || !Array.isArray(response.feedbacks)) return;
 
     renderFeedbacks(response.feedbacks);
+    initStars(response.feedbacks);
     initSwiper();
   } catch (err) {
     console.error('Помилка завантаження відгуків:', err);
@@ -47,8 +41,9 @@ function renderFeedbacks(feedbacks) {
       </div>
     </div>
   `).join('');
+}
 
-  // Ініціалізація зірок
+function initStars(feedbacks) {
   feedbacks.forEach((fb, i) => {
     new Raty(document.getElementById(`rating-${i}`), {
       readOnly: true,
@@ -60,7 +55,7 @@ function renderFeedbacks(feedbacks) {
 }
 
 function initSwiper() {
-  new Swiper('.swiper', { 
+  const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: false,
@@ -72,5 +67,18 @@ function initSwiper() {
       el: '.swiper-pagination',
       clickable: true,
     },
+    on: {
+      slideChange: function () {
+        const prevBtn = document.querySelector('.swiper-button-prev');
+        const nextBtn = document.querySelector('.swiper-button-next');
+
+        prevBtn.classList.toggle('swiper-button-disabled', this.isBeginning);
+        nextBtn.classList.toggle('swiper-button-disabled', this.isEnd);
+      }
+    }
   });
+
+  // Початкове блокування кнопки "Назад"
+  document.querySelector('.swiper-button-prev').classList.add('swiper-button-disabled');
 }
+

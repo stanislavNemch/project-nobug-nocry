@@ -25,30 +25,82 @@
     margin-bottom: 24px;
 }
 
+/* Контейнер з кнопками і пагінацією внизу справа */
+.swiper {
+    position: relative;
+    padding-bottom: 60px;
+    /* щоб звільнити місце для кнопок і крапочок */
+}
+
+/* Пагінація (крапочки) */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: auto;
+}
+
+/* Кнопки */
 .swiper-button-prev,
 .swiper-button-next {
-    background: #fff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    bottom: 0;
     top: auto;
-    /* щоб не було посередині */
-    bottom: 10px;
-    /* внизу біля пагінації */
+    /* відключає вертикальне центрування */
+    background: rgba(242, 242, 242, 1);
+    border-radius: 50%;
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
 
+/* Іконка всередині кнопки */
+.swiper-button-icon {
+    fill: rgba(8, 12, 9, 1);
+}
+
+/* Ховер/фокус */
+.swiper-button-prev:hover,
+.swiper-button-next:hover,
+.swiper-button-prev:focus,
+.swiper-button-next:focus {
+    background-color: rgba(151, 80, 82, 1);
+}
+
+.swiper-button-icon:hover,
+.swiper-button-icon:focus,
+.swiper-button-icon:active {
+    fill: rgba(255, 255, 255, 1);
+}
+
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    background-color: rgba(107, 6, 9, 1);
+}
+
+/* Розташування кнопок біля пагінації справа */
 .swiper-button-prev {
-    left: calc(50% - 60px);
+    right: 60px;
+    /* кнопка "назад" */
 }
 
 .swiper-button-next {
-    right: calc(50% - 60px);
+    right: 0;
+    /* кнопка "вперед" */
 }
 
+/* Прибираємо стандартні стрілки Swiper */
 .swiper-button-prev:after,
 .swiper-button-next:after {
-    font-size: 16px;
-    /* розмір іконки зі шрифта Swiper */
-    color: #000;
+    display: none;
+}
+
+/* Стиль для неактивних кнопок */
+.swiper-button-disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
