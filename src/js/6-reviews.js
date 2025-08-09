@@ -5,6 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+// Виправлений імпорт css-star-rating
+import 'css-star-rating/css/star-rating.min.css';
+
 import { getFeedbacks } from './furniture-api.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -13,6 +16,32 @@ function normalizeRating(value) {
   if (value >= 3.3 && value <= 3.7) return 3.5;
   if (value >= 3.8 && value <= 4.2) return 4;
   return Math.round(value * 2) / 2;
+}
+
+function createStarRating(rating) {
+  const normalizedRating = normalizeRating(rating);
+  const fullStars = Math.floor(normalizedRating);
+  const hasHalfStar = normalizedRating % 1 !== 0;
+  const emptyStars = 5 - Math.ceil(normalizedRating);
+
+  let starsHtml = '';
+
+  // Повні зірки
+  for (let i = 0; i < fullStars; i++) {
+    starsHtml += '<span class="star star-full">★</span>';
+  }
+
+  // Половинна зірка
+  if (hasHalfStar) {
+    starsHtml += '<span class="star star-half">★</span>';
+  }
+
+  // Порожні зірки
+  for (let i = 0; i < emptyStars; i++) {
+    starsHtml += '<span class="star star-empty">★</span>';
+  }
+
+  return `<div class="rating-stars" data-rating="${normalizedRating}">${starsHtml}</div>`;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -63,8 +92,9 @@ function renderFeedbacks(feedbacks) {
       fb => `
         <div class="swiper-slide">
             <div class="review-card">
+                ${createStarRating(fb.rate)}
                 <p class="review-text">"${fb.descr}"</p>
-                <h3>${fb.name}</h3>
+                <h3 class="reviewer-name">${fb.name}</h3>
             </div>
         </div>
     `
