@@ -21,11 +21,11 @@ productsList.addEventListener('click', async function (event) {
       // Получить товар с ID = 123
       const furniture = await getFurnitureById(dataId);
 
-      if (furniture) {
-        console.log('Информация о товаре:', furniture);
-      } else {
-        console.log('Товар не найден');
-      }
+      // if (furniture) {
+      //   console.log('Информация о товаре:', furniture);
+      // } else {
+      //   console.log('Товар не найден');
+      // }
       const renderProduct = renderModal(furniture);
       modalSelector.innerHTML = renderProduct;
     }
@@ -33,31 +33,44 @@ productsList.addEventListener('click', async function (event) {
 });
 
 function renderModal(furniture) {
-  console.log(furniture.images);
   return `
   <div class="modalWindow">
-      <div class="modal-left">
-        <img class="modal-image-0" src="${furniture.images[0]}" alt="${furniture.description}" />
-        <div class="modal-bottom-row">
-          <img class="modal-image-1" src="${furniture.images[1]}" alt="${furniture.description}" />
-          <img class="modal-image-2" src="${furniture.images[2]}" alt="${furniture.description}" />
-        </div>
+    <div class="modal-left">
+      <img class="modal-image-0" src="${furniture.images[0]}" alt="${furniture.description}" />
+      <div class="modal-bottom-row">
+        <img class="modal-image-1" src="${furniture.images[1]}" alt="${furniture.description}" />
+        <img class="modal-image-2" src="${furniture.images[2]}" alt="${furniture.description}" />
       </div>
-      <div class="modal-right">
-  <h2 class="modal-title">${furniture.name}</h2>
-  <p class="modal-description" >${furniture.category.name}</p>
-  <div class="description-container">
-    <h3 class="modal-price">${furniture.price} грн</h3>
-     <div class="stars"></div>
-     <!-- checkbox .furnitureColors -->
-      <p class="furnitureDescription">${furniture.description}</p>
-      <p class="furnitureSize">${furniture.sizes}</p>
-      <button class="modalButton">Перейти до замовлення</button>
-  </div>
-</div>
-      <div></div>
     </div>
-  `;
+    <div class="modal-right">
+      <h2 class="modal-title">${furniture.name}</h2>
+      <p class="modal-description">${furniture.category.name}</p>
+      <div class="description-container">
+        <h3 class="modal-price">${furniture.price} грн</h3>
+        <div class="stars"></div>
+        <div class="color-options">
+          <p class="color-label">Колір</p>
+          <div class="radio-group">
+            <div class="radio-wrapper">
+              <input type="radio" id="color1" name="furniture-color" value="${furniture.color[0]}" class="color-radio" />
+              <label for="color1" class="color-circle" style="background-color: ${furniture.color[0]}"></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="radio" id="color2" name="furniture-color" value="${furniture.color[1]}" class="color-radio" />
+              <label for="color2" class="color-circle" style="background-color: ${furniture.color[1]}"></label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="radio" id="color3" name="furniture-color" value="${furniture.color[2]}" class="color-radio" />
+              <label for="color3" class="color-circle" style="background-color: ${furniture.color[2]}"></label>
+            </div>
+          </div>
+        </div>
+        <p class="furnitureDescription">${furniture.description}</p>
+        <p class="furnitureSize">${furniture.sizes}</p>
+        <button class="modalButton">Перейти до замовлення</button>
+      </div>
+    </div>
+  </div>`;
 }
 
 //next goes logic to close modal

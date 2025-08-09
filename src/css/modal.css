@@ -126,3 +126,46 @@
 /* .checkbox-wrapper {
   diameter;
 } */
+
+.radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.radio-wrapper {
+  position: relative;
+}
+
+.color-radio {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-circle {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+/* #color1 + .color-circle {
+  background-color: #6b0609;
+}
+#color2 + .color-circle {
+  background-color: #fff;
+}
+#color3 + .color-circle {
+  background-color: #080c09;
+} */
+
+/* selected radio */
+.color-radio:checked + .color-circle {
+  border-color: #000;
+}
+
+.color-circle:hover {
+  transform: scale(1.1);
+}
