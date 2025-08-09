@@ -1,7 +1,38 @@
 <section class="popular-products">
     <div class="container">
+        <h2 class="popular-products-title">Популярні товари</h2>
 
-        <!--Писати свій код в цьому контейнері-->
+        <!-- Swiper контейнер -->
+        <div class="swiper popular-products-swiper">
+            <div class="swiper-wrapper">
+                <!-- Слайды будут добавляться динамически -->
+            </div>
+        </div>
 
+        <!-- Навигация снизу -->
+        <div class="popular-products-controls">
+            <!-- Пагинация точками слева -->
+            <div class="popular-products-pagination swiper-pagination"></div>
+
+            <!-- Кнопки навигации справа -->
+            <div class="popular-products-navigation">
+                <button class="popular-products-btn-prev swiper-button-prev" type="button">
+                    <svg class="popular-products-icon" width="24" height="24">
+                        <use href="./img/sprite.svg#left-arrow-alt"></use>
+                    </svg>
+                </button>
+
+                <button class="popular-products-btn-next swiper-button-next" type="button">
+                    <svg class="popular-products-icon" width="24" height="24">
+                        <use href="./img/sprite.svg#right-arrow-alt"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Лоадер -->
+        <div class="popular-products-loader">
+            <div class="loader"></div>
+        </div>
     </div>
 </section>
