@@ -1,10 +1,32 @@
 //Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
 import axios from 'axios';
 import { getFurnitureById } from './furniture-api.js';
+import { openOrderModal } from './order.js';
 
 const modalSelector = document.querySelector('.modal');
 const productsList = document.querySelector('.products-list');
 let dataId = 0;
+let selectedColor = '';
+
+// Add this function
+function setupModalButton() {
+  const modalButton = document.querySelector('.modalButton');
+  if (modalButton) {
+    modalButton.addEventListener('click', function () {
+      console.log('Order button clicked');
+      console.log('Selected color:', selectedColor);
+      console.log('Product ID:', dataId);
+
+      // Hide current modal
+      modalSelector.classList.add('visuallyhidden');
+      document.body.style.overflow = ''; // restore scrolling
+
+      openOrderModal(dataId, selectedColor);
+      console.log('order window call');
+    });
+  }
+}
+
 //Getting furenitureId in this function:
 productsList.addEventListener('click', async function (event) {
   document.body.style.overflow = 'hidden'; // stop scrolling
@@ -28,6 +50,29 @@ productsList.addEventListener('click', async function (event) {
       // }
       const renderProduct = renderModal(furniture);
       modalSelector.innerHTML = renderProduct;
+
+      // Add color selection handler after rendering modal
+      const colorInputs = document.querySelectorAll(
+        'input[name="furniture-color"]'
+      );
+
+      // Set default color (first color)
+      if (colorInputs.length > 0) {
+        colorInputs[0].checked = true;
+        selectedColor = colorInputs[0].value;
+        console.log('Default color:', selectedColor);
+      }
+
+      // Listen for color changes
+      colorInputs.forEach(input => {
+        input.addEventListener('change', function () {
+          selectedColor = this.value;
+          console.log('Selected color:', selectedColor);
+        });
+      });
+
+      // Set up modal button
+      setupModalButton();
     }
   }
 });
@@ -78,12 +123,18 @@ modalSelector.addEventListener('click', function (event) {
   const modalWindow = event.target.closest('.modalWindow');
   if (!modalWindow) {
     console.log('closing modal');
+    console.log('selected color after closing modal', selectedColor);
 
     // Click was outside the modal-window
     modalSelector.classList.add('visuallyhidden');
     document.body.style.overflow = ''; //turn on scroll
   }
 });
+
+function closeModalWindow() {
+  modalSelector.classList.add('visuallyhidden');
+  document.body.style.overflow = ''; //turn on scroll
+}
 
 document.addEventListener('keydown', event => {
   if (
@@ -94,13 +145,3 @@ document.addEventListener('keydown', event => {
     document.body.style.overflow = ''; //turn on scroll
   }
 });
-
-// export function getDataId() {
-//   return dataId;
-// }
-
-// data.modelId = selectedModelId;
-// data.color = selectedColor;
-
-// export { selectedModelId };
-// export { selectedColor };
