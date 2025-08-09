@@ -9,7 +9,7 @@
   <script type="module" crossorigin src="/project-nobug-nocry/index.js"></script>
   <link rel="modulepreload" crossorigin href="/project-nobug-nocry/assets/vendor-BWsV38dq.js">
   <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/vendor-Cuoqd9ZS.css">
-  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/index-DQ5WQ-10.css">
+  <link rel="stylesheet" crossorigin href="/project-nobug-nocry/assets/index-Cuy2u9K_.css">
 </head>
 
 <body>
@@ -302,47 +302,158 @@
 </section>
   </footer>
 
-  <div class="modal visuallyhidden">
-    <div class="container">
+  <div class="modal-window visuallyhidden modalBlur">
+  <div class="container">
+    <!-- Писати свій код в цьому контейнері -->
 
-        <!-- Писати свій код в цьому контейнері -->
-
-    </div>
-</div>
-  <div class="order visuallyhidden">
-    <div class="container">
-
-        <div class="modal order-modal">
-            <button type="button" class="close-btn" data-modal-close>
-                <svg class="close-icon" width="24" height="24">
-                    <use href="./images/icons.svg#icon-close"></use>
-                </svg>
-            </button>
-
-            <h2 class="modal-title">Замовити зворотний зв’язок</h2>
-
-            <form class="order-form">
-                <label class="form-field">
-                    <span class="label-text">E-mail</span>
-                    <input type="email" name="email" class="form-input" required />
-                </label>
-
-                <label class="form-field">
-                    <span class="label-text">Телефон</span>
-                    <input type="tel" name="phone" class="form-input" required />
-                </label>
-
-                <label class="form-field comment-field">
-                    <span class="label-text">Коментар</span>
-                    <textarea name="comment" class="form-input comment-input"></textarea>
-                </label>
-
-                <button type="submit" class="submit-btn">Надіслати заявку</button>
-            </form>
+    <!-- <div class="modalWindow">
+      <div>
+        <img src="" alt="" />
+        <div>
+          <img src="" alt="" />
+          <img src="" alt="" />
         </div>
-
-    </div>
+      </div>
+      <div></div>
+    </div> -->
+  </div>
 </div>
+
+<!-- div
+<div class="modal-right">
+  <h2 class="modal-title"></h2>
+  <p class="modal-description"></p>
+  <h3 class="modal-price"></h3>
+  <div class="stars"></div> -->
+<!-- checkbox .furnitureColors -->
+<!-- <p class="furnitureDescription"></p>
+  <p class="furnitureSize"></p>
+  <button></button>
+</div> -->
+<!-- <div class="color-options">
+  <p class="color-label">Колір</p>
+  <div class="checkbox-group">
+    <div
+      class="checkbox-wrapper"
+      style="background-color:${furniture.color[0]};"
+    >
+      <input
+        type="checkbox"
+        id="color1"
+        name="furniture-color"
+        value="furniture.color[0]"
+      />
+      <label for="color1">Колір 1</label>
+    </div>
+    <div class="checkbox-wrapper">
+      <input
+        type="checkbox"
+        id="color2"
+        name="furniture-color"
+        value="color2"
+      />
+      <label for="color2">Колір 2</label>
+    </div>
+    <div class="checkbox-wrapper">
+      <input
+        type="checkbox"
+        id="color3"
+        name="furniture-color"
+        value="color3"
+      />
+      <label for="color3">Колір 3</label>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="color-options">
+  <p class="color-label">Колір</p>
+  <div class="radio-group">
+    <div class="radio-wrapper">
+      <input
+        type="radio"
+        id="color1"
+        name="furniture-color"
+        value="color1"
+        class="color-radio"
+      />
+      <label for="color1" class="color-circle"></label>
+    </div>
+    <div class="radio-wrapper">
+      <input
+        type="radio"
+        id="color2"
+        name="furniture-color"
+        value="color2"
+        class="color-radio"
+      />
+      <label for="color2" class="color-circle"></label>
+    </div>
+    <div class="radio-wrapper">
+      <input
+        type="radio"
+        id="color3"
+        name="furniture-color"
+        value="color3"
+        class="color-radio"
+      />
+      <label for="color3" class="color-circle"></label>
+    </div>
+  </div>
+</div> -->
+
+  <div class="backdrop visuallyhidden" id="order-backdrop">
+  <div class="container">
+    <div class="modal order-modal">
+      <button type="button" class="close-btn" data-modal-close>
+        <svg class="close-icon" width="24" height="24">
+          <use href="./images/icons.svg#icon-close"></use>
+        </svg>
+      </button>
+
+      <h2 class="modal-title">
+        Замовити зворотний <br />
+        зв’язок
+      </h2>
+
+      <form class="order-form">
+        <label class="form-field">
+          <span class="label-text">E-mail*</span>
+          <input
+            type="email"
+            name="email"
+            placeholder="example@example.com"
+            class="form-input"
+            required
+          />
+        </label>
+
+        <label class="form-field">
+          <span class="label-text">Телефон*</span>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+38 (099) 123 22 11"
+            class="form-input"
+            required
+          />
+        </label>
+
+        <label class="form-field comment-field">
+          <span class="label-text">Коментар</span>
+          <textarea
+            name="comment"
+            placeholder="Type your message..."
+            class="form-input comment-input"
+          ></textarea>
+        </label>
+
+        <button type="submit" class="submit-btn">Надіслати заявку</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 </body>
 
