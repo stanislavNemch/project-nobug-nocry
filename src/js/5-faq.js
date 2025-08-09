@@ -1,37 +1,55 @@
 import Accordion from 'accordion-js';
 import 'accordion-js/dist/accordion.min.css';
 
-// Получаем путь к спрайту из уже существующего элемента
-function getSpritePath() {
-  const existingSvgUse = document.querySelector('use[href*="sprite.svg"]');
-  if (existingSvgUse) {
-    const href = existingSvgUse.getAttribute('href');
-    return href.split('#')[0]; // Убираем #icon-name, оставляем только путь
-  }
-  // Fallback если не найдено
-  return './img/sprite.svg';
-}
+// Ждем загрузки DOM перед инициализацией
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling;
+      const svgUse = question.querySelector('use');
+      const isOpen = answer.classList.contains('open');
 
-document.querySelectorAll('.faq-question').forEach(question => {
-  question.addEventListener('click', () => {
-    const answer = question.nextElementSibling;
-    const svgUse = question.querySelector('use');
-    const isOpen = answer.classList.contains('open');
-    const spritePath = getSpritePath(); // Получаем актуальный путь
+      if (isOpen) {
+        // Закрываем текущий элемент
+        answer.classList.remove('open');
+        if (svgUse) {
+          const currentHref = svgUse.getAttribute('href');
+          if (currentHref) {
+            const basePath = currentHref.split('#')[0];
+            svgUse.setAttribute('href', `${basePath}#chevron-down`);
+          }
+        }
+      } else {
+        // Сначала закрываем все остальные элементы
+        document.querySelectorAll('.faq-question').forEach(otherQuestion => {
+          if (otherQuestion !== question) {
+            const otherAnswer = otherQuestion.nextElementSibling;
+            const otherSvgUse = otherQuestion.querySelector('use');
 
-    // Закрываем все другие элементы
-    document.querySelectorAll('.faq-question').forEach(otherQuestion => {
-      const otherAnswer = otherQuestion.nextElementSibling;
-      const otherSvgUse = otherQuestion.querySelector('use');
+            if (otherAnswer.classList.contains('open')) {
+              otherAnswer.classList.remove('open');
 
-      otherAnswer.classList.remove('open');
-      otherSvgUse.setAttribute('href', `${spritePath}#chevron-down`);
+              if (otherSvgUse) {
+                const currentHref = otherSvgUse.getAttribute('href');
+                if (currentHref) {
+                  const basePath = currentHref.split('#')[0];
+                  otherSvgUse.setAttribute('href', `${basePath}#chevron-down`);
+                }
+              }
+            }
+          }
+        });
+
+        // Открываем текущий элемент
+        answer.classList.add('open');
+        if (svgUse) {
+          const currentHref = svgUse.getAttribute('href');
+          if (currentHref) {
+            const basePath = currentHref.split('#')[0];
+            svgUse.setAttribute('href', `${basePath}#chevron-up`);
+          }
+        }
+      }
     });
-
-    // Открываем/закрываем текущий элемент
-    if (!isOpen) {
-      answer.classList.add('open');
-      svgUse.setAttribute('href', `${spritePath}#chevron-up`);
-    }
   });
 });
