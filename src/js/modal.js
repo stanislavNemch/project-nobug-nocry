@@ -1,81 +1,136 @@
-//Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
+// Описана робота модалки - відкриття закриття і все що з модалкою пов'язано
 import axios from 'axios';
 import { getFurnitureById } from './furniture-api.js';
 import { openOrderModal } from './order.js';
+
+// Імпортуємо css-star-rating
+import 'css-star-rating/css/star-rating.min.css';
 
 const modalSelector = document.querySelector('.modal-window');
 const productsList = document.querySelector('.products-list');
 let dataId = 0;
 let selectedColor = '';
 
-// Add this function
+// Функція нормалізації рейтингу (така ж як в reviews)
+function normalizeRating(value) {
+  if (value >= 3.3 && value <= 3.7) return 3.5;
+  if (value >= 3.8 && value <= 4.2) return 4;
+  return Math.round(value * 2) / 2;
+}
+
+// Функція створення рейтингу зірочками (така ж як в reviews)
+function createStarRating(rating) {
+  const normalizedRating = normalizeRating(rating);
+  const fullStars = Math.floor(normalizedRating);
+  const hasHalfStar = normalizedRating % 1 !== 0;
+  const emptyStars = 5 - Math.ceil(normalizedRating);
+
+  let starsHtml = '';
+
+  // Повні зірки
+  for (let i = 0; i < fullStars; i++) {
+    starsHtml += '<span class="star star-full">★</span>';
+  }
+
+  // Половинна зірка
+  if (hasHalfStar) {
+    starsHtml += '<span class="star star-half">★</span>';
+  }
+
+  // Порожні зірки
+  for (let i = 0; i < emptyStars; i++) {
+    starsHtml += '<span class="star star-empty">★</span>';
+  }
+
+  return `<div class="modal-rating-stars" data-rating="${normalizedRating}">${starsHtml}</div>`;
+}
+
+// Налаштування кнопки замовлення в модалці
 function setupModalButton() {
   const modalButton = document.querySelector('.modalButton');
   if (modalButton) {
     modalButton.addEventListener('click', function () {
-      console.log('Order button clicked');
-      console.log('Selected color:', selectedColor);
-      console.log('Product ID:', dataId);
-
-      // Hide current modal
+      // Приховати поточну модалку
       modalSelector.classList.add('visuallyhidden');
-      document.body.style.overflow = ''; // restore scrolling
+      document.body.style.overflow = ''; // відновити прокрутку
 
       openOrderModal(dataId, selectedColor);
-      console.log('order window call');
     });
   }
 }
 
-//Getting furenitureId in this function:
-productsList.addEventListener('click', async function (event) {
-  document.body.style.overflow = 'hidden'; // stop scrolling
-  if (event.target.matches('img, button')) {
-    modalSelector.classList.remove('visuallyhidden'); //show modal
-    document.body.style.overflow = 'hidden'; // stop scrolling
+// Загальна функція для відкриття модального вікна
+async function openProductModal(productId) {
+  document.body.style.overflow = 'hidden'; // заборонити прокрутку
+  modalSelector.classList.remove('visuallyhidden'); // показати модалку
 
-    const productItem = event.target.closest('.product-item'); //selector for the closest product card (the click card)
+  dataId = productId;
 
-    if (productItem) {
-      dataId = productItem.getAttribute('data-id');
+  // Отримати товар за ID
+  const furniture = await getFurnitureById(dataId);
 
-      console.log('data-id:', dataId);
-      // Получить товар с ID = 123
-      const furniture = await getFurnitureById(dataId);
+  const renderProduct = renderModal(furniture);
+  modalSelector.innerHTML = renderProduct;
 
-      // if (furniture) {
-      //   console.log('Информация о товаре:', furniture);
-      // } else {
-      //   console.log('Товар не найден');
-      // }
-      const renderProduct = renderModal(furniture);
-      modalSelector.innerHTML = renderProduct;
+  // Додати обробник вибору кольору після рендерингу модалки
+  const colorInputs = document.querySelectorAll(
+    'input[name="furniture-color"]'
+  );
 
-      // Add color selection handler after rendering modal
-      const colorInputs = document.querySelectorAll(
-        'input[name="furniture-color"]'
-      );
-
-      // Set default color (first color)
-      if (colorInputs.length > 0) {
-        colorInputs[0].checked = true;
-        selectedColor = colorInputs[0].value;
-        console.log('Default color:', selectedColor);
-      }
-
-      // Listen for color changes
-      colorInputs.forEach(input => {
-        input.addEventListener('change', function () {
-          selectedColor = this.value;
-          console.log('Selected color:', selectedColor);
-        });
-      });
-
-      // Set up modal button
-      setupModalButton();
-    }
+  // Встановити колір за замовчуванням (перший колір)
+  if (colorInputs.length > 0) {
+    colorInputs[0].checked = true;
+    selectedColor = colorInputs[0].value;
   }
+
+  // Слухати зміни кольору
+  colorInputs.forEach(input => {
+    input.addEventListener('change', function () {
+      selectedColor = this.value;
+    });
+  });
+
+  // Налаштувати кнопку модалки
+  setupModalButton();
+}
+
+// Обробник для популярних товарів через custom events
+document.addEventListener('openProductModal', function (event) {
+  const productId = event.detail.productId;
+  openProductModal(productId);
 });
+
+// Обробник для звичайних товарів
+if (productsList) {
+  productsList.addEventListener('click', async function (event) {
+    if (event.target.matches('img, button')) {
+      const productItem = event.target.closest('.product-item'); // селектор для найближчої картки товару
+
+      if (productItem) {
+        const productId = productItem.getAttribute('data-id');
+        await openProductModal(productId);
+      }
+    }
+  });
+}
+
+// Обробник для популярних товарів - прямий клік
+const popularProductsContainer = document.querySelector(
+  '.popular-products-swiper'
+);
+if (popularProductsContainer) {
+  popularProductsContainer.addEventListener('click', async function (event) {
+    // Перевіряємо клік на зображення або кнопку
+    if (event.target.matches('img.img-card, button.btn-go-modal')) {
+      const productItem = event.target.closest('.popular-products-item');
+
+      if (productItem) {
+        const productId = productItem.getAttribute('data-id');
+        await openProductModal(productId);
+      }
+    }
+  });
+}
 
 function renderModal(furniture) {
   return `
@@ -97,14 +152,9 @@ function renderModal(furniture) {
       <h2 class="product-modal-title">${furniture.name}</h2>
       <p class="modal-description">${furniture.category.name}</p>
       <div class="description-container">
-        <h3 class="modal-price">${furniture.price} грн</h3>
-        <div class="stars">
-          <div class="rating" data-rate="${furniture.rate}">
-            <div class="empty-stars">★★★★★</div>
-            <div class="filled-stars" style="width: ${
-              (furniture.rate / 5) * 100
-            }%">★★★★★</div>
-          </div>
+        <div class="modal-price-rating">
+          <h3 class="modal-price">${furniture.price} грн</h3>
+          ${createStarRating(furniture.rate)}
         </div>
         <div class="color-options">
           <p class="color-label">Колір</p>
@@ -143,30 +193,28 @@ function renderModal(furniture) {
   </div>`;
 }
 
-//next goes logic to close modal
+// Логіка закриття модалки
 modalSelector.addEventListener('click', function (event) {
   const modalWindow = event.target.closest('.product-modalWindow');
   if (!modalWindow) {
-    console.log('closing modal');
-    console.log('selected color after closing modal', selectedColor);
-
-    // Click was outside the modal-window
+    // Клік був поза модальним вікном
     modalSelector.classList.add('visuallyhidden');
-    document.body.style.overflow = ''; //turn on scroll
+    document.body.style.overflow = ''; // увімкнути прокрутку
   }
 });
 
 function closeModalWindow() {
   modalSelector.classList.add('visuallyhidden');
-  document.body.style.overflow = ''; //turn on scroll
+  document.body.style.overflow = ''; // увімкнути прокрутку
 }
 
+// Закриття модалки при натисканні Escape
 document.addEventListener('keydown', event => {
   if (
     event.key === 'Escape' &&
-    modalSelector.classList.contains('visuallyhidden')
+    !modalSelector.classList.contains('visuallyhidden')
   ) {
     modalSelector.classList.add('visuallyhidden');
-    document.body.style.overflow = ''; //turn on scroll
+    document.body.style.overflow = ''; // увімкнути прокрутку
   }
 });

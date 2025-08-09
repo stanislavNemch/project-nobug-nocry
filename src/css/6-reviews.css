@@ -37,17 +37,21 @@
 }
 
 .star {
-  font-size: 20px;
-  line-height: 1;
+  font-size: 18px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.2s ease;
 }
 
 .star-full {
-  color: #ffb400; /* Золотистий колір для повних зірок */
+  color: #080c09; /* Единый цвет для всего проекта */
 }
 
 .star-half {
-  background: linear-gradient(90deg, #ffb400 50%, #e0e0e0 50%);
+  background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -202,7 +206,8 @@
   }
 
   .star {
-    font-size: 18px;
+    font-size: 28px;
+    width: 20px;
   }
 
   .review-text {
@@ -269,7 +274,8 @@
   }
 
   .star {
-    font-size: 22px;
+    font-size: 32px;
+    width: 24px;
   }
 
   .review-text {

@@ -81,13 +81,56 @@
   line-height: 1.6;
   color: #080c09;
 }
+
+/* Контейнер для ціни та рейтингу */
+.modal-price-rating {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .modal-price {
   font-weight: 700;
   font-size: 32px;
   line-height: 1.4;
   letter-spacing: 0.01em;
   color: #080c09;
+  margin: 0;
 }
+
+/* Стилі для рейтингу зірочками в модальному вікні */
+.modal-rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.modal-rating-stars .star {
+  font-size: 18px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.modal-rating-stars .star-full {
+  color: #080c09; /* Единый цвет для всего проекта */
+}
+
+.modal-rating-stars .star-half {
+  background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-rating-stars .star-empty {
+  color: #e0e0e0; /* Сірий колір для порожніх зірок */
+}
+
 .furnitureDescription {
   font-weight: 400;
   font-size: 16px;
@@ -123,10 +166,6 @@
   gap: 24px;
 }
 
-/* .checkbox-wrapper {
-  diameter;
-} */
-
 .radio-group {
   display: flex;
   gap: 16px;
@@ -151,16 +190,6 @@
   cursor: pointer;
 }
 
-/* #color1 + .color-circle {
-  background-color: #6b0609;
-}
-#color2 + .color-circle {
-  background-color: #fff;
-}
-#color3 + .color-circle {
-  background-color: #080c09;
-} */
-
 /* selected radio */
 .color-radio:checked + .color-circle {
   border-color: #000;
@@ -170,10 +199,7 @@
   transform: scale(1.1);
 }
 
-/* .stars {
-  margin: 16px 0;
-} */
-
+/* Видаляємо старі стилі зірочок */
 .rating {
   position: relative;
   display: inline-block;
@@ -196,4 +222,29 @@
   padding: 0;
   margin: 0;
   white-space: nowrap;
+}
+
+/* Responsive стилі для модального вікна */
+@media screen and (max-width: 767px) {
+  .modal-price-rating {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .modal-price {
+    font-size: 28px;
+  }
+
+  .modal-rating-stars .star {
+    font-size: 28px;
+    width: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .modal-rating-stars .star {
+    font-size: 32px;
+    width: 24px;
+  }
 }
