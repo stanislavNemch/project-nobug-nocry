@@ -35,10 +35,12 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  ./public/category-imgs/category-img-${index + 1}.webp    1x,
-                  ./public/category-imgs/category-img-${index + 1}@2x.webp 2x
+                  /public/img/category-imgs/category-img-${
+                    index + 1
+                  }.webp    1x,
+                  /public/img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
-    src="./public/category-imgs/category-img-${index + 1}.webp"
+    src="/public/img/category-imgs/category-img-${index + 1}.webp"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
@@ -83,14 +85,18 @@ export function getOneCategory(e) {
 
 listCategory.addEventListener('click', getOneCategory);
 
-
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
-  showLoader() // [5] Скрываем лоадер перед загрузкой товаров
+  showLoader(); // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
   const isMobile = window.matchMedia('(max-width: 374px)').matches;
-  console.debug('createProductsList: isMobile=', isMobile, 'innerWidth=', window.innerWidth);
+  console.debug(
+    'createProductsList: isMobile=',
+    isMobile,
+    'innerWidth=',
+    window.innerWidth
+  );
 
   if (!isMobile) {
     // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
@@ -99,7 +105,7 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
   }
   try {
     const data = await functions;
-    hideLoader() // [5] Скрываем лоадер перед загрузкой товаров
+    hideLoader(); // [5] Скрываем лоадер перед загрузкой товаров
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
 
@@ -223,7 +229,7 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
     }
@@ -236,7 +242,7 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
     }
@@ -249,10 +255,9 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
-
     }
   }
 
@@ -264,13 +269,11 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'nearest',
         });
       }, 100);
     }
   });
-
-
 });
 
 // Инициализация
