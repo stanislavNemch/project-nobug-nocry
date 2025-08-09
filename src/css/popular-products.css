@@ -26,6 +26,7 @@
 .swiper-slide {
   height: auto;
   display: flex;
+  justify-content: center; /* Центрируем содержимое слайда */
 }
 
 /* Карточки товаров - точно как .product-item */
@@ -40,6 +41,7 @@
 
 .popular-products-item .img-card {
   width: 100%;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   transition: filter 0.3s ease;
@@ -247,14 +249,22 @@
     margin-bottom: 32px;
   }
 
+  /* Центрирование слайдов на мобильных */
+  .popular-products-swiper {
+    text-align: center;
+  }
+
+  .swiper-slide {
+    justify-content: center;
+    align-items: center;
+  }
+
   /* Размеры карточки как в product-item для мобильных */
   .popular-products-item {
     width: 335px;
+    max-width: calc(100vw - 32px); /* Учитываем отступы контейнера */
     height: 450px;
-  }
-
-  .popular-products-item .img-card {
-    height: 450px;
+    margin: 0 auto; /* Дополнительное центрирование */
   }
 
   .popular-products-controls {
@@ -298,11 +308,6 @@
   /* Размеры карточки как в product-item для планшетов */
   .popular-products-item {
     width: 340px;
-    height: 460px;
-  }
-
-  .popular-products-item .img-card {
-    height: 460px;
   }
 }
 
@@ -315,10 +320,5 @@
   /* Размеры карточки как в product-item для десктопа */
   .popular-products-item {
     width: 310px;
-    height: 436px;
-  }
-
-  .popular-products-item .img-card {
-    height: 436px;
   }
 }

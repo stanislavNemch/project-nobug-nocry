@@ -80,6 +80,7 @@ class PopularProductsSwiper {
       // Количество слайдов в зависимости от экрана
       slidesPerView: 1, // Мобильные - 1 товар
       spaceBetween: 16,
+      centeredSlides: true, // Центрирование слайдов
 
       // Breakpoints для responsive дизайна
       breakpoints: {
@@ -87,11 +88,13 @@ class PopularProductsSwiper {
         768: {
           slidesPerView: 2,
           spaceBetween: 24,
+          centeredSlides: false, // Отключаем центрирование для планшетов и десктопа
         },
         // >= 1440px (десктоп) - 4 товара
         1440: {
           slidesPerView: 4,
           spaceBetween: 24,
+          centeredSlides: false,
         },
       },
 
