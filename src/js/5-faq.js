@@ -7,18 +7,18 @@ document.querySelectorAll('.faq-question').forEach(question => {
   question.addEventListener('click', () => {
     const answer = question.nextElementSibling;
     const svgUse = question.querySelector('use');
-    const isOpen = answer.style.display === 'block';
+    const isOpen = answer.classList.contains('open');
 
     document.querySelectorAll('.faq-question').forEach(otherQuestion => {
       const otherAnswer = otherQuestion.nextElementSibling;
       const otherSvgUse = otherQuestion.querySelector('use');
 
-      otherAnswer.style.display = 'none';
+      otherAnswer.classList.remove('open');
       otherSvgUse.setAttribute('href', `${spritePath}#chevron-down`);
     });
 
     if (!isOpen) {
-      answer.style.display = 'block';
+      answer.classList.add('open');
       svgUse.setAttribute('href', `${spritePath}#chevron-up`);
     }
   });
