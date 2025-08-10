@@ -1,7 +1,8 @@
 .footer{
- background-color: #6B0609;
- font-weight: 400;
-color: #FFFFFF;
+    background-color: #6B0609;
+    font-weight: 400;
+    color: #FFFFFF;
+    padding-bottom: 32px;
 }
 .screen-footer{
     display: flex;
@@ -46,13 +47,16 @@ color: #FFFFFF;
 }
 
 @media only screen and (min-width: 1440px) {
+    .footer {
+        padding-bottom: 0px;
+    }
    .screen-footer {
         display: flex;
         flex-direction: row;
         gap: 80px;
     }
     .logo-footer{
-            order: 1;
+        order: 1;
     }
     .copyright{
         order:2;
