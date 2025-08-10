@@ -1,14 +1,14 @@
 import { getCategories, getFurnitures } from './furniture-api.js';
 
 const listCategory = document.querySelector('.product-categories-list');
-
 const paginationContainer = document.querySelector('.pagination');
+const BtnMoreItems = document.querySelector('.btn-loadMore');
 
 const ALL_CATEGORY_TEXT = 'Всі товари';
 
 let NowPages = 1;
-let totalItemspages = 1; // [1] Глобально сохраняем общее число страниц
-const BtnMoreItems = document.querySelector('.btn-loadMore');
+let totalItemspages = 1;
+let currentCategoryId = null;
 
 export function activeFirstCategory() {
   const firstCategory = document.querySelector('.product-categories-content');
@@ -19,13 +19,14 @@ export function activeFirstCategory() {
 
 export function activeCategory(event) {
   const activeItem = event.target.closest('.product-categories-content');
-
   activeItem.classList.add('active-category');
 }
 
 export function removeActiveCategory() {
   const activeCategory = document.querySelector('.active-category');
-  activeCategory.classList.remove('active-category');
+  if (activeCategory) {
+    activeCategory.classList.remove('active-category');
+  }
 }
 
 export function renderCategories(data) {
@@ -35,10 +36,11 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  ../img/category-imgs/category-img-${index + 1}.webp    1x,
-                  ../img/category-imgs/category-img-${index + 1}@2x.webp 2x
+                  ./img/category-imgs/category-img-${index + 1}.webp    1x,
+                  ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
     src="./img/category-imgs/category-img-${index + 1}.webp"
+    alt="${el.name}"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
@@ -59,7 +61,6 @@ export async function getAllCategories() {
     ]);
     activeFirstCategory();
   } catch (error) {
-    console.log(error);
     return [];
   }
 }
@@ -70,27 +71,30 @@ export function getOneCategory(e) {
   const categoryName = categoryItem.textContent.trim();
   const categoryId = categoryItem.dataset.id;
 
+  NowPages = 1;
+
   removeActiveCategory();
   activeCategory(e);
 
   if (categoryName === ALL_CATEGORY_TEXT) {
-    createProductsList();
+    currentCategoryId = null;
+    createProductsList(getFurnitures(1, 8));
+  } else {
+    currentCategoryId = categoryId;
+    createProductsList(getFurnitures(1, 8, categoryId));
   }
-  createProductsList(getFurnitures(1, 8, categoryId));
 }
 
 listCategory.addEventListener('click', getOneCategory);
-
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
   showLoader() // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
-  const isMobile = window.matchMedia('(max-width: 374px)').matches;
-  console.debug('createProductsList: isMobile=', isMobile, 'innerWidth=', window.innerWidth);
+  const isMobiles = window.matchMedia('(max-width: 767px)').matches;
 
-  if (!isMobile) {
+  if (!isMobiles) {
     // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
     productsList.innerHTML = '';
     if (productsContainer) productsContainer.innerHTML = '';
@@ -150,6 +154,15 @@ function createPagination(NowPages) {
       </svg>
     </button>
   `;
+
+if (NowPages > 1) {
+    paginationContainer.innerHTML += `
+      <button class="page-number ${NowPages === 1 ? 'focus' : ''}">1</button>
+    `;
+    paginationContainer.innerHTML += `<span class="dtp" style="margin-right: 18px;" >...</span>`;
+  }
+
+
 
   // Текущая + 2 страницы (например: 8 9 10)
   for (let i = NowPages; i <= Math.min(NowPages + 2, totalItemspages); i++) {

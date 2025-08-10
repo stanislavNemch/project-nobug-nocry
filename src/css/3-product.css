@@ -77,7 +77,6 @@
   width: calc(100% / 4 - 18px);
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
 }
 .text-card {
   font-weight: 600;
@@ -111,7 +110,7 @@ width: 100%;
    display: flex;
    gap: 24px;
    flex-wrap: wrap;
-   margin-bottom: 32px;
+   padding-top: 40px;
 }
 .img-card {
   width: 100%;
@@ -125,21 +124,7 @@ width: 100%;
   filter: brightness(0.7);
   border: 8px solid rgba(107, 6, 9, 1);
 }
-.btn-loadMore {
-  display: none;
-  color: rgba(255, 255, 255, 1);
-  width: 420px;
-  background-color: rgb(128, 8, 12);
-  border-radius: 100px;
-  padding: 10px 0px;
-  border: none;
-  font-style: medium;
-  font-family: Raleway, sans-serif;
-  margin: 0 auto;
-}
-.hiden {
-  display: none;
-}
+
 .pagination-container {
   display: flex;
   justify-content: center;
@@ -207,26 +192,62 @@ width: 100%;
   flex-direction: column;
   align-items: center;
 }
-@media only screen and (min-width: 375px) and (max-width: 768px) {
+.btn-loadMore {
+  display: none;
+  color: rgba(255, 255, 255, 1);
+  width: 420px;
+  background-color: rgb(128, 8, 12);
+  border-radius: 100px;
+  padding: 10px 0px;
+  border: none;
+  font-style: medium;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto;
+}
+.hiden {
+  display: none;
+}
+@media only screen and (min-width: 425px) and (max-width: 1439px) {
   .product-item {
     width: calc(100% / 2 - 18px);
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+
   }
   .three-product {
-    margin: 48px 0px;
+    padding: 48px 0px;
 }
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (min-width: 425px) and (max-width: 767px) {
+  .pagination {
+  display: none;
+}
+.btn-loadMore {
+  display: inline;
+  color: rgba(255, 255, 255, 1);
+  max-width: 420px;
+  background-color: rgb(128, 8, 12);
+  border-radius: 100px;
+  padding: 10px 0px;
+  border: none;
+  font-style: medium;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto;
+}
+.product-container {
+  display: flex;
+  flex-direction: column;
+}
+
+}
+@media only screen and (max-width: 425px) {
   .product-item {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
   }
   .three-product {
-    margin: 48px 0px;
+    padding: 48px 0px;
 }
 .pagination {
   display: none;
@@ -245,5 +266,6 @@ width: 100%;
 }
 .products-list {
   margin-bottom: 0px;
+  padding-top: 40px;
 }
 }
