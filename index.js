@@ -113,4 +113,3 @@ import{a as V,i as l,S as I,N as R,P}from"./assets/vendor-BWsV38dq.js";(function
         </svg>
       </button>
   </div>`}g.addEventListener("click",function(e){const t=e.target.closest(".product-modalWindow"),s=e.target.closest(".modal-close-btn");t||(g.classList.add("visuallyhidden"),document.body.style.overflow=""),s&&(g.classList.add("visuallyhidden"),document.body.style.overflow="")});document.addEventListener("keydown",e=>{e.key==="Escape"&&!g.classList.contains("visuallyhidden")&&(g.classList.add("visuallyhidden"),document.body.style.overflow="")});
-//# sourceMappingURL=index.js.map

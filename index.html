@@ -5,6 +5,17 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/project-nobug-nocry/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Preconnect для Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload критичных ресурсов -->
+  <link rel="preload" href="/project-nobug-nocry/img/hero/hero-mob-1x.avif" as="image" media="(max-width: 767px)">
+  <link rel="preload" href="/project-nobug-nocry/img/hero/hero-tab-1x.avif" as="image" media="(min-width: 768px) and (max-width: 1439px)">
+  <link rel="preload" href="/project-nobug-nocry/img/hero/hero-desc-1x.avif" as="image" media="(min-width: 1440px)">
+
+  <!-- Preload критичного CSS -->
+
   <title>Меблерія</title>
   <script type="module" crossorigin src="/project-nobug-nocry/index.js"></script>
   <link rel="modulepreload" crossorigin href="/project-nobug-nocry/assets/vendor-BWsV38dq.js">
@@ -110,7 +121,8 @@
             <source srcset="/project-nobug-nocry/assets/about-desk-min-BXbhatB0.webp 1x, /project-nobug-nocry/assets/about-desk@2x-min-BbGOu-5g.webp 2x"
                 media="(min-width:1440px)" />
             <img srcset="/project-nobug-nocry/assets/about-desk-min-BXbhatB0.webp 1x, /project-nobug-nocry/assets/about-desk@2x-min-BbGOu-5g.webp 2x"
-                src="/project-nobug-nocry/assets/about-desk-min-BXbhatB0.webp" alt="Group of smiling people" class="img-about" />
+                src="/project-nobug-nocry/assets/about-desk-min-BXbhatB0.webp" alt="Group of smiling people" class="img-about"
+                loading="lazy" />
         </picture>
 
     </div>
