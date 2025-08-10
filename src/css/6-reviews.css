@@ -23,7 +23,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 56px;
 }
 
 .rating-stars {
@@ -48,10 +47,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-stroke: 1px #080c09;
 }
 
 .star-empty {
   color: #e0e0e0;
+  -webkit-text-stroke: 1px #080c09;
 }
 
 .review-text {
@@ -190,17 +191,6 @@
     margin-bottom: 80px;
   }
 
-  .rating-stars {
-    width: 116px;
-    height: 21px;
-    gap: 4px;
-  }
-
-  .star {
-    font-size: 20px;
-    line-height: 1;
-  }
-
   .review-text {
     font-size: 18px;
     font-weight: 500;
@@ -209,6 +199,7 @@
   .reviewer-name {
     font-size: 16px;
     font-weight: 700;
+    margin-bottom: 56px;
   }
 
   .reviews-controls {
