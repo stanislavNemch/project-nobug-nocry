@@ -1,11 +1,11 @@
 /* reviews-css */
-
 .reviews {
   padding-top: 64px;
   padding-bottom: 64px;
 }
 
 .reviews-heading {
+  font-size: 36px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.01;
@@ -24,11 +24,12 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
 /* Стили для рейтинга зірочками */
 .rating-stars {
+  height: 20px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -46,7 +47,9 @@
 }
 
 .star-full {
-  color: #080c09; /* Единый цвет для всего проекта */
+  color: #080c09; 
+  width: 20px;
+  height: 20px;
 }
 
 .star-half {
@@ -54,10 +57,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  width: 20px;
+  height: 20px;
 }
 
 .star-empty {
-  color: #e0e0e0; /* Сірий колір для порожніх зірок */
+  color: #e0e0e0; 
+  width: 20px;
+  height: 20px;
 }
 
 .review-text {
@@ -81,7 +88,7 @@
 .reviews .swiper {
   position: relative;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 /* Контролы снизу - как в popular-products */
@@ -194,26 +201,21 @@
   cursor: not-allowed;
 }
 
+
 /* Responsive для мобильных устройств */
-@media screen and (max-width: 767px) {
-  .reviews {
-    padding-top: 32px;
-    padding-bottom: 32px;
+@media (min-width: 375px) and (max-width: 767px) {
+  .revies-section-text {
+    font-size: 16px;
+    margin-bottom: 80px;
   }
-
-  .star {
-    font-size: 28px;
-    width: 20px;
-  }
-
   .review-text {
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
   }
-
   .reviewer-name {
     font-size: 16px;
+    font-weight: 700;
   }
-
   .reviews-controls {
     gap: 16px;
   }
@@ -243,14 +245,28 @@
     width: 6px !important;
     height: 6px !important;
   }
+  
 }
 
 @media only screen and (min-width: 768px) {
+  .reviews {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
   .reviews-heading {
     font-size: 48px;
   }
   .revies-section-text {
     font-size: 18px;
+  }
+  .review-text{
+      font-size: 20px;
+    }
+  .review-card{
+    margin-bottom: 0;
+  }
+  .reviewer-name {
+    margin-bottom: 0;
   }
 }
 
@@ -259,18 +275,5 @@
     padding-top: 64px;
     padding-bottom: 64px;
   }
-
-
-  .star {
-    font-size: 32px;
-    width: 24px;
-  }
-
-  .review-text {
-    font-size: 18px;
-  }
-
-  .reviewer-name {
-    font-size: 20px;
-  }
 }
+

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.product-container {
+.three-product {
   padding-top: 48px;
   padding-bottom: 48px;
 }
@@ -107,6 +107,11 @@
 }
 
 @media screen and (min-width: 1440px) {
+  .three-product {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
   .product-categories-item {
     width: calc((100% - 144px) / 7);
   }
@@ -342,10 +347,6 @@
     height: 450px;
   }
 
-  .three-product {
-    margin: 48px 0px;
-  }
-
   .products-list {
     justify-content: center;
     margin-bottom: 0px;
@@ -405,5 +406,6 @@
   .pagination-container {
     display: flex;
   }
+
 }
 }
