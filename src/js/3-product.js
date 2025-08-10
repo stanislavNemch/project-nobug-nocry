@@ -94,13 +94,16 @@ async function createProductsList(functions = getFurnitures(NowPages, 8)) {
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
   const isMobiles = window.matchMedia('(max-width: 767px)').matches;
 
-  if (!isMobiles) {
+
+  try {
+    const data = await functions;
+    if (!isMobiles) {
     // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
+    productsList.style.opacity = 0;
     productsList.innerHTML = '';
     if (productsContainer) productsContainer.innerHTML = '';
   }
-  try {
-    const data = await functions;
+    productsList.style.opacity = 1;
     hideLoader() // [5] Скрываем лоадер перед загрузкой товаров
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
