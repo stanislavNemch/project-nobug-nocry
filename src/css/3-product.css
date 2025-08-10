@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -98,7 +97,7 @@
     gap: 24px;
   }
 
-  .product-categories-item{
+  .product-categories-item {
     width: calc((100% - 72px) / 4);
   }
 
@@ -109,18 +108,17 @@
 
 @media screen and (min-width: 1440px) {
   .product-categories-item {
-      width: calc((100% - 144px) / 7);
-    }
+    width: calc((100% - 144px) / 7);
+  }
 }
 
-
-
+/* Product Items - Base Styles */
 .product-item {
-  width: calc(100% / 4 - 18px);
   display: flex;
   flex-direction: column;
   margin-top: 40px;
 }
+
 .text-card {
   font-weight: 600;
   font-family: 'Raleway' sans-serif;
@@ -128,32 +126,41 @@
   margin-top: 8px;
   font-style: semi-bold;
 }
+
 .btn-go-modal {
-width: 100%;
+  width: 100%;
   height: 40px;
-  background-color:#080C090D;
-  color:rgba(8, 12, 9, 1);
+  background-color: #080c090d;
+  color: rgba(8, 12, 9, 1);
   font-weight: 500;
-  font-family: 'Raleway';
+  font-size: 16px;
   border-radius: 100px;
   border: none;
   margin-top: 16px;
 }
+
+.btn-go-modal:hover,
+.btn-go-modal:focus {
+  background-color: rgba(107, 6, 9, 0.1);
+}
+
 .color-one {
   border-radius: 100%;
   width: 24px;
   height: 24px;
 }
+
 .colors {
   display: flex;
   gap: 16px;
   margin-top: 8px;
 }
+
 .products-list {
-   display: flex;
-   gap: 24px;
-   flex-wrap: wrap;
-   margin-bottom: 32px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .img-card {
@@ -164,32 +171,46 @@ width: 100%;
   overflow: hidden;
   transition: filter 0.3s ease;
 }
+
 .img-card:hover {
   filter: brightness(0.7);
   border: 8px solid rgba(107, 6, 9, 1);
 }
+
+/* Load More Button - показывается только на мобильных (1 товар в ряду) */
 .btn-loadMore {
-  display: none;
+  display: block;
   color: rgba(255, 255, 255, 1);
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   background-color: rgb(128, 8, 12);
   border-radius: 100px;
   padding: 10px 0px;
   border: none;
   font-style: medium;
   font-family: Raleway, sans-serif;
-  margin: 0 auto;
+  margin: 32px auto 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
+
+.btn-loadMore:hover {
+  opacity: 0.8;
+}
+
 .hiden {
   display: none;
 }
+
+/* Пагинация - показывается только на планшетах и десктопе (2+ товаров в ряду) */
 .pagination-container {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   margin-top: 32px;
   gap: 4px;
 }
+
 .page-number {
   width: 56px;
   height: 46px;
@@ -199,20 +220,24 @@ width: 100%;
   font-family: Raleway, sans-serif;
   background-color: white;
 }
+
 .dtp {
   font-weight: 500;
   font-style: medium;
   size: 18px;
 }
+
 .focus {
   background-color: rgba(107, 6, 9, 1);
   color: rgba(255, 255, 255, 1);
   transition: opacity 0.3s ease;
 }
+
 .page-number:hover {
   opacity: 0.5;
   cursor: pointer;
 }
+
 .scroll {
   width: 48px;
   height: 48px;
@@ -227,70 +252,127 @@ width: 100%;
   opacity: 0.7;
   background-color: rgba(151, 80, 82, 1);
 }
+
 .scroll:active {
   fill: white;
   opacity: 1;
   background-color: rgba(107, 6, 9, 1);
 }
+
 .disabled {
   opacity: 0.5;
   pointer-events: none;
 }
-.loader {
 
+.loader {
   width: 48px;
-    height: 48px;
-    border: 5px solid #000000;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 0.5s linear infinite;
+  height: 48px;
+  border: 5px solid #000000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 0.5s linear infinite;
 }
+
 .container-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-@media only screen and (min-width: 375px) and (max-width: 768px) {
-  .product-item {
-    width: calc(100% / 2 - 18px);
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-  }
-  .three-product {
-    margin: 48px 0px;
-}
-}
-
-@media only screen and (max-width: 375px) {
+/* Mobile: до 375px - 1 товар в ряду, кнопка "Показати ще" */
+@media screen and (max-width: 374px) {
   .product-item {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
+    max-width: 335px;
+    height: 450px;
   }
+
+  .products-list {
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+
+  /* Показать кнопку "Показати ще" */
+  .btn-loadMore {
+    display: block;
+  }
+
+  /* Скрыть пагинацию */
+  .pagination-container {
+    display: none;
+  }
+}
+
+/* Mobile: 375px-767px - 1 товар в ряду, кнопка "Показати ще" */
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .product-item {
+    width: 335px;
+    height: 450px;
+  }
+
   .three-product {
     margin: 48px 0px;
+  }
+
+  .products-list {
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+
+  /* Показать кнопку "Показати ще" */
+  .btn-loadMore {
+    display: block;
+  }
+
+  /* Скрыть пагинацию */
+  .pagination-container {
+    display: none;
+  }
 }
-.pagination {
-  display: none;
+
+/* Tablet: 768px-1439px - 2 товара в ряду, пагинация */
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .product-item {
+    width: 340px;
+    height: 460px;
+  }
+
+  .products-list {
+    justify-content: space-around;
+    gap: calc((100% - 680px) / 1);
+  }
+
+  /* Скрыть кнопку "Показати ще" */
+  .btn-loadMore {
+    display: none;
+  }
+
+  /* Показать пагинацию */
+  .pagination-container {
+    display: flex;
+  }
 }
-.btn-loadMore {
-  display: inline;
-  color: rgba(255, 255, 255, 1);
-  width: 100%;
-  background-color: rgb(128, 8, 12);
-  border-radius: 100px;
-  padding: 10px 0px;
-  border: none;
-  font-style: medium;
-  font-family: Raleway, sans-serif;
-  margin: 0 auto;
-}
-.products-list {
-  margin-bottom: 0px;
-}
+
+/* Desktop: 1440px+ - 4 товара в ряду, пагинация */
+@media screen and (min-width: 1440px) {
+  .product-item {
+    width: 310px;
+    height: 436px;
+  }
+
+  .products-list {
+    gap: calc((100% - 1240px) / 3);
+  }
+
+  /* Скрыть кнопку "Показати ще" */
+  .btn-loadMore {
+    display: none;
+  }
+
+  /* Показать пагинацию */
+  .pagination-container {
+    display: flex;
+  }
 }

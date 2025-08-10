@@ -1,125 +1,287 @@
 /* reviews-css */
 
 .reviews {
-    padding-top: 64px;
-    padding-bottom: 64px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
 .reviews-heading {
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.01;
-    margin-bottom: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01;
+  margin-bottom: 24px;
 }
 
 .revies-section-text {
-    font-size: 16px;
-    margin-bottom: 80px;
+  font-size: 16px;
+  margin-bottom: 80px;
 }
 
+/* Стили для карточки отзыва */
+.review-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для рейтинга зірочками */
 .rating-stars {
-    margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.star {
+  font-size: 18px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.star-full {
+  color: #080c09; /* Единый цвет для всего проекта */
+}
+
+.star-half {
+  background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.star-empty {
+  color: #e0e0e0; /* Сірий колір для порожніх зірок */
 }
 
 .review-text {
-    margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333333;
+  margin-bottom: 16px;
+  flex-grow: 1;
+  font-style: italic;
 }
 
-/* Контейнер з кнопками і пагінацією внизу справа */
-.swiper {
-    position: relative;
-    padding-bottom: 60px;
-    /* щоб звільнити місце для кнопок і крапочок */
+.reviewer-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #080c09;
+  margin: 0;
 }
 
-/* Пагінація (крапочки) */
-.swiper-pagination {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: auto;
+/* Контейнер для swiper */
+.reviews .swiper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
 }
 
-/* Кнопки */
-.swiper-button-prev,
-.swiper-button-next {
-    position: absolute;
-    bottom: 0;
-    top: auto;
-    background: rgba(242, 242, 242, 1);
-    border-radius: 100%;
-    border: 1px solid rgba(8, 12, 9, 0.15);
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
+/* Контролы снизу - как в popular-products */
+.reviews-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Іконка всередині кнопки */
+/* Пагинация точками слева - блок 104x8 */
+.reviews .swiper-pagination {
+  width: 100%;
+  height: 8px;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+.reviews .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50%;
+  background-color: rgba(8, 12, 9, 0.3) !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
+
+.reviews .swiper-pagination-bullet-active {
+  background-color: rgba(107, 6, 9, 1) !important;
+  transform: scale(1.25);
+}
+
+.reviews .swiper-pagination-bullet:hover {
+  background-color: rgba(107, 6, 9, 0.7) !important;
+}
+
+/* Навигация стрелочками справа - блок 112x48 */
+.reviews-navigation {
+  width: 112px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  border-radius: 24px;
+  padding: 4px;
+}
+
+.reviews .swiper-button-prev,
+.reviews .swiper-button-next {
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: 0 !important;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: static !important;
+  color: #080c09;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+.reviews .swiper-button-prev::after,
+.reviews .swiper-button-next::after {
+  display: none !important;
+}
+
+.reviews .swiper-button-prev:hover:not(.swiper-button-disabled),
+.reviews .swiper-button-next:hover:not(.swiper-button-disabled) {
+  background-color: rgba(151, 80, 82, 1);
+}
+
+.reviews
+  .swiper-button-prev:hover:not(.swiper-button-disabled)
+  .swiper-button-icon,
+.reviews
+  .swiper-button-next:hover:not(.swiper-button-disabled)
+  .swiper-button-icon {
+  fill: white;
+}
+
+.reviews .swiper-button-prev:active:not(.swiper-button-disabled),
+.reviews .swiper-button-next:active:not(.swiper-button-disabled) {
+  background-color: rgba(107, 6, 9, 1);
+}
+
+.reviews .swiper-button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .swiper-button-icon {
-    fill: rgba(8, 12, 9, 1);
+  width: 24px;
+  height: 24px;
+  fill: #080c09;
+  transition: fill 0.3s ease;
 }
 
-/* Ховер/фокус */
-.swiper-button-prev:hover,
-.swiper-button-next:hover,
-.swiper-button-prev:focus,
-.swiper-button-next:focus {
-    background-color: rgba(151, 80, 82, 1);
-}
+/* Responsive для мобильных устройств */
+@media screen and (max-width: 767px) {
+  .reviews {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
 
-.swiper-button-icon:hover,
-.swiper-button-icon:focus,
-.swiper-button-icon:active {
-    fill: rgba(255, 255, 255, 1);
-}
+  .review-card {
+    padding: 20px;
+  }
 
-.swiper-button-prev:active,
-.swiper-button-next:active {
-    background-color: rgba(107, 6, 9, 1);
-}
+  .star {
+    font-size: 28px;
+    width: 20px;
+  }
 
-/* Розташування кнопок біля пагінації справа */
-.swiper-button-prev {
-    right: 60px;
-    /* кнопка "назад" */
-}
+  .review-text {
+    font-size: 14px;
+  }
 
-.swiper-button-next {
-    right: 0;
-    /* кнопка "вперед" */
-}
+  .reviewer-name {
+    font-size: 16px;
+  }
 
-/* Прибираємо стандартні стрілки Swiper */
-.swiper-button-prev:after,
-.swiper-button-next:after {
-    display: none;
-}
+  .reviews-controls {
+    gap: 16px;
+  }
 
-/* Стиль для неактивних кнопок */
-.swiper-button-disabled {
-    opacity: 0.5;
-    pointer-events: none;
+  .reviews-navigation {
+    width: 96px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .reviews .swiper-button-prev,
+  .reviews .swiper-button-next {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .swiper-button-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .reviews .swiper-pagination {
+    height: 6px;
+  }
+
+  .reviews .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .reviews{
-        padding-top: 32px;
-        padding-bottom: 32px;
-    }
-    .reviews-heading{
-        font-size: 48px;
-    }
-        .revies-section-text{
-            font-size: 18px;
-        }
+  .reviews-heading {
+    font-size: 48px;
+  }
+  .revies-section-text {
+    font-size: 18px;
+  }
+
+  .review-card {
+    padding: 28px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
-    .reviews {
-            padding-top: 64px;
-            padding-bottom: 64px;
-        }
+  .reviews {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .review-card {
+    padding: 32px;
+  }
+
+  .star {
+    font-size: 32px;
+    width: 24px;
+  }
+
+  .review-text {
+    font-size: 18px;
+  }
+
+  .reviewer-name {
+    font-size: 20px;
+  }
 }

@@ -2,7 +2,15 @@
 
 .hero-container {
   width: 100%;
-  max-width: 375px;
+  /* margin: 0 auto; */
+}
+
+@media screen and (min-width: 375px) {
+  .hero-container {
+    /* width: 100%;
+  max-width: 375px; */
+    width: 335px;
+  }
 }
 
 .hero {
@@ -12,6 +20,8 @@
   background-size: cover;
   background-position: center;
   padding: 156px 0;
+  width: 100%;
+  /* margin: 0 auto; */
 }
 
 @media screen and (min-resolution: 2x) {
@@ -44,6 +54,7 @@
 }
 
 .hero-btn {
+  display: block;
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -163,7 +174,6 @@ html {
   .hero-title {
     font-size: 56px;
     max-width: 560px;
-
     margin: 0;
   }
 
