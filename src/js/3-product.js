@@ -41,7 +41,7 @@ export function renderCategories(data) {
                   ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
     src="./img/category-imgs/category-img-${index + 1}.webp"
-    alt="Зображення категорії ${el.name}"
+    alt="${el.name}"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
