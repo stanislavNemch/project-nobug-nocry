@@ -1,9 +1,12 @@
+/* Критичные стили первыми */
 @import url('./modern-normalize.css');
 @import url('./reset.css');
 @import url('./body.css');
 @import url('./container.css');
 @import url('./1-navbar.css');
 @import url('./2-hero.css');
+
+/* Некритичные стили можно загружать асинхронно */
 @import url('./css-loader.css');
 @import url('./3-product.css');
 @import url('./4-about-us.css');

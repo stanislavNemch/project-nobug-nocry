@@ -5,6 +5,18 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Preconnect для Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload критичных ресурсов -->
+  <link rel="preload" href="/img/hero/hero-mob-1x.avif" as="image" media="(max-width: 767px)">
+  <link rel="preload" href="/img/hero/hero-tab-1x.avif" as="image" media="(min-width: 768px) and (max-width: 1439px)">
+  <link rel="preload" href="/img/hero/hero-desc-1x.avif" as="image" media="(min-width: 1440px)">
+
+  <!-- Preload критичного CSS -->
+  <link rel="preload" href="./css/styles.css" as="style">
+
   <title>Меблерія</title>
   <link rel="stylesheet" href="./css/styles.css" />
 </head>

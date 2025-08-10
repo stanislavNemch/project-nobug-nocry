@@ -14,7 +14,7 @@ export default defineConfig(({ command }) => {
     root: 'src',
     base: '/project-nobug-nocry/',
     build: {
-      sourcemap: true,
+      sourcemap: false,
       rollupOptions: {
         input: glob.sync('./src/*.html'),
         output: {
