@@ -77,6 +77,7 @@
   width: calc(100% / 4 - 18px);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .text-card {
   font-weight: 600;
@@ -84,6 +85,7 @@
   color: rgba(8, 12, 9, 1);
   margin-top: 8px;
   font-style: semi-bold;
+  position: relative;
 }
 .btn-go-modal {
 width: 100%;
