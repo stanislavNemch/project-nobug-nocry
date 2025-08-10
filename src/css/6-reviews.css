@@ -241,12 +241,12 @@
 
   .reviews .swiper-pagination {
     width: 80px;
-    height: 6px;
+    height: 8px;
   }
 
   .reviews .swiper-pagination-bullet {
-    width: 6px !important;
-    height: 6px !important;
+    width: 8px !important;
+    height: 8px !important;
   }
 }
 
