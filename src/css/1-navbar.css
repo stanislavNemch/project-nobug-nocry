@@ -127,16 +127,29 @@
   text-align: center;
   font-weight: 500;
   font-size: 16px;
+  transition: opacity 250ms ease, transform 200ms ease;
+  cursor: pointer;
 }
 
 .mobile-order-btn:hover,
 .mobile-order-btn:focus {
+  opacity: 0.5;
+  background: #6b0609;
   box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
     inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.mobile-order-btn:active {
+  opacity: 1;
   background: #6b0609;
-  opacity: 0.5;
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(0);
 }
 
 /* --- Планшет (Tablet) --- */
@@ -156,6 +169,9 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-20px);
     transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+    /* Додаємо обмеження, щоб меню не виходило за межі екрана */
+    max-width: calc(100vw - 64px); /* Враховуємо відступи контейнера */
+    min-width: 200px; /* Мінімальна ширина для читабельності */
   }
 
   .mobile-menu-container.is-open {
@@ -164,6 +180,8 @@
 
   .mobile-menu-content {
     justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .mobile-menu-header {
@@ -223,17 +241,31 @@
     background-color: #6b0609;
     font-weight: 500;
     font-size: 16px;
+    transition: opacity 250ms ease, transform 200ms ease;
+    cursor: pointer;
   }
 
   .desktop-order-btn:hover,
   .desktop-order-btn:focus {
+    opacity: 0.5;
+    background: #6b0609;
     box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
       inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
       inset 0 0 0 1px rgba(8, 12, 9, 0.15),
       inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
       inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .desktop-order-btn:active {
+    opacity: 1;
     background: #6b0609;
-    opacity: 0.5;
+    box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+      inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+      inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    transform: translateY(0);
   }
 }
 

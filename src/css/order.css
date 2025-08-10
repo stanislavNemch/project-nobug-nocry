@@ -1,7 +1,3 @@
-/* ==================================== */
-/* Базові стилі для мобільної версії    */
-/* (Mobile-First: до 768px)             */
-/* ==================================== */
 .backdrop {
   position: fixed;
   top: 0;
@@ -20,11 +16,11 @@
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.visuallyhidden {
+/* .visuallyhidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-}
+} */
 
 .backdrop.visuallyhidden .modal.order-modal {
   transform: scale(1.1);
@@ -150,4 +146,79 @@
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
   background: #6b0609;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 767px) {
+  .modal.order-modal {
+    border-radius: 8px;
+    padding: 64px 20px;
+    width: 335px;
+    height: 789px;
+    background: #fff;
+  }
+
+  .modal-title {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #080c09;
+  }
+  .order-form {
+    width: 295px;
+    height: 484px;
+  }
+  .form-input {
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    border-radius: 12px;
+    padding: 8px 12px;
+    width: 295px;
+    height: 42px;
+  }
+  .comment-input {
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    border-radius: 12px;
+    padding: 12px;
+    width: 295px;
+    height: 180px;
+  }
+
+  /* .close-icon {
+  } */
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .modal.order-modal {
+    border-radius: 8px;
+    padding: 64px;
+    width: 704px;
+    height: 776px;
+  }
+  .modal-title {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #080c09;
+  }
+  .order-form {
+    width: 576px;
+    height: 484px;
+  }
+  .form-input {
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    border-radius: 12px;
+    padding: 8px 12px;
+    width: 576px;
+    height: 42px;
+  }
+  .comment-input {
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    border-radius: 12px;
+    padding: 12px;
+    width: 576px;
+    height: 180px;
+  }
 }

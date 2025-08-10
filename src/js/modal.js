@@ -8,6 +8,7 @@ import 'css-star-rating/css/star-rating.min.css';
 
 const modalSelector = document.querySelector('.modal-window');
 const productsList = document.querySelector('.products-list');
+
 let dataId = 0;
 let selectedColor = '';
 
@@ -190,14 +191,26 @@ function renderModal(furniture) {
         <button class="modalButton">Перейти до замовлення</button>
       </div>
     </div>
+    <button type="button" class="modal-close-btn" >
+        <svg class="close-icon" width="14" height="14">
+          
+          <use href="./img/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
   </div>`;
 }
 
 // Логіка закриття модалки
 modalSelector.addEventListener('click', function (event) {
   const modalWindow = event.target.closest('.product-modalWindow');
+  const clickOnCloseModalButton = event.target.closest('.modal-close-btn');
+
   if (!modalWindow) {
     // Клік був поза модальним вікном
+    modalSelector.classList.add('visuallyhidden');
+    document.body.style.overflow = ''; // увімкнути прокрутку
+  }
+  if (clickOnCloseModalButton) {
     modalSelector.classList.add('visuallyhidden');
     document.body.style.overflow = ''; // увімкнути прокрутку
   }
