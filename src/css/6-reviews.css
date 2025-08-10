@@ -17,7 +17,6 @@
   margin-bottom: 80px;
 }
 
-/* Стили для карточки отзыва */
 .review-card {
   background: #ffffff;
   border-radius: 12px;
@@ -27,7 +26,6 @@
   margin-bottom: 56px;
 }
 
-/* Стили для рейтинга звездочками - упрощенный подход */
 .rating-stars {
   width: 116px;
   height: 21px;
