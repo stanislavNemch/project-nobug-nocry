@@ -57,12 +57,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-stroke: 1px #080c09;
   width: 20px;
   height: 20px;
 }
 
 .star-empty {
   color: #e0e0e0; 
+    -webkit-text-stroke: 1px #080c09;
   width: 20px;
   height: 20px;
 }
@@ -208,6 +210,38 @@
     font-size: 16px;
     margin-bottom: 80px;
   }
+  .star {
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    }
+  
+  .star-full {
+    color: #080c09;
+    width: 20px;
+    height: 20px;
+   }
+  
+  .star-half {
+    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 1px #080c09;
+    width: 20px;
+    height: 20px;
+    }
+  
+  .star-empty {
+    color: #e0e0e0;
+    -webkit-text-stroke: 1px #080c09;
+    width: 20px;
+    height: 20px;
+    }
   .review-text {
     font-size: 18px;
     font-weight: 500;
