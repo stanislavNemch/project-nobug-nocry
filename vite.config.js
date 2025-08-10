@@ -3,8 +3,10 @@ import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig(({ command }) => {
+  const isBuild = command === 'build';
   return {
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
@@ -40,7 +42,19 @@ export default defineConfig(({ command }) => {
     },
     plugins: [
       injectHTML(),
-      FullReload(['./src/**/**.html']),
+      !isBuild && FullReload(['./src/**/**.html']),
+      isBuild &&
+        viteCompression({
+          verbose: true,
+          algorithm: 'brotliCompress',
+          ext: '.br',
+        }),
+      isBuild &&
+        viteCompression({
+          verbose: true,
+          algorithm: 'gzip',
+          ext: '.gz',
+        }),
       SortCss({
         sort: 'mobile-first',
       }),
