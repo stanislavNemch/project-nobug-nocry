@@ -53,10 +53,18 @@
 }
 
 .star-half {
-  background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  position: relative;
+  color: #e0e0e0;
+}
+
+.star-half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #080c09;
 }
 
 .star-empty {
@@ -225,11 +233,20 @@
     color: #080c09;
   }
 
+  /* Упрощенный подход для мобильных - без градиентов */
   .star-half {
-    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    position: relative;
+    color: #e0e0e0;
+  }
+
+  .star-half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #080c09;
   }
 
   .star-empty {
@@ -304,6 +321,14 @@
     height: 20px;
   }
 
+  /* Для планшетов и десктопов можно использовать градиенты */
+  .star-half {
+    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .review-text {
     font-size: 20px;
   }
@@ -334,5 +359,13 @@
     line-height: 1;
     width: 20px;
     height: 20px;
+  }
+
+  /* Для десктопа также используем градиенты */
+  .star-half {
+    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
