@@ -16,7 +16,8 @@ let closeBtn = null;
 function initializeElements() {
   orderBackdrop = document.getElementById('order-backdrop');
   orderForm = document.querySelector('.order-form');
-  closeBtn = document.querySelector('.order-modal .close-btn');
+  // closeBtn = document.querySelector('.order-modal .close-btn');
+  closeBtn = document.querySelector('.close-btn');
 }
 
 // Function to open the order modal
