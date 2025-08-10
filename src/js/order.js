@@ -1,7 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
-
+import { createOrder } from './furniture-api';
 // Regular expressions for email and phone validation
 const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 const PHONE_REGEX = /^[0-9]{12}$/;
@@ -21,13 +21,14 @@ function initializeElements() {
 
 // Function to open the order modal
 export function openOrderModal(modelId, color) {
+  orderBackdrop.classList.remove('visuallyhidden');
   // Убедимся, что элементы инициализированы
   if (!orderBackdrop) {
     initializeElements();
   }
 
   if (orderBackdrop) {
-    orderBackdrop.classList.remove('visuallyhidden');
+    // orderBackdrop.classList.remove('visuallyhidden');
     document.body.style.overflow = 'hidden';
     selectedModelId = modelId;
     selectedColor = color;
@@ -98,29 +99,9 @@ async function handleFormSubmit(event) {
     });
     return;
   }
+  console.log('order data', data);
 
-  try {
-    const response = await axios.post(
-      'https://furniture-store.b.goit.study/api/orders',
-      data
-    );
-
-    iziToast.success({
-      title: 'Success!',
-      message: 'Your order has been successfully placed.',
-      position: 'topRight',
-    });
-
-    closeOrderModal();
-  } catch (error) {
-    iziToast.error({
-      title: 'Error',
-      message:
-        error.response?.data?.message ||
-        'Failed to send order. Please try again later.',
-      position: 'topRight',
-    });
-  }
+  createOrder(data);
 }
 
 // Инициализация обработчиков событий после загрузки DOM

@@ -1,0 +1,276 @@
+/* reviews-css */
+
+.reviews {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.reviews-heading {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01;
+  margin-bottom: 24px;
+}
+
+.revies-section-text {
+  font-size: 16px;
+  margin-bottom: 80px;
+}
+
+/* Стили для карточки отзыва */
+.review-card {
+  background: #ffffff;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48px;
+}
+
+/* Стили для рейтинга зірочками */
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.star {
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.star-full {
+  color: #080c09; /* Единый цвет для всего проекта */
+}
+
+.star-half {
+  background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.star-empty {
+  color: #e0e0e0; /* Сірий колір для порожніх зірок */
+}
+
+.review-text {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #080C09;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.reviewer-name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #080c09;
+  margin: 0;
+}
+
+/* Контейнер для swiper */
+.reviews .swiper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+/* Контролы снизу - как в popular-products */
+.reviews-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Пагинация точками слева - блок 104x8 */
+.reviews .swiper-pagination {
+  width: 100%;
+  height: 8px;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+.reviews .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50%;
+  background-color: rgba(8, 12, 9, 0.3) !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
+
+.reviews .swiper-pagination-bullet-active {
+  background-color: rgba(8, 12, 9, 1) !important;
+  transform: scale(1.25);
+}
+
+.reviews .swiper-pagination-bullet:hover {
+  background-color: rgba(107, 6, 9, 0.7) !important;
+}
+
+/* Навигация стрелочками справа - блок 112x48 */
+.reviews-navigation {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-radius: 24px;
+  padding: 4px;
+  box-shadow: none;
+}
+
+.reviews .swiper-button-prev,
+.reviews .swiper-button-next {
+  width: 48px !important;
+  height: 48px !important;
+  margin-top: 0 !important;
+  border-radius: 50%;
+  border: 1px solid rgba(8, 12, 9, 0.15);
+  background-color: #F2F2F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  position: static !important;
+  color: #080c09;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+.reviews .swiper-button-prev::after,
+.reviews .swiper-button-next::after {
+  display: none !important;
+}
+
+.reviews .swiper-button-prev:hover:not(.swiper-button-disabled),
+.reviews .swiper-button-next:hover:not(.swiper-button-disabled) {
+  background-color: rgba(151, 80, 82, 1);
+}
+
+.reviews .swiper-button-icon {
+  width: 24px;
+  height: 24px;
+  fill: #080c09;
+}
+
+.reviews
+  .swiper-button-prev:hover:not(.swiper-button-disabled)
+  .swiper-button-icon,
+.reviews
+  .swiper-button-next:hover:not(.swiper-button-disabled)
+  .swiper-button-icon {
+  fill: white;
+}
+
+.reviews .swiper-button-prev:active:not(.swiper-button-disabled),
+.reviews .swiper-button-next:active:not(.swiper-button-disabled) {
+  background-color: rgba(107, 6, 9, 1);
+}
+
+.reviews .swiper-button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive для мобильных устройств */
+@media screen and (max-width: 767px) {
+  .reviews {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .star {
+    font-size: 28px;
+    width: 20px;
+  }
+
+  .review-text {
+    font-size: 20px;
+  }
+
+  .reviewer-name {
+    font-size: 16px;
+  }
+
+  .reviews-controls {
+    gap: 16px;
+  }
+
+  .reviews-navigation {
+    width: 96px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .reviews .swiper-button-prev,
+  .reviews .swiper-button-next {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .swiper-button-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .reviews .swiper-pagination {
+    height: 6px;
+  }
+
+  .reviews .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .reviews-heading {
+    font-size: 48px;
+  }
+  .revies-section-text {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .reviews {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+
+  .star {
+    font-size: 32px;
+    width: 24px;
+  }
+
+  .review-text {
+    font-size: 18px;
+  }
+
+  .reviewer-name {
+    font-size: 20px;
+  }
+}

@@ -10,6 +10,7 @@ export default defineConfig(({ command }) => {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
+    base: '/project-nobug-nocry/',
     build: {
       sourcemap: true,
       rollupOptions: {
