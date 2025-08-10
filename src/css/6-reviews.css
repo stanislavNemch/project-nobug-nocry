@@ -27,7 +27,7 @@
   margin-bottom: 56px;
 }
 
-/* Стили для рейтинга зірочками */
+/* Стили для рейтинга зірочками - упрощенный подход */
 .rating-stars {
   width: 116px;
   height: 21px;
@@ -42,33 +42,32 @@
   line-height: 1;
   width: 20px;
   height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
+  display: inline-block;
+  color: #e0e0e0;
+  position: relative;
 }
 
 .star-full {
-  color: #080c09;
+  color: #080c09 !important;
 }
 
+/* Упрощенный подход для половинных звездочек - работает везде */
 .star-half {
-  position: relative;
-  color: #e0e0e0;
+  color: #e0e0e0 !important;
 }
 
-.star-half::before {
+.star-half::after {
   content: '★';
   position: absolute;
   left: 0;
   top: 0;
-  width: 50%;
+  width: 10px;
   overflow: hidden;
   color: #080c09;
 }
 
 .star-empty {
-  color: #e0e0e0;
+  color: #e0e0e0 !important;
 }
 
 .review-text {
@@ -223,34 +222,6 @@
     line-height: 1;
     width: 20px;
     height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s ease;
-  }
-
-  .star-full {
-    color: #080c09;
-  }
-
-  /* Упрощенный подход для мобильных - без градиентов */
-  .star-half {
-    position: relative;
-    color: #e0e0e0;
-  }
-
-  .star-half::before {
-    content: '★';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50%;
-    overflow: hidden;
-    color: #080c09;
-  }
-
-  .star-empty {
-    color: #e0e0e0;
   }
 
   .review-text {
@@ -321,14 +292,6 @@
     height: 20px;
   }
 
-  /* Для планшетов и десктопов можно использовать градиенты */
-  .star-half {
-    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
   .review-text {
     font-size: 20px;
   }
@@ -359,13 +322,5 @@
     line-height: 1;
     width: 20px;
     height: 20px;
-  }
-
-  /* Для десктопа также используем градиенты */
-  .star-half {
-    background: linear-gradient(90deg, #080c09 50%, #e0e0e0 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 }
