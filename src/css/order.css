@@ -16,11 +16,11 @@
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.visuallyhidden {
+/* .visuallyhidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-}
+} */
 
 .backdrop.visuallyhidden .modal.order-modal {
   transform: scale(1.1);

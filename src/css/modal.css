@@ -224,6 +224,22 @@
   white-space: nowrap;
 }
 
+.modal-close-btn {
+  /* fill: #080c09; */
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 /* Responsive стилі для модального вікна */
 @media screen and (max-width: 767px) {
   .modal-price-rating {
