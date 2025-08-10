@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { getFurnitureById } from './furniture-api.js';
 import { openOrderModal } from './order.js';
+import spriteUrl from '../img/sprite.svg';
 
 // Імпортуємо css-star-rating
 import 'css-star-rating/css/star-rating.min.css';
@@ -194,7 +195,7 @@ function renderModal(furniture) {
     <button type="button" class="modal-close-btn" >
         <svg class="close-icon" width="14" height="14">
           
-          <use href="./img/sprite.svg#icon-close"></use>
+          <use href="${spriteUrl}#icon-close"/>
         </svg>
       </button>
   </div>`;
