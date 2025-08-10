@@ -12,11 +12,20 @@ let orderBackdrop = null;
 let orderForm = null;
 let closeBtn = null;
 
+const orderCloseButton = document.querySelector('.close-btn');
+console.log(orderCloseButton);
+
+orderCloseButton.addEventListener('click', () => {
+  orderBackdrop.classList.add('visuallyhidden');
+  document.body.style.overflow = '';
+});
+
 // Function to initialize DOM elements
 function initializeElements() {
   orderBackdrop = document.getElementById('order-backdrop');
   orderForm = document.querySelector('.order-form');
-  closeBtn = document.querySelector('.order-modal .close-btn');
+  // closeBtn = document.querySelector('.order-modal .close-btn');
+  closeBtn = document.querySelector('.close-btn');
 }
 
 // Function to open the order modal
