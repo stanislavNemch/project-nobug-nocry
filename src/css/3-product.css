@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.product-container {
+.three-product {
   padding-top: 48px;
   padding-bottom: 48px;
 }
@@ -85,6 +85,7 @@
 }
 
 @media screen and (min-width: 768px) {
+
   .product-title {
     font-size: 48px;
   }
@@ -107,6 +108,12 @@
 }
 
 @media screen and (min-width: 1440px) {
+
+  .three-product {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
   .product-categories-item {
     width: calc((100% - 144px) / 7);
   }
@@ -310,10 +317,6 @@
   .product-item {
     width: 335px;
     height: 450px;
-  }
-
-  .three-product {
-    margin: 48px 0px;
   }
 
   .products-list {
