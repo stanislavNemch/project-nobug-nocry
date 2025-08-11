@@ -16,25 +16,33 @@
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* .visuallyhidden {
+/* Цей клас приховує модальне вікно і є необхідним для JS */
+.visuallyhidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-} */
+}
 
 .backdrop.visuallyhidden .modal.order-modal {
-  transform: scale(1.1);
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .modal.order-modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 8px;
   padding: 64px;
-  width: 866px;
-  height: 776px;
+  max-width: 866px;
+  width: 90%;
+  /* ===== Новий блок для виправлення висоти ===== */
+  max-height: 90vh;
+  /* Вікно не буде вилазити за висоту екрана */
+  overflow-y: auto;
+  /* Додає скрол, якщо контент не поміщається */
+  /* =========================================== */
   background: #fff;
 }
 
@@ -166,10 +174,12 @@
     text-align: center;
     color: #080c09;
   }
+
   .order-form {
     width: 295px;
     height: 484px;
   }
+
   .form-input {
     border: 1px solid rgba(8, 12, 9, 0.15);
     border-radius: 12px;
@@ -177,6 +187,7 @@
     width: 295px;
     height: 42px;
   }
+
   .comment-input {
     border: 1px solid rgba(8, 12, 9, 0.15);
     border-radius: 12px;
@@ -196,6 +207,7 @@
     width: 704px;
     height: 776px;
   }
+
   .modal-title {
     font-weight: 700;
     font-size: 48px;
@@ -204,10 +216,12 @@
     text-align: center;
     color: #080c09;
   }
+
   .order-form {
     width: 576px;
     height: 484px;
   }
+
   .form-input {
     border: 1px solid rgba(8, 12, 9, 0.15);
     border-radius: 12px;
@@ -215,6 +229,7 @@
     width: 576px;
     height: 42px;
   }
+
   .comment-input {
     border: 1px solid rgba(8, 12, 9, 0.15);
     border-radius: 12px;

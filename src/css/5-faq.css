@@ -1,16 +1,10 @@
-.faq-container {
-  padding-top: 48px;
-  padding-bottom: 48px;
-  max-width: 335px;
-}
-
 .faq-title {
   font-weight: 700;
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0.01em;
   text-align: center;
-  padding-bottom: 32px;
+  margin-bottom: 32px;
 }
 .faq-list {
   list-style: none;

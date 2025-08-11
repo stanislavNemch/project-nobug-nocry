@@ -179,7 +179,7 @@
   }
 
   .mobile-menu-content {
-    justify-content: space-between;
+    padding-top: 24px;
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -190,6 +190,8 @@
 
   .mobile-menu-list {
     text-align: right;
+    margin-bottom: 32px;
+    margin-right: 16px;
   }
 
   .mobile-menu-list li:not(:last-child) {
