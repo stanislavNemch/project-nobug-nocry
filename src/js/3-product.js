@@ -40,7 +40,7 @@ export function renderCategories(data) {
                   ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
                 "
     src="./img/category-imgs/category-img-${index + 1}.webp"
-    alt="${el.name}"
+    alt="Зображення категорії ${el.name}"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${el.name}</p>
@@ -88,23 +88,22 @@ export function getOneCategory(e) {
 listCategory.addEventListener('click', getOneCategory);
 
 async function createProductsList(functions = getFurnitures(NowPages, 8)) {
-  showLoader() // [5] Скрываем лоадер перед загрузкой товаров
+  showLoader(); // [5] Скрываем лоадер перед загрузкой товаров
   const productsList = document.querySelector('.products-list');
   const productsContainer = document.querySelector('.pagination');
   productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
   const isMobiles = window.matchMedia('(max-width: 767px)').matches;
 
-
   try {
     const data = await functions;
     if (!isMobiles) {
-    // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
-    productsList.style.opacity = 0;
-    productsList.innerHTML = '';
-    if (productsContainer) productsContainer.innerHTML = '';
-  }
+      // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
+      productsList.style.opacity = 0;
+      productsList.innerHTML = '';
+      if (productsContainer) productsContainer.innerHTML = '';
+    }
     productsList.style.opacity = 1;
-    hideLoader() // [5] Скрываем лоадер перед загрузкой товаров
+    hideLoader(); // [5] Скрываем лоадер перед загрузкой товаров
     const furnitures = data.furnitures || data;
     totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
 
@@ -158,14 +157,12 @@ function createPagination(NowPages) {
     </button>
   `;
 
-if (NowPages > 1) {
+  if (NowPages > 1) {
     paginationContainer.innerHTML += `
       <button class="page-number ${NowPages === 1 ? 'focus' : ''}">1</button>
     `;
     paginationContainer.innerHTML += `<span class="dtp" style="margin-right: 18px;" >...</span>`;
   }
-
-
 
   // Текущая + 2 страницы (например: 8 9 10)
   for (let i = NowPages; i <= Math.min(NowPages + 2, totalItemspages); i++) {
@@ -237,7 +234,7 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
     }
@@ -250,7 +247,7 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
     }
@@ -263,10 +260,9 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'end'
+          block: 'end',
         });
       }, 300);
-
     }
   }
 
@@ -278,13 +274,11 @@ document.addEventListener('click', async event => {
       setTimeout(() => {
         document.querySelector('.products-list').scrollIntoView({
           behavior: 'smooth',
-          block: 'nearest'
+          block: 'nearest',
         });
       }, 100);
     }
   });
-
-
 });
 
 // Инициализация
