@@ -36,9 +36,9 @@ export function renderCategories(data) {
   <img
     class="product-categories-img"
     srcset="
-                  ./img/category-imgs/category-img-${index + 1}.webp    1x,
-                  ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
-                "
+      ./img/category-imgs/category-img-${index + 1}.webp    1x,
+      ./img/category-imgs/category-img-${index + 1}@2x.webp 2x
+    "
     src="./img/category-imgs/category-img-${index + 1}.webp"
     alt="Зображення категорії ${el.name}"
   />
@@ -87,68 +87,105 @@ export function getOneCategory(e) {
 
 listCategory.addEventListener('click', getOneCategory);
 
-async function createProductsList(functions = getFurnitures(NowPages, 8)) {
-  showLoader(); // [5] Скрываем лоадер перед загрузкой товаров
+// Функция для отображения скелетон-карточек
+function showSkeleton(count = 8) {
   const productsList = document.querySelector('.products-list');
-  const productsContainer = document.querySelector('.pagination');
-  productsContainer.innerHTML = ''; // Очищаем контейнер пагинации
+  productsList.innerHTML = '';
+
+  for (let i = 0; i < count; i++) {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'product-item skeleton';
+    skeleton.innerHTML = `
+      <div class="skeleton-box" style="width:100%; height:256px; margin-bottom:10px;"></div>
+      <div class="skeleton-box" style="width:80%; height:16px; margin-bottom:8px;"></div>
+      <div class="skeleton-box" style="width:60%; height:16px; margin-bottom:8px;"></div>
+      <div class="skeleton-box" style="width:40%; height:16px; margin-bottom:12px;"></div>
+      <button class="btn btn-go-modal">Детальніше</button>
+    `;
+    productsList.appendChild(skeleton);
+  }
+}
+
+async function createProductsList(functions = getFurnitures(NowPages, 8)) {
+  const productsList = document.querySelector('.products-list');
   const isMobiles = window.matchMedia('(max-width: 767px)').matches;
+
+  // Сохраняем текущую длину списка для автоскролла
+  const existingItems = productsList.querySelectorAll('.product-item').length;
+
+  // Скелетоны показываем только при первой загрузке или на десктопе
+  if (!isMobiles || NowPages === 1) {
+    showSkeleton(8);
+  }
+
+  showLoader();
 
   try {
     const data = await functions;
-    if (!isMobiles) {
-      // Очищаем список и пагинацию перед загрузкой (только для ПК/планшета)
-      productsList.style.opacity = 0;
-      productsList.innerHTML = '';
-      if (productsContainer) productsContainer.innerHTML = '';
-    }
-    productsList.style.opacity = 1;
-    hideLoader(); // [5] Скрываем лоадер перед загрузкой товаров
     const furnitures = data.furnitures || data;
-    totalItemspages = Math.ceil(data.totalItems / 8); // [2] Рассчитываем всего страниц
+    totalItemspages = Math.ceil(data.totalItems / 8);
 
-    if (furnitures && furnitures.length) {
+    // Если мобильный и это не первая страница — добавляем
+    if (isMobiles && NowPages > 1) {
       furnitures.forEach(furniture => {
-        const productItem = document.createElement('div');
-        productItem.className = 'product-item';
-        productItem.setAttribute('data-id', furniture._id);
-
-        productItem.innerHTML = `
-          <img src="${furniture.images[0]}" alt="${
-          furniture.name
-        }" class="img-card" width="100%" height="256px" />
-          <p class="text-card">${furniture.name}</p>
-          <div class="colors">
-            ${furniture.color
-              .map(
-                c =>
-                  `<span class="color-one" style="background-color:${c};"></span>`
-              )
-              .join('')}
-          </div>
-          <p class="text-card">${furniture.price} грн</p>
-          <button class="btn btn-go-modal">Детальніше</button>
-        `;
-
-        productsList.appendChild(productItem);
-        createPagination(totalItemspages);
+        productsList.appendChild(createProductCard(furniture));
       });
 
-      createPagination(NowPages); // [3] Обновляем пагинацию
-      updatePaginationButtons(); // [4] Включаем/отключаем кнопки вперёд/назад
+      // Автоскролл к первому новому товару
+      const firstNewItem =
+        productsList.querySelectorAll('.product-item')[existingItems];
+      if (firstNewItem) {
+        firstNewItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } else {
-      console.warn('Товари не знайдені.');
+      // Иначе перерисовываем
+      productsList.innerHTML = '';
+      furnitures.forEach(furniture => {
+        productsList.appendChild(createProductCard(furniture));
+      });
+    }
+
+    if (!isMobiles) {
+      createPagination(NowPages);
+      updatePaginationButtons();
+    } else {
+      hideLoadMoreButton();
     }
   } catch (error) {
     console.error('Помилка завантаження товарів:', error);
     productsList.innerHTML = '<p>Помилка завантаження товарів.</p>';
+  } finally {
+    hideLoader();
   }
 }
 
-function createPagination(NowPages) {
-  paginationContainer.innerHTML = ''; // Очищаем
+function createProductCard(furniture) {
+  const productItem = document.createElement('li');
+  productItem.className = 'product-item';
+  productItem.setAttribute('data-id', furniture._id);
 
-  // Кнопка "Назад"
+  productItem.innerHTML = `
+    <img src="${furniture.images[0]}" alt="${
+    furniture.name
+  }" class="img-card" width="100%" height="256px" />
+    <p class="text-card">${furniture.name}</p>
+    <div class="colors">
+      ${furniture.color
+        .map(
+          c => `<span class="color-one" style="background-color:${c};"></span>`
+        )
+        .join('')}
+    </div>
+    <p class="text-card">${furniture.price} грн</p>
+    <button class="btn btn-go-modal">Детальніше</button>
+  `;
+
+  return productItem;
+}
+
+function createPagination(NowPages) {
+  paginationContainer.innerHTML = '';
+
   paginationContainer.innerHTML += `
     <button class="btn-prev scroll">
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="icon">
@@ -161,23 +198,20 @@ function createPagination(NowPages) {
     paginationContainer.innerHTML += `
       <button class="page-number ${NowPages === 1 ? 'focus' : ''}">1</button>
     `;
-    paginationContainer.innerHTML += `<span class="dtp" style="margin-right: 18px;" >...</span>`;
+    paginationContainer.innerHTML += `<span class="dtp" style="margin-right: 18px;">...</span>`;
   }
 
-  // Текущая + 2 страницы (например: 8 9 10)
   for (let i = NowPages; i <= Math.min(NowPages + 2, totalItemspages); i++) {
     paginationContainer.innerHTML += `
       <button class="page-number ${i === NowPages ? 'focus' : ''}">${i}</button>
     `;
   }
 
-  // Если осталось больше страниц — многоточие и последняя
   if (NowPages + 2 < totalItemspages) {
     paginationContainer.innerHTML += `<span class="dtp">...</span>`;
     paginationContainer.innerHTML += `<button class="page-number last">${totalItemspages}</button>`;
   }
 
-  // Кнопка "Вперёд"
   paginationContainer.innerHTML += `
     <button class="btn-next scroll">
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="icon">
@@ -197,14 +231,12 @@ function updatePaginationButtons() {
   const prevBtn = document.querySelector('.btn-prev');
   const nextBtn = document.querySelector('.btn-next');
 
-  // Обработка "Назад"
   if (NowPages === 1) {
     prevBtn.classList.add('disabled');
   } else {
     prevBtn.classList.remove('disabled');
   }
 
-  // Обработка "Вперёд"
   if (NowPages >= totalItemspages) {
     nextBtn.classList.add('disabled');
   } else {
@@ -220,68 +252,39 @@ function hideLoadMoreButton() {
   }
 }
 
-// Обработка кликов по пагинации
-
 document.addEventListener('click', async event => {
-  let shouldScroll = false;
-
   if (event.target.closest('.page-number')) {
     const pageBtn = event.target.closest('.page-number');
     const pageNumber = parseInt(pageBtn.textContent, 10);
     if (!isNaN(pageNumber)) {
       NowPages = pageNumber;
-      await createProductsList(getFurnitures(NowPages, 8));
-      setTimeout(() => {
-        document.querySelector('.products-list').scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
-      }, 300);
+      await createProductsList(getFurnitures(NowPages, 8, currentCategoryId));
     }
   }
 
   if (event.target.closest('.btn-next')) {
     if (NowPages < totalItemspages) {
       NowPages++;
-      await createProductsList(getFurnitures(NowPages, 8));
-      setTimeout(() => {
-        document.querySelector('.products-list').scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
-      }, 300);
+      await createProductsList(getFurnitures(NowPages, 8, currentCategoryId));
     }
   }
 
   if (event.target.closest('.btn-prev')) {
     if (NowPages > 1) {
       NowPages--;
-      await createProductsList(getFurnitures(NowPages, 8));
-      setTimeout(() => {
-        document.querySelector('.products-list').scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-        });
-      }, 300);
+      await createProductsList(getFurnitures(NowPages, 8, currentCategoryId));
     }
   }
-
-  BtnMoreItems.addEventListener('click', async () => {
-    if (NowPages < totalItemspages) {
-      NowPages++;
-      hideLoadMoreButton();
-      await createProductsList(getFurnitures(NowPages, 8));
-      setTimeout(() => {
-        document.querySelector('.products-list').scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-        });
-      }, 100);
-    }
-  });
 });
 
-// Инициализация
+BtnMoreItems.addEventListener('click', async () => {
+  if (NowPages < totalItemspages) {
+    NowPages++;
+    hideLoadMoreButton();
+    await createProductsList(getFurnitures(NowPages, 8, currentCategoryId));
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   getAllCategories();
   createProductsList();
