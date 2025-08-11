@@ -6,7 +6,7 @@ import{a as V,i as l,S as I,N as R,P}from"./assets/vendor-BWsV38dq.js";(function
                   ./img/category-imgs/category-img-${i+1}@2x.webp 2x
                 "
     src="./img/category-imgs/category-img-${i+1}.webp"
-    alt="${s.name}"
+    alt="Зображення категорії ${s.name}"
   />
   <div class="product-categories-content">
     <p class="product-categories-descr">${s.name}</p>
