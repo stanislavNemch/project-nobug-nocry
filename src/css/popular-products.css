@@ -68,6 +68,10 @@
   font-size: 16px;
 }
 
+.img-card {
+  margin-bottom: 8px;
+}
+
 .popular-products-item .colors {
   display: flex;
   gap: 16px;
