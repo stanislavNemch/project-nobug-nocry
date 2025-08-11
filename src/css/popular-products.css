@@ -16,6 +16,7 @@
 .popular-products-swiper {
   height: 100%;
   overflow: hidden;
+  margin-bottom: 48px;
 }
 
 .swiper-wrapper {
@@ -257,10 +258,7 @@
   }
 
   /* Центрирование слайдов на мобильных */
-  .popular-products-swiper {
-    text-align: center;
-  }
-
+  
   .swiper-slide {
     justify-content: center;
     align-items: center;
@@ -268,14 +266,18 @@
 
   /* Размеры карточки как в product-item для мобильных */
   .popular-products-item {
+    height: 450px;
     width: 335px;
     max-width: calc(100vw - 32px); /* Учитываем отступы контейнера */
-    height: 450px;
     margin: 0 auto; /* Дополнительное центрирование */
   }
 
   .popular-products-controls {
     gap: 16px;
+    /* цей код не має дублюватися */
+    width: 335px;
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
   }
 
   .popular-products-navigation {
@@ -309,19 +311,21 @@
 /* Responsive для планшетов - 2 товара 340x460 */
 @media screen and (min-width: 768px) and (max-width: 1439px) {
 
-    .swiper-slide {
-        min-height: 460px;
-      }
+/* Помогает кнопку товаров ровнять по нижнему краю */
+
+  .swiper-slide {
+    min-height: 460px;
+  }
     
-      .popular-products-item {
-        height: 460px;
-      }
+  .popular-products-item {
+    height: 460px;
+  }
 
   .popular-products-title {
     font-size: 42px;
   }
 
-  /* Размеры карточки как в product-item для планшетов */
+/* Размеры карточки как в product-item для планшетов */
   .popular-products-item {
     width: 341px;
   }
@@ -329,6 +333,8 @@
 
 /* Responsive для десктопов - 4 товара 310x436 */
 @media screen and (min-width: 1440px) {
+
+/* Помогает кнопку товаров ровнять по нижнему краю */
 
 .swiper-slide {
     min-height: 436px;
