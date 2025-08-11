@@ -120,6 +120,7 @@
   padding: 12px;
   width: 738px;
   height: 180px;
+  resize: none;
 }
 
 .submit-btn {
