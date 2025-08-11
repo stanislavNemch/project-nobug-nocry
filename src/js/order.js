@@ -143,6 +143,9 @@ async function handleFormSubmit(event) {
       message: 'Please enter a valid E-mail address.',
       position: 'topRight',
     });
+    
+    // Блок коду для розблокування кнопки при помилці валідації
+    if (submitBtn) submitBtn.disabled = false;
     return;
   }
 
@@ -155,6 +158,9 @@ async function handleFormSubmit(event) {
         'Please enter a valid phone like +38 (099) 123 22 11. Digits-only: 12 (e.g., 380991232211).',
       position: 'topRight',
     });
+    
+    // Блок коду для розблокування кнопки при помилці валідації
+    if (submitBtn) submitBtn.disabled = false;
     return;
   }
   data.phone = phoneDigits; // submit digits only
@@ -165,9 +171,12 @@ async function handleFormSubmit(event) {
       message: 'Could not get furniture details. Please try again.',
       position: 'topRight',
     });
+
+    // Блок коду для розблокування кнопки при помилці валідації
+    if (submitBtn) submitBtn.disabled = false;
     return;
   }
-  console.log('order data', data);
+
   try {
     const result = await createOrder(data);
     if (result) {
