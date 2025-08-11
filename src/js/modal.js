@@ -13,6 +13,11 @@ const productsList = document.querySelector('.products-list');
 let dataId = 0;
 let selectedColor = '';
 
+// Змінні для зберігання обробників подій
+let keydownHandler = null;
+let modalClickHandler = null;
+let colorChangeHandlers = [];
+
 // Функція нормалізації рейтингу (така ж як в reviews)
 function normalizeRating(value) {
   if (value >= 3.3 && value <= 3.7) return 3.5;
@@ -47,15 +52,69 @@ function createStarRating(rating) {
   return `<div class="modal-rating-stars" data-rating="${normalizedRating}">${starsHtml}</div>`;
 }
 
+// Створення обробника клавіші Escape
+const createKeydownHandler = () => event => {
+  if (event.key === 'Escape') {
+    closeModalWindow();
+  }
+};
+
+// Створення обробника кліку на модалку
+const createModalClickHandler = () => event => {
+  const modalWindow = event.target.closest('.product-modalWindow');
+  const clickOnCloseModalButton = event.target.closest('.modal-close-btn');
+
+  if (!modalWindow || clickOnCloseModalButton) {
+    closeModalWindow();
+  }
+};
+
+// Додавання слухачів при відкритті модалки
+const addModalEventListeners = () => {
+  // Створюємо обробники якщо їх ще немає
+  if (!keydownHandler) {
+    keydownHandler = createKeydownHandler();
+  }
+  if (!modalClickHandler) {
+    modalClickHandler = createModalClickHandler();
+  }
+
+  // Додаємо слухачі
+  document.addEventListener('keydown', keydownHandler);
+  modalSelector.addEventListener('click', modalClickHandler);
+};
+
+// Видалення слухачів при закритті модалки
+const removeModalEventListeners = () => {
+  if (keydownHandler) {
+    document.removeEventListener('keydown', keydownHandler);
+  }
+  if (modalClickHandler) {
+    modalSelector.removeEventListener('click', modalClickHandler);
+  }
+
+  // Видаляємо обробники зміни кольору
+  colorChangeHandlers.forEach(({ input, handler }) => {
+    input.removeEventListener('change', handler);
+  });
+  colorChangeHandlers = [];
+};
+
+function closeModalWindow() {
+  modalSelector.classList.add('visuallyhidden');
+  document.body.style.overflow = ''; // увімкнути прокрутку
+
+  // Видаляємо слухачі подій
+  removeModalEventListeners();
+}
+
 // Налаштування кнопки замовлення в модалці
 function setupModalButton() {
   const modalButton = document.querySelector('.modalButton');
   if (modalButton) {
     modalButton.addEventListener('click', function () {
       // Приховати поточну модалку
-      modalSelector.classList.add('visuallyhidden');
-      document.body.style.overflow = ''; // відновити прокрутку
-
+      closeModalWindow();
       openOrderModal(dataId, selectedColor);
     });
   }
@@ -74,7 +133,7 @@ async function openProductModal(productId) {
   const renderProduct = renderModal(furniture);
   modalSelector.innerHTML = renderProduct;
 
-  // Додати обробник вибору кольору після рендерингу модалки
+  // Додати обробники вибору кольору після рендерингу модалки
   const colorInputs = document.querySelectorAll(
     'input[name="furniture-color"]'
   );
@@ -85,15 +144,21 @@ async function openProductModal(productId) {
     selectedColor = colorInputs[0].value;
   }
 
-  // Слухати зміни кольору
+  // Слухати зміни кольору та зберігати обробники для видалення
   colorInputs.forEach(input => {
-    input.addEventListener('change', function () {
+    const handler = function () {
       selectedColor = this.value;
-    });
+    };
+    input.addEventListener('change', handler);
+    // Зберігаємо для подальшого видалення
+    colorChangeHandlers.push({ input, handler });
   });
 
   // Налаштувати кнопку модалки
   setupModalButton();
+
+  // Додаємо слухачі подій для модалки
+  addModalEventListeners();
 }
 
 // Обробник для популярних товарів через custom events
@@ -106,7 +171,7 @@ document.addEventListener('openProductModal', function (event) {
 if (productsList) {
   productsList.addEventListener('click', async function (event) {
     if (event.target.matches('img, button')) {
-      const productItem = event.target.closest('.product-item'); // селектор для найближчої картки товару
+      const productItem = event.target.closest('.product-item');
 
       if (productItem) {
         const productId = productItem.getAttribute('data-id');
@@ -194,41 +259,11 @@ function renderModal(furniture) {
     </div>
     <button type="button" class="modal-close-btn" >
         <svg class="close-icon" width="14" height="14">
-          
           <use href="${spriteUrl}#icon-close"/>
         </svg>
       </button>
   </div>`;
 }
 
-// Логіка закриття модалки
-modalSelector.addEventListener('click', function (event) {
-  const modalWindow = event.target.closest('.product-modalWindow');
-  const clickOnCloseModalButton = event.target.closest('.modal-close-btn');
-
-  if (!modalWindow) {
-    // Клік був поза модальним вікном
-    modalSelector.classList.add('visuallyhidden');
-    document.body.style.overflow = ''; // увімкнути прокрутку
-  }
-  if (clickOnCloseModalButton) {
-    modalSelector.classList.add('visuallyhidden');
-    document.body.style.overflow = ''; // увімкнути прокрутку
-  }
-});
-
-function closeModalWindow() {
-  modalSelector.classList.add('visuallyhidden');
-  document.body.style.overflow = ''; // увімкнути прокрутку
-}
-
-// Закриття модалки при натисканні Escape
-document.addEventListener('keydown', event => {
-  if (
-    event.key === 'Escape' &&
-    !modalSelector.classList.contains('visuallyhidden')
-  ) {
-    modalSelector.classList.add('visuallyhidden');
-    document.body.style.overflow = ''; // увімкнути прокрутку
-  }
-});
+// Експортуємо функцію для використання в інших модулях
+export { openProductModal };

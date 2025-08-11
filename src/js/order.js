@@ -2,9 +2,15 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { createOrder } from './furniture-api';
+
 // Regular expressions for email and phone validation
 const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 const PHONE_REGEX = /^[0-9]{12}$/; // 12 digits only, e.g. 380991232211
+
+// Змінні для зберігання обробників подій
+let keydownHandler = null;
+let clickHandler = null;
+let formSubmitHandler = null;
 
 // Phone mask helpers: format to +38 (XXX) XXX XX XX while keeping digits-only for submit
 function digitsOnly(value) {
@@ -65,19 +71,51 @@ let orderBackdrop = null;
 let orderForm = null;
 let closeBtn = null;
 
-const orderCloseButton = document.querySelector('.close-btn');
-if (orderCloseButton) {
-  orderCloseButton.addEventListener('click', () => {
-    orderBackdrop && orderBackdrop.classList.add('visuallyhidden');
-    document.body.style.overflow = '';
-  });
-}
+// Створення обробника клавіші Escape
+const createKeydownHandler = () => event => {
+  if (event.key === 'Escape') {
+    closeOrderModal();
+  }
+};
+
+// Створення обробника кліків
+const createClickHandler = () => event => {
+  if (event.target === orderBackdrop || event.target === closeBtn) {
+    closeOrderModal();
+  }
+};
+
+// Додавання слухачів при відкритті модалки замовлення
+const addOrderEventListeners = () => {
+  // Створюємо обробники якщо їх ще немає
+  if (!keydownHandler) {
+    keydownHandler = createKeydownHandler();
+  }
+  if (!clickHandler) {
+    clickHandler = createClickHandler();
+  }
+
+  // Додаємо слухачі
+  document.addEventListener('keydown', keydownHandler);
+  if (orderBackdrop) {
+    orderBackdrop.addEventListener('click', clickHandler);
+  }
+};
+
+// Видалення слухачів при закритті модалки замовлення
+const removeOrderEventListeners = () => {
+  if (keydownHandler) {
+    document.removeEventListener('keydown', keydownHandler);
+  }
+  if (clickHandler && orderBackdrop) {
+    orderBackdrop.removeEventListener('click', clickHandler);
+  }
+};
 
 // Function to initialize DOM elements
 function initializeElements() {
   orderBackdrop = document.getElementById('order-backdrop');
   orderForm = document.querySelector('.order-form');
-  // closeBtn = document.querySelector('.order-modal .close-btn');
   closeBtn = document.querySelector('.close-btn');
 }
 
@@ -93,6 +131,9 @@ export function openOrderModal(modelId, color) {
     document.body.style.overflow = 'hidden';
     selectedModelId = modelId;
     selectedColor = color;
+
+    // Додаємо слухачі подій при відкритті
+    addOrderEventListeners();
   }
 }
 
@@ -105,22 +146,9 @@ const closeOrderModal = () => {
   if (orderForm) {
     orderForm.reset();
   }
-};
 
-const handleCloseClick = event => {
-  if (event.target === orderBackdrop || event.target === closeBtn) {
-    closeOrderModal();
-  }
-};
-
-const handleKeydown = event => {
-  if (
-    event.key === 'Escape' &&
-    orderBackdrop &&
-    !orderBackdrop.classList.contains('visuallyhidden')
-  ) {
-    closeOrderModal();
-  }
+  // Видаляємо слухачі подій при закритті
+  removeOrderEventListeners();
 };
 
 // Form submission handler
@@ -143,7 +171,7 @@ async function handleFormSubmit(event) {
       message: 'Please enter a valid E-mail address.',
       position: 'topRight',
     });
-    
+
     // Блок коду для розблокування кнопки при помилці валідації
     if (submitBtn) submitBtn.disabled = false;
     return;
@@ -158,7 +186,7 @@ async function handleFormSubmit(event) {
         'Please enter a valid phone like +38 (099) 123 22 11. Digits-only: 12 (e.g., 380991232211).',
       position: 'topRight',
     });
-    
+
     // Блок коду для розблокування кнопки при помилці валідації
     if (submitBtn) submitBtn.disabled = false;
     return;
@@ -190,28 +218,33 @@ async function handleFormSubmit(event) {
   }
 }
 
-// Инициализация обработчиков событий после загрузки DOM
+// Ініціалізація обробників подій після загрузки DOM (тільки для форми)
 function initializeEventListeners() {
   initializeElements();
 
   if (orderForm) {
-    orderForm.addEventListener('submit', handleFormSubmit);
+    // Створюємо обробник форми один раз
+    if (!formSubmitHandler) {
+      formSubmitHandler = handleFormSubmit;
+    }
+    orderForm.addEventListener('submit', formSubmitHandler);
+
     // Attach phone mask
     const phoneInput = orderForm.querySelector('input[name="phone"]');
     attachPhoneMask(phoneInput);
   }
-
-  if (orderBackdrop) {
-    orderBackdrop.addEventListener('click', handleCloseClick);
-  }
-
-  document.addEventListener('keydown', handleKeydown);
 }
 
-// Запускаем инициализацию после загрузки DOM
+// Обробник для кнопки закриття (статичний елемент)
+const orderCloseButton = document.querySelector('.close-btn');
+if (orderCloseButton) {
+  orderCloseButton.addEventListener('click', closeOrderModal);
+}
+
+// Запускаємо ініціалізацію після загрузки DOM (тільки для постійних елементів)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeEventListeners);
 } else {
-  // DOM уже загружен
+  // DOM вже загружен
   initializeEventListeners();
 }
