@@ -270,6 +270,17 @@ document.addEventListener('click', async event => {
     }
   }
 
+window.addEventListener("resize", () => {
+  const isMobiles = window.matchMedia('(max-width: 767px)').matches;
+
+  if (!isMobiles) {
+    // Только для ПК/планшета
+    BtnMoreItems.classList.add("hidden");
+  } else {
+    BtnMoreItems.classList.remove("hidden");
+  }
+});
+
   BtnMoreItems.addEventListener('click', async () => {
     if (NowPages < totalItemspages) {
       NowPages++;
