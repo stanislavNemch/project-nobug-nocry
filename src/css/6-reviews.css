@@ -33,9 +33,10 @@
 }
 
 .star {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1;
   color: #e0e0e0; /* Цвет для пустых звёзд */
+  -webkit-text-stroke: 1px #080c09;
 }
 
 .star-full {
@@ -47,12 +48,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  -webkit-text-stroke: 1px #080c09;
 }
 
 .star-empty {
   color: #e0e0e0;
-  -webkit-text-stroke: 1px #080c09;
 }
 
 .review-text {
