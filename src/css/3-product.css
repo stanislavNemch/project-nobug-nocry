@@ -125,8 +125,28 @@
     }
 }
 
-/* =============================================== */
+.skeleton-box {
+  background: linear-gradient(90deg, #eee 25%, #ddd 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 8px;
+}
 
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.skeleton .btn-go-modal {
+  display: none;
+}
+
+/* =============================================== */
 
 .product-item {
   width: calc(100% / 4 - 18px);
@@ -134,6 +154,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .text-card {
   font-weight: 600;
   font-family: 'Raleway' sans-serif;
@@ -142,6 +163,7 @@
   font-style: semi-bold;
   position: relative;
 }
+
 .btn-go-modal {
 width: 100%;
   height: 40px;
@@ -153,30 +175,37 @@ width: 100%;
   border: none;
   margin-top: 16px;
 }
+
 .color-one {
   border-radius: 100%;
   width: 24px;
   height: 24px;
+  border: 1px solid lightgray;
 }
+
 .colors {
   display: flex;
   gap: 16px;
   margin-top: 8px;
 }
+
 .products-list {
    display: flex;
    gap: 24px;
    flex-wrap: wrap;
 }
+
 .img-card {
   width: 100%;
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
   overflow: hidden;
-  transition: filter 0.3s ease;
+  transition: filter 200s ease-in-out, border 200ms ease-in-out;
 }
+
 .img-card:hover {
+  cursor: pointer;
   filter: brightness(0.7);
   border: 8px solid rgba(107, 6, 9, 1);
 }
@@ -188,6 +217,7 @@ width: 100%;
   margin-top: 32px;
   gap: 4px;
 }
+
 .page-number {
   width: 56px;
   height: 46px;
@@ -197,28 +227,33 @@ width: 100%;
   font-family: Raleway, sans-serif;
   background-color: white;
 }
+
 .dtp {
   font-weight: 500;
   font-style: medium;
   size: 18px;
 }
+
 .focus {
   background-color: rgba(107, 6, 9, 1);
   color: rgba(255, 255, 255, 1);
   transition: opacity 0.3s ease;
 }
+
 .page-number:hover {
   opacity: 0.5;
   cursor: pointer;
 }
+
 .scroll {
   width: 48px;
   height: 48px;
   border-radius: 100px;
   background-color: rgba(242, 242, 242, 1);
   border: 1px solid rgba(8, 12, 9, 0.15);
-  transition: opacity fill 0.5s ease;
+  transition: opacity 0.5s ease, fill 0.5s ease, background-color 0.5s ease;
 }
+
 .scroll:hover {
   fill: white;
   opacity: 0.7;
@@ -229,25 +264,32 @@ width: 100%;
   opacity: 1;
   background-color: rgba(107, 6, 9, 1);
 }
+
 .disabled {
   opacity: 0.5;
   pointer-events: none;
 }
+
 .loader {
+  margin-top: 20px;
   width: 48px;
-    height: 48px;
-    border: 5px solid #000000;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 0.5s linear infinite;
+  height: 48px;
+  border: 5px solid #000000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 0.5s linear infinite;
 }
+
+
 .container-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+
 .btn-loadMore {
   display: none;
   color: rgba(255, 255, 255, 1);
@@ -260,9 +302,11 @@ width: 100%;
   font-family: Raleway, sans-serif;
   margin: 0 auto;
 }
+
 .hiden {
   display: none;
 }
+
 @media only screen and (min-width: 425px) and (max-width: 1439px) {
   .product-item {
     width: calc(100% / 2 - 18px);
@@ -272,12 +316,14 @@ width: 100%;
   }
   .three-product {
     padding: 48px 0px;
+  }
 }
-}
+
 @media only screen and (min-width: 425px) and (max-width: 767px) {
   .pagination {
   display: none;
-}
+  }
+
 .btn-loadMore {
   display: inline;
   color: rgba(255, 255, 255, 1);
@@ -290,10 +336,11 @@ width: 100%;
   font-family: Raleway, sans-serif;
   margin: 0 auto;
 }
+
 .product-container {
   display: flex;
   flex-direction: column;
-}
+  }
 
 }
 @media only screen and (max-width: 425px) {
@@ -301,13 +348,15 @@ width: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-  }
+    }
   .three-product {
     padding: 48px 0px;
 }
+
 .pagination {
   display: none;
 }
+
 .btn-loadMore {
   display: inline;
   color: rgba(255, 255, 255, 1);
@@ -320,6 +369,7 @@ width: 100%;
   font-family: Raleway, sans-serif;
   margin: 0 auto;
 }
+
 .products-list {
   margin-bottom: 0px;
 }
