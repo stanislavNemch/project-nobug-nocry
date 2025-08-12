@@ -120,10 +120,31 @@ function setupModalButton() {
   }
 }
 
+// Порожній/завантажувальний стан модалки
+function renderLoadingModal() {
+  return `
+  <div class="product-modalWindow">
+    <div class="modal-loading" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+      <div class="spinner" aria-label="Loading"></div>
+    </div>
+    <button type="button" class="modal-close-btn" >
+      <svg class="close-icon" width="14" height="14">
+        <use href="${spriteUrl}#icon-close"/>
+      </svg>
+    </button>
+  </div>`;
+}
+
 // Загальна функція для відкриття модального вікна
 async function openProductModal(productId) {
   document.body.style.overflow = 'hidden'; // заборонити прокрутку
   modalSelector.classList.remove('visuallyhidden'); // показати модалку
+
+  // Показати порожню модалку зі спінером на час завантаження
+  modalSelector.innerHTML = renderLoadingModal();
+
+  // Дозволити закривати модалку ще під час завантаження
+  addModalEventListeners();
 
   dataId = productId;
 
@@ -157,8 +178,7 @@ async function openProductModal(productId) {
   // Налаштувати кнопку модалки
   setupModalButton();
 
-  // Додаємо слухачі подій для модалки
-  addModalEventListeners();
+  // Слухачі вже додані перед завантаженням
 }
 
 // Обробник для популярних товарів через custom events
@@ -253,7 +273,7 @@ function renderModal(furniture) {
           </div>
         </div>
         <p class="furnitureDescription">${furniture.description}</p>
-        <p class="furnitureSize">${furniture.sizes}</p>
+        <p class="furnitureSize">Розміри: ${furniture.sizes}</p>
         <button class="modalButton">Перейти до замовлення</button>
       </div>
     </div>
