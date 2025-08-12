@@ -10,6 +10,12 @@ let keydownHandler = null;
 let clickHandler = null;
 let formSubmitHandler = null;
 
+let selectedModelId = null;
+let selectedColor = null;
+let orderBackdrop = null;
+let orderForm = null;
+let closeBtn = null;
+
 function digitsOnly(value) {
   return (value || '').replace(/\D/g, '');
 }
@@ -57,12 +63,6 @@ function attachPhoneMask(inputEl) {
     }
   });
 }
-
-let selectedModelId = null;
-let selectedColor = null;
-let orderBackdrop = null;
-let orderForm = null;
-let closeBtn = null;
 
 const createKeydownHandler = () => event => {
   if (event.key === 'Escape') {
@@ -135,9 +135,7 @@ async function handleFormSubmit(event) {
 
   const formData = new FormData(orderForm);
   const data = Object.fromEntries(formData);
-
   const submitBtn = orderForm.querySelector('.submit-btn');
-  if (submitBtn) submitBtn.disabled = true;
 
   let isValid = true;
 
@@ -154,17 +152,18 @@ async function handleFormSubmit(event) {
   if (!PHONE_REGEX.test(phoneDigits)) {
     iziToast.error({
       title: 'Validation Error',
-      message: 'Please enter a valid phone number.',
+      message: 'Please enter a valid phone number (12 digits).',
       position: 'topRight',
     });
     isValid = false;
   }
   data.phone = phoneDigits;
 
-  if (!data.comment || data.comment.trim() === '') {
+  // Виправлена перевірка для коментаря: мінімум 3 символи
+  if (!data.comment || data.comment.trim().length < 3) {
     iziToast.error({
       title: 'Validation Error',
-      message: 'Please enter a comment.',
+      message: 'Please enter a comment with at least 3 characters.',
       position: 'topRight',
     });
     isValid = false;
@@ -184,7 +183,8 @@ async function handleFormSubmit(event) {
     return;
   }
 
-  // Створення об'єкта для відправки на бекенд тільки з необхідними даними
+  if (submitBtn) submitBtn.disabled = true;
+
   const orderData = {
     email: data.email,
     phone: data.phone,
@@ -216,11 +216,11 @@ function initializeEventListeners() {
     const phoneInput = orderForm.querySelector('input[name="phone"]');
     attachPhoneMask(phoneInput);
   }
-}
 
-const orderCloseButton = document.querySelector('.close-btn');
-if (orderCloseButton) {
-  orderCloseButton.addEventListener('click', closeOrderModal);
+  const orderCloseButton = document.querySelector('.close-btn');
+  if (orderCloseButton) {
+    orderCloseButton.addEventListener('click', closeOrderModal);
+  }
 }
 
 if (document.readyState === 'loading') {
