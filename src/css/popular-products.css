@@ -329,6 +329,18 @@
     font-size: 42px;
   }
 
+  .popular-products-item .text-card {
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+  }
+
+  .popular-products-item .btn-go-modal {
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+  }
+
 /* Размеры карточки как в product-item для планшетов */
   .popular-products-item {
     width: 341px;
@@ -337,6 +349,11 @@
 
 /* Responsive для десктопов - 4 товара 310x436 */
 @media screen and (min-width: 1440px) {
+
+.popular-products {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 
 /* Помогает кнопку товаров ровнять по нижнему краю */
 
@@ -350,6 +367,18 @@
 
   .popular-products-title {
     font-size: 48px;
+  }
+
+  .popular-products-item .text-card {
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+  }
+    
+  .popular-products-item .btn-go-modal {
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
   }
 
   /* Размеры карточки как в product-item для десктопа */
