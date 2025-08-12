@@ -13,8 +13,10 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.98);
   padding: 64px;
+  opacity: 0;
+  animation: modal-pop 200ms ease-out forwards;
 }
 
 .modalBlur {
@@ -25,6 +27,44 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.25);
   z-index: 1000; /* Should be less than .modalWindow */
+  opacity: 0;
+  animation: backdrop-fade 200ms ease-out forwards;
+}
+
+/* Spinner */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: #6b0609;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes backdrop-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-left {
@@ -47,15 +87,20 @@
 .modal-image-0 {
   width: 580px;
   height: 308px;
+  border-radius: 8px;
   object-fit: cover;
 }
 .modal-image-1 {
   width: 282px;
   height: 197px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 .modal-image-2 {
   width: 282px;
   height: 197px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .modal-right {
