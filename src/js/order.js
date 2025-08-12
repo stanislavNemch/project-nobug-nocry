@@ -3,28 +3,23 @@ import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 import { createOrder } from './furniture-api';
 
-// Regular expressions for email and phone validation
 const EMAIL_REGEX = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-const PHONE_REGEX = /^[0-9]{12}$/; // 12 digits only, e.g. 380991232211
+const PHONE_REGEX = /^[0-9]{12}$/;
 
-// Змінні для зберігання обробників подій
 let keydownHandler = null;
 let clickHandler = null;
 let formSubmitHandler = null;
 
-// Phone mask helpers: format to +38 (XXX) XXX XX XX while keeping digits-only for submit
 function digitsOnly(value) {
   return (value || '').replace(/\D/g, '');
 }
 
 function formatUaPhoneFromDigits(digits) {
-  // Ensure starts with country prefix 38
   let d = digitsOnly(digits);
   if (!d.startsWith('38')) d = '38' + d;
-  // Keep at most 12 digits (+38 + 10 more)
   d = d.slice(0, 12);
 
-  const rest = d.slice(2); // next up to 10 digits
+  const rest = d.slice(2);
   let out = '+38';
   if (rest.length > 0) out += ' (' + rest.slice(0, Math.min(3, rest.length));
   if (rest.length >= 3) out += ')';
@@ -37,7 +32,6 @@ function formatUaPhoneFromDigits(digits) {
 function attachPhoneMask(inputEl) {
   if (!inputEl) return;
 
-  // Initialize value if empty
   if (!digitsOnly(inputEl.value)) {
     inputEl.value = '+38 ';
   } else {
@@ -54,7 +48,6 @@ function attachPhoneMask(inputEl) {
   });
 
   inputEl.addEventListener('blur', () => {
-    // If only prefix present, clear the field
     if (
       inputEl.value.trim() === '+38' ||
       inputEl.value.trim() === '+38(' ||
@@ -71,23 +64,19 @@ let orderBackdrop = null;
 let orderForm = null;
 let closeBtn = null;
 
-// Створення обробника клавіші Escape
 const createKeydownHandler = () => event => {
   if (event.key === 'Escape') {
     closeOrderModal();
   }
 };
 
-// Створення обробника кліків
 const createClickHandler = () => event => {
   if (event.target === orderBackdrop || event.target === closeBtn) {
     closeOrderModal();
   }
 };
 
-// Додавання слухачів при відкритті модалки замовлення
 const addOrderEventListeners = () => {
-  // Створюємо обробники якщо їх ще немає
   if (!keydownHandler) {
     keydownHandler = createKeydownHandler();
   }
@@ -95,14 +84,12 @@ const addOrderEventListeners = () => {
     clickHandler = createClickHandler();
   }
 
-  // Додаємо слухачі
   document.addEventListener('keydown', keydownHandler);
   if (orderBackdrop) {
     orderBackdrop.addEventListener('click', clickHandler);
   }
 };
 
-// Видалення слухачів при закритті модалки замовлення
 const removeOrderEventListeners = () => {
   if (keydownHandler) {
     document.removeEventListener('keydown', keydownHandler);
@@ -112,16 +99,13 @@ const removeOrderEventListeners = () => {
   }
 };
 
-// Function to initialize DOM elements
 function initializeElements() {
   orderBackdrop = document.getElementById('order-backdrop');
   orderForm = document.querySelector('.order-form');
   closeBtn = document.querySelector('.close-btn');
 }
 
-// Function to open the order modal
 export function openOrderModal(modelId, color) {
-  // Ensure elements exist before manipulating
   if (!orderBackdrop) {
     initializeElements();
   }
@@ -131,13 +115,10 @@ export function openOrderModal(modelId, color) {
     document.body.style.overflow = 'hidden';
     selectedModelId = modelId;
     selectedColor = color;
-
-    // Додаємо слухачі подій при відкритті
     addOrderEventListeners();
   }
 }
 
-// Function to close the order modal
 const closeOrderModal = () => {
   if (orderBackdrop) {
     orderBackdrop.classList.add('visuallyhidden');
@@ -146,21 +127,19 @@ const closeOrderModal = () => {
   if (orderForm) {
     orderForm.reset();
   }
-
-  // Видаляємо слухачі подій при закритті
   removeOrderEventListeners();
 };
 
-// Form submission handler
 async function handleFormSubmit(event) {
   event.preventDefault();
 
   const formData = new FormData(orderForm);
   const data = Object.fromEntries(formData);
-  const submitBtn = orderForm.querySelector('.submit-btn');
 
-  data.modelId = selectedModelId;
-  data.color = selectedColor;
+  const submitBtn = orderForm.querySelector('.submit-btn');
+  if (submitBtn) submitBtn.disabled = true;
+
+  let isValid = true;
 
   if (!EMAIL_REGEX.test(data.email)) {
     iziToast.error({
@@ -168,85 +147,84 @@ async function handleFormSubmit(event) {
       message: 'Please enter a valid E-mail address.',
       position: 'topRight',
     });
-    return;
+    isValid = false;
   }
 
-  // Normalize phone to digits-only for validation and submission
   const phoneDigits = digitsOnly(data.phone);
   if (!PHONE_REGEX.test(phoneDigits)) {
     iziToast.error({
       title: 'Validation Error',
-      message:
-        'Please enter a valid phone like +38 (099) 123 22 11. Digits-only: 12 (e.g., 380991232211).',
+      message: 'Please enter a valid phone number.',
       position: 'topRight',
     });
-    return;
+    isValid = false;
   }
-  data.phone = phoneDigits; // submit digits only
+  data.phone = phoneDigits;
 
-  // Validate comment (required, min length 3)
-  const trimmedComment = (data.comment || '').trim();
-  if (!trimmedComment || trimmedComment.length < 3) {
+  if (!data.comment || data.comment.trim() === '') {
     iziToast.error({
       title: 'Validation Error',
-      message: 'Please enter a comment (at least 3 characters).',
+      message: 'Please enter a comment.',
       position: 'topRight',
     });
-    return;
+    isValid = false;
   }
-  data.comment = trimmedComment;
 
-  if (!data.modelId || !data.color) {
+  if (!selectedModelId || !selectedColor) {
     iziToast.error({
       title: 'Error',
       message: 'Could not get furniture details. Please try again.',
       position: 'topRight',
     });
+    isValid = false;
+  }
+
+  if (!isValid) {
+    if (submitBtn) submitBtn.disabled = false;
     return;
   }
 
-  // Prevent double submit only after all validations pass
-  if (submitBtn) submitBtn.disabled = true;
+  // Створення об'єкта для відправки на бекенд тільки з необхідними даними
+  const orderData = {
+    email: data.email,
+    phone: data.phone,
+    comment: data.comment,
+    modelId: selectedModelId,
+    color: selectedColor,
+  };
+
   try {
-    const result = await createOrder(data);
+    const result = await createOrder(orderData);
     if (result) {
-      // Close and reset on success
       closeOrderModal();
     }
   } catch (e) {
-    // createOrder already shows a toast on error; just re-enable button
   } finally {
     if (submitBtn) submitBtn.disabled = false;
   }
 }
 
-// Ініціалізація обробників подій після загрузки DOM (тільки для форми)
 function initializeEventListeners() {
   initializeElements();
 
   if (orderForm) {
-    // Створюємо обробник форми один раз
     if (!formSubmitHandler) {
       formSubmitHandler = handleFormSubmit;
     }
     orderForm.addEventListener('submit', formSubmitHandler);
 
-    // Attach phone mask
     const phoneInput = orderForm.querySelector('input[name="phone"]');
     attachPhoneMask(phoneInput);
   }
 }
 
-// Обробник для кнопки закриття (статичний елемент)
 const orderCloseButton = document.querySelector('.close-btn');
 if (orderCloseButton) {
   orderCloseButton.addEventListener('click', closeOrderModal);
 }
 
-// Запускаємо ініціалізацію після загрузки DOM (тільки для постійних елементів)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeEventListeners);
 } else {
-  // DOM вже загружен
   initializeEventListeners();
 }
