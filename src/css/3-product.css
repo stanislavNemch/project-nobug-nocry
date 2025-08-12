@@ -207,7 +207,7 @@
   object-fit: cover;
   border-radius: 10px;
   overflow: hidden;
-  transition: filter 200s ease-in-out, border 200ms ease-in-out;
+  transition: filter 200ms ease-in-out, border 200ms ease-in-out;
 }
 
 .img-card:hover {
