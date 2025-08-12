@@ -32,6 +32,10 @@
   margin-bottom: 24px;
 }
 
+.reviews .swiper-slide {
+  min-height: auto;
+}
+
 .star {
   font-size: 19px;
   line-height: 1;
