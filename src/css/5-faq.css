@@ -60,6 +60,7 @@
   }
   .faq-title {
     margin: 0 auto;
+    margin-bottom: 32px;
     width: 704px;
     border: none;
   }
