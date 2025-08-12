@@ -9,34 +9,42 @@
   line-height: 1.2;
   letter-spacing: 0.01em;
   color: #080c09;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   text-align: center;
 }
 
 .popular-products-swiper {
+  height: 100%;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 .swiper-wrapper {
+  height: 100%;
   display: flex;
   align-items: stretch;
 }
 
 .swiper-slide {
-  height: auto;
+  min-height: 450px;
+  height: 100%;
   display: flex;
   justify-content: center; /* Центрируем содержимое слайда */
 }
 
 /* Карточки товаров - точно как .product-item */
 .popular-products-item {
+  height: 450px;
+  width: 335px;
   display: flex;
   flex-direction: column;
-  background: white;
-  width: 100%;
   height: 100%;
-  margin-top: 0; /* Убираем отступ сверху в отличие от product-item */
+  background: white;
+}
+  
+/* Штовхає блок із кнопкою донизу */
+.product-bottom {
+  margin-top: auto;  
 }
 
 .popular-products-item .img-card {
@@ -58,6 +66,10 @@
   color: rgba(8, 12, 9, 1);
   margin-top: 8px;
   font-size: 16px;
+}
+
+.img-card {
+  margin-bottom: 8px;
 }
 
 .popular-products-item .colors {
@@ -250,10 +262,7 @@
   }
 
   /* Центрирование слайдов на мобильных */
-  .popular-products-swiper {
-    text-align: center;
-  }
-
+  
   .swiper-slide {
     justify-content: center;
     align-items: center;
@@ -261,14 +270,18 @@
 
   /* Размеры карточки как в product-item для мобильных */
   .popular-products-item {
+    height: 450px;
     width: 335px;
     max-width: calc(100vw - 32px); /* Учитываем отступы контейнера */
-    height: 450px;
     margin: 0 auto; /* Дополнительное центрирование */
   }
 
   .popular-products-controls {
     gap: 16px;
+    /* цей код не має дублюватися */
+    width: 335px;
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
   }
 
   .popular-products-navigation {
@@ -301,18 +314,40 @@
 
 /* Responsive для планшетов - 2 товара 340x460 */
 @media screen and (min-width: 768px) and (max-width: 1439px) {
+
+/* Помогает кнопку товаров ровнять по нижнему краю */
+
+  .swiper-slide {
+    min-height: 460px;
+  }
+    
+  .popular-products-item {
+    height: 460px;
+  }
+
   .popular-products-title {
     font-size: 42px;
   }
 
-  /* Размеры карточки как в product-item для планшетов */
+/* Размеры карточки как в product-item для планшетов */
   .popular-products-item {
-    width: 340px;
+    width: 341px;
   }
 }
 
 /* Responsive для десктопов - 4 товара 310x436 */
 @media screen and (min-width: 1440px) {
+
+/* Помогает кнопку товаров ровнять по нижнему краю */
+
+.swiper-slide {
+    min-height: 436px;
+  }
+
+  .popular-products-item {
+    height: 436px;
+  }
+
   .popular-products-title {
     font-size: 48px;
   }
