@@ -297,7 +297,7 @@
 .btn-loadMore {
   display: none;
   color: rgba(255, 255, 255, 1);
-  width: 420px;
+  width: 100%;
   background-color: rgb(128, 8, 12);
   border-radius: 100px;
   padding: 10px 0px;
