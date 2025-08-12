@@ -63,7 +63,9 @@ class PopularProductsSwiper {
               .join('')}
           </div>
           <p class="text-card">${product.price} грн</p>
-          <button class="btn btn-go-modal">Детальніше</button>
+          <div class="product-bottom">
+            <button class="btn btn-go-modal">Детальніше</button>
+          </div>
         </div>
       </div>
     `
