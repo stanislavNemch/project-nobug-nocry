@@ -157,10 +157,7 @@ async function handleFormSubmit(event) {
 
   const formData = new FormData(orderForm);
   const data = Object.fromEntries(formData);
-
-  // Prevent double submit
   const submitBtn = orderForm.querySelector('.submit-btn');
-  if (submitBtn) submitBtn.disabled = true;
 
   data.modelId = selectedModelId;
   data.color = selectedColor;
@@ -171,9 +168,6 @@ async function handleFormSubmit(event) {
       message: 'Please enter a valid E-mail address.',
       position: 'topRight',
     });
-
-    // Блок коду для розблокування кнопки при помилці валідації
-    if (submitBtn) submitBtn.disabled = false;
     return;
   }
 
@@ -186,12 +180,21 @@ async function handleFormSubmit(event) {
         'Please enter a valid phone like +38 (099) 123 22 11. Digits-only: 12 (e.g., 380991232211).',
       position: 'topRight',
     });
-
-    // Блок коду для розблокування кнопки при помилці валідації
-    if (submitBtn) submitBtn.disabled = false;
     return;
   }
   data.phone = phoneDigits; // submit digits only
+
+  // Validate comment (required, min length 3)
+  const trimmedComment = (data.comment || '').trim();
+  if (!trimmedComment || trimmedComment.length < 3) {
+    iziToast.error({
+      title: 'Validation Error',
+      message: 'Please enter a comment (at least 3 characters).',
+      position: 'topRight',
+    });
+    return;
+  }
+  data.comment = trimmedComment;
 
   if (!data.modelId || !data.color) {
     iziToast.error({
@@ -199,12 +202,11 @@ async function handleFormSubmit(event) {
       message: 'Could not get furniture details. Please try again.',
       position: 'topRight',
     });
-
-    // Блок коду для розблокування кнопки при помилці валідації
-    if (submitBtn) submitBtn.disabled = false;
     return;
   }
 
+  // Prevent double submit only after all validations pass
+  if (submitBtn) submitBtn.disabled = true;
   try {
     const result = await createOrder(data);
     if (result) {
