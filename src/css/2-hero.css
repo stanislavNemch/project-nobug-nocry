@@ -2,14 +2,12 @@
 
 .hero-container {
   width: 100%;
-  /* margin: 0 auto; */
 }
 
-@media screen and (min-width: 375px) {
+@media screen and (min-width: 375px) and (max-width: 768px) {
   .hero-container {
-    /* width: 100%;
-  max-width: 375px; */
-    width: 335px;
+    max-width: 375px;
+    margin: 0 auto;
   }
 }
 
@@ -174,7 +172,6 @@ html {
   .hero-title {
     font-size: 56px;
     max-width: 560px;
-    margin: 0;
   }
 
   .text-hero {
