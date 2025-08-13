@@ -104,7 +104,7 @@ The project consists of the following functional blocks:
 
 **Area of Responsibility:**
 
-- **Order Modal:** Created a modal window with a form (name, phone, comment).
+- **Order Modal:** Created a modal window with a form (email, phone, comment).
   Implemented field validation and sending a POST request to `/orders` with form
   data and product information. Integrated the `izitoast` library to show
   success or error messages.
