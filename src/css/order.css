@@ -1,3 +1,16 @@
+.visuallyhidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -16,8 +29,7 @@
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Цей клас приховує модальне вікно і є необхідним для JS */
-.visuallyhidden {
+.backdrop.visuallyhidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -37,12 +49,8 @@
   padding: 64px;
   max-width: 866px;
   width: 90%;
-  /* ===== Новий блок для виправлення висоти ===== */
   max-height: 90vh;
-  /* Вікно не буде вилазити за висоту екрана */
   overflow-y: auto;
-  /* Додає скрол, якщо контент не поміщається */
-  /* =========================================== */
   background: #fff;
 }
 
@@ -67,7 +75,6 @@
   transform: rotate(90deg);
 }
 
-/* Іконки SVG автоматично адаптуються для Retina-екранів */
 .close-icon {
   fill: #2e2f42;
 }
@@ -112,6 +119,9 @@
   width: 738px;
   height: 42px;
   background: rgba(8, 12, 9, 0.05);
+  /* Виправлення: Прибираємо outline і додаємо плавний перехід */
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .form-input:focus {
@@ -129,6 +139,13 @@
   width: 738px;
   height: 180px;
   resize: none;
+  /* Виправлення: Прибираємо outline і додаємо плавний перехід */
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.comment-input:focus {
+  border-color: #4e75ff;
 }
 
 .submit-btn {
@@ -195,9 +212,6 @@
     width: 295px;
     height: 180px;
   }
-
-  /* .close-icon {
-  } */
 }
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
