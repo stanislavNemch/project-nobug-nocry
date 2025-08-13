@@ -10,11 +10,22 @@ feedback form.
 - **HTML5**
 - **CSS3**
 - **JavaScript (ES6+)**
+- **Node.js**
+- **Vite**
 - **Libraries:**
+  - **Axios** (for interacting with the backend)
   - **Swiper.js** (for sliders in the "Reviews" and "Popular Products" sections)
   - **izitoast** (for pop-up notifications about successful orders or errors)
   - **accordion** (for implementing functionality in the FAQ section)
   - **css-star-rating / raty-js** (for displaying ratings as stars)
+
+## Utilities
+
+- **VSCode** (for code development, debugging, and support)
+- **Trello** (for project planning and development)
+- **Figma** (for working with the project's design system)
+- **Git/GitHub** (for version control and project development)
+- **Chat GPT/GitHub Copilot** (used as information systems)
 
 ## Project Structure and Functionality
 
