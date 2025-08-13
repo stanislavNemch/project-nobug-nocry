@@ -178,7 +178,33 @@ async function openProductModal(productId) {
   // Налаштувати кнопку модалки
   setupModalButton();
 
-  // Слухачі вже додані перед завантаженням
+  setupImageSwitching();
+}
+
+// Функція для перемикання зображень
+function setupImageSwitching() {
+  const mainImg = document.querySelector('.modal-image-0');
+  const img1 = document.querySelector('.modal-image-1');
+  const img2 = document.querySelector('.modal-image-2');
+
+  if (!mainImg || !img1 || !img2) return;
+
+  // Функція для обміну src і alt між двома елементами
+  function swapImages(imgA, imgB) {
+    imgA.style.opacity = '0.5';
+    setTimeout(() => {
+      const tempSrc = imgA.src;
+      const tempAlt = imgA.alt;
+      imgA.src = imgB.src;
+      imgA.alt = imgB.alt;
+      imgB.src = tempSrc;
+      imgB.alt = tempAlt;
+      imgA.style.opacity = '1';
+    }, 150);
+  }
+
+  img1.addEventListener('click', () => swapImages(mainImg, img1));
+  img2.addEventListener('click', () => swapImages(mainImg, img2));
 }
 
 // Обробник для популярних товарів через custom events

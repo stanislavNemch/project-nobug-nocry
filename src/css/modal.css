@@ -89,18 +89,30 @@
   height: 308px;
   border-radius: 8px;
   object-fit: cover;
+  transition: opacity 0.3s;
 }
 .modal-image-1 {
   width: 282px;
   height: 197px;
   border-radius: 8px;
   object-fit: cover;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
 }
 .modal-image-2 {
   width: 282px;
   height: 197px;
   border-radius: 8px;
   object-fit: cover;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
+}
+
+.modal-image-1:hover,
+.modal-image-2:hover {
+  box-shadow: 0 0 8px #6b0609;
+  transform: scale(1.05);
+  opacity: 0.85;
 }
 
 .modal-right {
@@ -333,6 +345,8 @@
     width: 139px;
     height: 197px;
     object-fit: cover;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
   }
   .modal-right {
     display: flex;
@@ -405,6 +419,8 @@
     border-radius: 8px;
     width: 312px;
     height: 197px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
   }
   .modal-right {
     display: flex;
